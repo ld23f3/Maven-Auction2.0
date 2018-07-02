@@ -84,7 +84,7 @@
 								<td class="text-l">${user.user_address }</td>
 								<td>${user.user_create }</td>
 								<td class="td-status"><span
-									class="label label-danger radius">已删除</span></td>
+									class="label label-danger radius">停权中</span></td>
 								<td class="td-manage"><a style="text-decoration: none"
 									href="javascript:;"
 									onClick="member_huanyuan(this,'${user.user_id}')" title="还原"><i
@@ -137,14 +137,36 @@
 		}
 		/*用户-还原*/
 		function member_huanyuan(obj, id) {
-			layer.confirm('确认要还原吗？', function(index) {
+			layer
+					.confirm(
+							'确认要还原吗？',
+							function(index) {
+								$
+										.ajax({
+											type : 'PUT',
+											url : '${pageContext.request.contextPath}/users/activeUser/'
+													+ id,
+											dataType : 'json',
+											success : function(data) {
+												if (data == true) {
+													$(obj).remove();
+													layer.msg('已启用!', {
+														icon : 6,
+														time : 1000
+													});
+												} else {
+													layer.msg('操作失败,请检查网络!', {
+														icon : 5,
+														time : 1000
+													});
+												}
 
-				$(obj).remove();
-				layer.msg('已还原!', {
-					icon : 6,
-					time : 1000
-				});
-			});
+											},
+											error : function(data) {
+												console.log(data.msg);
+											},
+										});
+							});
 		}
 
 		/*用户-删除*/
