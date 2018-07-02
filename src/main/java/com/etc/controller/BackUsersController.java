@@ -1,6 +1,7 @@
 package com.etc.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.etc.entity.Users;
 
@@ -23,23 +25,31 @@ import com.etc.entity.Users;
 @RequestMapping(value = "users")
 public class BackUsersController {
 	/**
-	 * 获取所有启用的用户列表
+	 * 
 	 * 
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping(value = "getList", method = RequestMethod.GET)
-	public String getUsersList(@RequestParam(value="user_state",required=false,defaultValue="0")int user_state, Model model) {
-		System.out.println(user_state);
+	public ModelAndView getUsersList(@RequestParam(value="user_state",required=false,defaultValue="0")int user_state, ModelAndView mav) {
 		List<Users> list = new ArrayList<>();
 		for (int i = 1; i <= 20; i++) {
 			Users user = new Users(i, "user_acc" + i, "user_pwd" + i, "user_email" + i, "user_tel" + i,
-					"user_realname" + i, "user_cardid" + i, "user_address" + i, 100.0, 0, "user_create" + i,
+					"user_realname" + i, "user_cardid" + i, "user_address" + i, 100.0, 0, new Date().toLocaleString(),
 					"user_modified" + i);
 			list.add(user);
 		}
-		model.addAttribute("list", list);
-		return "/Back/member-list";
+		mav.addObject("list", list);
+		
+		if(user_state == 0) {
+			///这边显示的是正常的会员
+			mav.setViewName("/Back/member-list");
+		}else {
+			///这边显示被停权的会员
+			mav.setViewName("/Back/member-del");
+		}
+		mav.addObject("size", list.size());
+		return mav;
 	}
 	/**
 	 * 获取用户详细信息
@@ -72,7 +82,6 @@ public class BackUsersController {
 		}
 		return true;
 	}
-
 	/**
 	 * 用户权限激活
 	 * 
@@ -84,7 +93,18 @@ public class BackUsersController {
 	public boolean activeUser(@PathVariable(value = "user_id") int user_id) {
 		if (user_id == 0)
 			return false;
-
+		return true;
+	}
+	/**
+	 * 用户彻底删除
+	 * @param user_id
+	 * @return
+	 */
+	@RequestMapping(value = "deleteUser/{user_id}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public boolean deleteUser(@PathVariable(value = "user_id") int user_id) {
+		if (user_id == 0)
+			return false;
 		return true;
 	}
 }

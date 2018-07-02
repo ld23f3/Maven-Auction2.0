@@ -159,7 +159,7 @@
 					<ul>
 						<li><a data-href="${pageContext.request.contextPath}/users/getList" data-title="会员列表"
 							href="javascript:;">会员列表</a></li>
-						<li><a data-href="member-del.html" data-title="删除的会员"
+						<li><a data-href="${pageContext.request.contextPath}/users/getList?user_state=1" data-title="删除的会员"
 							href="javascript:;">删除的会员</a></li>
 						<li hidden="hidden"><a data-href="member-level.html"
 							data-title="等级管理" href="javascript:;">等级管理</a></li>
