@@ -37,7 +37,7 @@
 		<div class="navbar navbar-fixed-top">
 			<div class="container-fluid cl">
 				<a class="logo navbar-logo f-l mr-10 hidden-xs"
-					href="/aboutHui.shtml">H-ui.admin</a> <a
+					href="${pageContext.request}">H-ui.admin</a> <a
 					class="logo navbar-logo-m f-l mr-10 visible-xs"
 					href="/aboutHui.shtml">H-ui</a> <span
 					class="logo navbar-slogan f-l mr-10 hidden-xs">v3.1</span> <a
@@ -73,7 +73,7 @@
 							<ul class="dropDown-menu menu radius box-shadow">
 								<li><a href="javascript:;" onClick="myselfinfo()">个人信息</a></li>
 								<li><a href="#">切换账户</a></li>
-								<li><a href="${pageContext.request.contextPath}/manage/exit">退出</a></li>
+								<li><a href="${pageContext.request.contextPath}/manage/exit">退出<st/a></li>
 							</ul></li>
 						<li id="Hui-msg"><a href="#" title="消息"><span
 								class="badge badge-danger">1</span><i class="Hui-iconfont"
@@ -158,7 +158,7 @@
 				</dt>
 				<dd>
 					<ul>
-						<li><a data-href="member-list.html" data-title="会员列表"
+						<li><a data-href="${pageContext.request.contextPath}/users/getlist" data-title="会员列表"
 							href="javascript:;">会员列表</a></li>
 						<li><a data-href="member-del.html" data-title="删除的会员"
 							href="javascript:;">删除的会员</a></li>

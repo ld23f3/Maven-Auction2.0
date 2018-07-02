@@ -79,7 +79,7 @@
 								<td><input type="checkbox" value="1" name=""></td>
 								<td>${user.user_id }</td>
 								<td><u style="cursor: pointer" class="text-primary"
-									onclick="member_show('${user.user_realname }','member-show.html','10001','360','400')">${user.user_realname }</u></td>
+									onclick="member_show('${user.user_realname }','${pageContext.request.contextPath}/users/userInfo','${user.user_id }','360','400')">${user.user_realname }</u></td>
 								<td>${user.user_acc }</td>
 								<td>${user.user_tel }</td>
 								<td>${user.user_email }</td>
@@ -120,11 +120,11 @@
 
 	<!--请在下方写此页面业务相关的脚本-->
 	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/static/My97DatePicker/4.8/WdatePicker.js"></script>
+		src="${pageContext.request.contextPath}/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
 	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/static/datatables/1.10.0/jquery.dataTables.min.js"></script>
+		src="${pageContext.request.contextPath}/static/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/static/laypage/1.2/laypage.js"></script>
+		src="${pageContext.request.contextPath}/static/lib/laypage/1.2/laypage.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			$('.table-sort').dataTable({
