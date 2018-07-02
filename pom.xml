@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.etc</groupId>
-	<artifactId>maven-cms</artifactId>
+	<artifactId>Maven-Auction2.0</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>maven-cms Maven Webapp</name>
+	<name>Maven-Auction2.0 Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<!-- 添加Spring4.2.2的核心包 -->
@@ -120,6 +120,6 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>maven-cms</finalName>
+		<finalName>Maven-Auction2.0</finalName>
 	</build>
 </project>

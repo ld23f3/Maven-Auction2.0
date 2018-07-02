@@ -29,24 +29,25 @@
 	<div class="header"></div>
 	<div class="loginWraper">
 		<div id="loginform" class="loginBox">
-			<form class="form form-horizontal" action="index.html" method="get">
+			<form class="form form-horizontal" action="${pageContext.request.contextPath}/manage/show.html" method="post">
 				<div class="row cl">
 					<label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
 					<div class="formControls col-xs-8">
-						<input id="" name="" type="text" placeholder="账户"
+						<input id="manageName" name="manageName" type="text" placeholder="账户"
 							class="input-text size-L">
 					</div>
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
 					<div class="formControls col-xs-8">
-						<input id="" name="" type="password" placeholder="密码"
+						<input id="managePwd" name="managePwd" type="password" placeholder="密码"
 							class="input-text size-L">
 					</div>
 				</div>
 				<div class="row cl">
 					<div class="formControls col-xs-8 col-xs-offset-3">
 						<input class="input-text size-L" type="text" placeholder="验证码"
+						id="imageCode" name="imageCode"
 							onblur="if(this.value==''){this.value='验证码:'}"
 							onclick="if(this.value=='验证码:'){this.value='';}" value="验证码:"
 							style="width: 150px;"> <img src=""> <a id="kanbuq"

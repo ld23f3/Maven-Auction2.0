@@ -5,8 +5,8 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
-	
-	
+
+
 	<!-- 文件扫描器 -->
 	<context:annotation-config></context:annotation-config>
 	<context:component-scan base-package="com.etc.controller"></context:component-scan>
@@ -22,5 +22,15 @@
 		<property name="prefix" value="/WEB-INF/jsp/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
-
+	
+	<!-- SpringMVC拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<!-- 所有都会拦截，/**包含子目录 -->
+			<mvc:mapping path="/manage/**" />
+			<!-- 此时访问api/的url则不会被拦截 -->
+			<mvc:exclude-mapping path="/manage/show.html*" />
+			<bean class="com.etc.interceptor.BackInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>
