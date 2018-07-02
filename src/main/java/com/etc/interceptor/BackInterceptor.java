@@ -13,7 +13,6 @@ public class BackInterceptor implements HandlerInterceptor {
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handle,
 			Exception exception) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("afterCompletion now");
 
 	}
 
@@ -21,7 +20,6 @@ public class BackInterceptor implements HandlerInterceptor {
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handle,
 			ModelAndView modelAndView) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("postHandle now");
 	}
 
 	@Override
@@ -29,8 +27,6 @@ public class BackInterceptor implements HandlerInterceptor {
 		HttpSession session = request.getSession();
 		String manageName = (String) session.getAttribute("manageName");
 		String managePwd = (String) session.getAttribute("managePwd");
-		System.out.println("preHandle");
-		System.out.println("manageName:" + manageName + " managePwd:" + managePwd);
 		if (manageName != null && managePwd != null) {
 			if ("admin".equals(manageName) && "admin".equals(managePwd)) {
 				return true;

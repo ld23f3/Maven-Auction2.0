@@ -7,6 +7,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Maven-Auction2.0 Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+	
 	<dependencies>
 		<!-- 添加Spring4.2.2的核心包 -->
 		<dependency>
@@ -14,7 +15,7 @@
 			<artifactId>spring-core</artifactId>
 			<version>4.2.2.RELEASE</version>
 		</dependency>
- 
+
 		<!-- 添加spring-context包 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -118,7 +119,19 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.9.5</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.5</version>
+		</dependency>
 	</dependencies>
+
 	<build>
 		<finalName>Maven-Auction2.0</finalName>
 	</build>

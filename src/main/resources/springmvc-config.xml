@@ -28,8 +28,9 @@
 		<mvc:interceptor>
 			<!-- 所有都会拦截，/**包含子目录 -->
 			<mvc:mapping path="/manage/**" />
+			<mvc:mapping path="/users/**" />
 			<!-- 此时访问api/的url则不会被拦截 -->
-			<mvc:exclude-mapping path="/manage/show.html*" />
+			<mvc:exclude-mapping path="/manage/show.html" />
 			<bean class="com.etc.interceptor.BackInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>

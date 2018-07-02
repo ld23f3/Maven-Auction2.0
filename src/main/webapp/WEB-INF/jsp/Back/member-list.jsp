@@ -79,7 +79,7 @@
 								<td><input type="checkbox" value="1" name=""></td>
 								<td>${user.user_id }</td>
 								<td><u style="cursor: pointer" class="text-primary"
-									onclick="member_show('${user.user_realname }','${pageContext.request.contextPath}/users/userInfo','${user.user_id }','360','400')">${user.user_realname }</u></td>
+									onclick="member_show('${user.user_realname }','${pageContext.request.contextPath}/users/userInfo?user_id=${user.user_id}','${user.user_id}','360','400')">${user.user_realname }</u></td>
 								<td>${user.user_acc }</td>
 								<td>${user.user_tel }</td>
 								<td>${user.user_email }</td>
@@ -88,9 +88,9 @@
 								<td class="td-status"><span
 									class="label label-success radius">已启用</span></td>
 								<td class="td-manage"><a style="text-decoration: none"
-									onClick="member_stop(this,'10001')" href="javascript:;"
-									title="停用"><i class="Hui-iconfont">&#xe631;</i></a> <a
-									title="编辑" href="javascript:;"
+									onClick="member_stop(this,'${user.user_id}')"
+									href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>
+									<a title="编辑" href="javascript:;"
 									onclick="member_edit('编辑','member-add.html','4','','510')"
 									class="ml-5" style="text-decoration: none"><i
 										class="Hui-iconfont">&#xe6df;</i></a> <a
@@ -156,25 +156,35 @@
 							function(index) {
 								$
 										.ajax({
-											type : 'POST',
-											url : '',
+											type : 'PUT',
+											url : '${pageContext.request.contextPath}/users/stopUser/'
+													+ id,
 											dataType : 'json',
 											success : function(data) {
-												$(obj)
-														.parents("tr")
-														.find(".td-manage")
-														.prepend(
-																'<a style="text-decoration:none" onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a>');
-												$(obj)
-														.parents("tr")
-														.find(".td-status")
-														.html(
-																'<span class="label label-defaunt radius">已停用</span>');
-												$(obj).remove();
-												layer.msg('已停用!', {
-													icon : 5,
-													time : 1000
-												});
+												if (data == true) {
+													$(obj)
+															.parents("tr")
+															.find(".td-manage")
+															.prepend(
+																	'<a style="text-decoration:none" onClick="member_start(this,'
+																			+ id
+																			+ ')" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a>');
+													$(obj)
+															.parents("tr")
+															.find(".td-status")
+															.html(
+																	'<span class="label label-defaunt radius">已停用</span>');
+													$(obj).remove();
+													layer.msg('已停用!', {
+														icon : 5,
+														time : 1000
+													});
+												} else {
+													layer.msg('操作失败,请检查网络!', {
+														icon : 5,
+														time : 2000
+													});
+												}
 											},
 											error : function(data) {
 												console.log(data.msg);
@@ -189,27 +199,39 @@
 					.confirm(
 							'确认要启用吗？',
 							function(index) {
+
 								$
 										.ajax({
-											type : 'POST',
-											url : '',
+											type : 'PUT',
+											url : '${pageContext.request.contextPath}/users/activeUser/'
+													+ id,
 											dataType : 'json',
 											success : function(data) {
-												$(obj)
-														.parents("tr")
-														.find(".td-manage")
-														.prepend(
-																'<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>');
-												$(obj)
-														.parents("tr")
-														.find(".td-status")
-														.html(
-																'<span class="label label-success radius">已启用</span>');
-												$(obj).remove();
-												layer.msg('已启用!', {
-													icon : 6,
-													time : 1000
-												});
+												if (data == true) {
+													$(obj)
+															.parents("tr")
+															.find(".td-manage")
+															.prepend(
+																	'<a style="text-decoration:none" onClick="member_stop(this,'
+																			+ id
+																			+ ')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>');
+													$(obj)
+															.parents("tr")
+															.find(".td-status")
+															.html(
+																	'<span class="label label-success radius">已启用</span>');
+													$(obj).remove();
+													layer.msg('已启用!', {
+														icon : 6,
+														time : 1000
+													});
+												} else {
+													layer.msg('操作失败,请检查网络!', {
+														icon : 5,
+														time : 2000
+													});
+												}
+
 											},
 											error : function(data) {
 												console.log(data.msg);
