@@ -37,6 +37,7 @@
 	<article class="page-container">
 		<form action="/" method="post" class="form form-horizontal"
 			id="form-change-password">
+			<input type="hidden" id="user_id" name="user_id" value="${user.user_id}">
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3"><span
 					class="c-red">*</span>账户：</label>
@@ -105,10 +106,36 @@
 				focusCleanup : true,
 				success : "valid",
 				submitHandler : function(form) {
-					$(form).ajaxSubmit();
-					var index = parent.layer.getFrameIndex(window.name);
-					parent.$('.btn-refresh').click();
-					parent.layer.close(index);
+					$.ajax({
+						type : 'PUT',
+						url : '${pageContext.request.contextPath}/users/updatePwd',
+						dataType : 'json',
+						contentType : "application/json",
+						data : JSON.stringify({
+							"user_id" : $("#user_id").val(),
+							"user_pwd" : $("#newpassword").val()
+						}),
+						success : function(data) {
+							if (data == true) {
+								layer.msg('信息已提交!', {
+									icon : 6,
+									time : 1000
+								});
+							} else {
+								layer.msg("操作失败,该用户已被注册!", {
+									icon : 5,
+									time : 2000
+								});
+							}
+						},
+						error : function(data) {
+							console.log(data.msg);
+						},
+					});
+					// 					$(form).ajaxSubmit();
+					// 					var index = parent.layer.getFrameIndex(window.name);
+					// 					parent.$('.btn-refresh').click();
+					// 					parent.layer.close(index);
 				}
 			});
 		});

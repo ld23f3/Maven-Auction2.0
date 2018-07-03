@@ -48,7 +48,7 @@
 			</button>
 		</div>
 		<div class="cl pd-5 bg-1 bk-gray mt-20">
-			<span class="l"><a href="javascript:;" onclick="datadel()"
+			<span class="l"><a href="javascript:;" onclick="delAll()"
 				class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
 					批量删除</a> </span> <span class="r">共有数据：<strong>${ size }</strong> 条
 			</span>
@@ -74,8 +74,9 @@
 					<c:if test="${ list ne null }">
 						<c:forEach items="${ list }" var="user">
 							<tr class="text-c">
-								<td><input type="checkbox" value="1" name=""></td>
-								<td>${user.user_id }</td>
+								<td><input type="checkbox" value="${user.user_id }" name=""
+									class="check"></td>
+								<td class="user_id">${user.user_id }</td>
 								<td><u style="cursor: pointer" class="text-primary"
 									onclick="member_show('${user.user_realname }','${pageContext.request.contextPath}/users/userInfo?user_id=${user.user_id}','${user.user_id}','360','400')">${user.user_realname }</u></td>
 								<td>${user.user_acc }</td>
@@ -171,23 +172,72 @@
 
 		/*用户-删除*/
 		function member_del(obj, id) {
-			layer.confirm('确认要删除吗？', function(index) {
+			layer
+					.confirm(
+							'确认要删除吗？',
+							function(index) {
+								$
+										.ajax({
+											type : 'DELETE',
+											url : '${pageContext.request.contextPath}/users/deleteUser/'
+													+ id,
+											dataType : 'json',
+											success : function(data) {
+												if (data == true) {
+													$(obj).parents("tr")
+															.remove();
+													layer.msg('已删除!', {
+														icon : 1,
+														time : 1000
+													});
+												}
+											},
+											error : function(data) {
+												console.log(data.msg);
+											},
+										});
+							});
+		}
+		function getCheck() {
+			var list = new Array();
+			$(".check").each(function() { //遍历table里的全部checkbox
+				// 								allcheckbox += $(this).val() + ","; //获取所有checkbox的值
+				if ($(this).prop("checked")) //如果被选中
+				{
+					list.push($(this).val());
+				}
+
+			});
+			return list;
+		}
+		function delAll(argument) {
+			var list = getCheck();
+			alert(list);
+			if (list.length > 0) {
 				$.ajax({
-					type : 'POST',
-					url : '',
+					type : 'DELETE',
+					url : '${pageContext.request.contextPath}/users/deleteCheckUser',
 					dataType : 'json',
+					contentType : "application/json",
+					data : JSON.stringify(list),
 					success : function(data) {
-						$(obj).parents("tr").remove();
-						layer.msg('已删除!', {
-							icon : 1,
-							time : 1000
-						});
+						if (data == true) {
+							layer.msg('信息已提交!', {
+								icon : 6,
+								time : 1000
+							});
+						} else {
+							layer.msg("操作失败,该用户已被注册!", {
+								icon : 5,
+								time : 2000
+							});
+						}
 					},
 					error : function(data) {
 						console.log(data.msg);
 					},
 				});
-			});
+			}
 		}
 	</script>
 </body>

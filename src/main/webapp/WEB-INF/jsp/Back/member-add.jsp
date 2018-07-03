@@ -35,8 +35,8 @@
 </head>
 <body>
 	<article class="page-container">
-		<form action="${pageContext.request.contextPath}/users/registerUser"
-			class="form form-horizontal" id="form-member-add" method="post">
+		<form action="${actionSrc}"
+			class="form form-horizontal" id="form-member-add" method="POST">
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3"><span
 					class="c-red">*</span>用户名：</label>
@@ -118,7 +118,10 @@
 				</div>
 			</div>
 			<div>
-				<input type="hidden" id="" name="" value="">
+				<input type="hidden" id="user_id" name="user_id" value="">
+				<input type="hidden" id="user_balance" name="user_balance" value="">
+				<input type="hidden" id="user_create" name="user_create" value="">
+				<input type="hidden" id="user_modified" name="user_modified" value="">
 			</div>
 
 			<div class="row cl">
@@ -143,7 +146,7 @@
 
 	<!--请在下方写此页面业务相关的脚本-->
 	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/static/My97DatePicker/4.8/WdatePicker.js"></script>
+		src="${pageContext.request.contextPath}/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/static/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
 	<script type="text/javascript"
@@ -152,12 +155,37 @@
 		src="${pageContext.request.contextPath}/static/lib/jquery.validation/1.14.0/messages_zh.js"></script>
 	<script type="text/javascript">
 		$(function() {
+			if(${user != null}){
+				$("#user_id").val("${user.user_id}");
+				$("#user_acc").val("${user.user_acc}");
+				$("#user_acc").attr("readonly","readonly");
+				
+
+				$("#user_pwd").val("${user.user_pwd}");
+				$("#usersecpwd").val("${user.user_pwd}");
+				var state = ${user.user_state} + 0;
+				if( state == 0){
+					$("#state-1").prop("checked",true);
+					$("#state-2").prop("checked",false);
+				}else{
+					$("#state-1").prop("checked",false);
+					$("#state-2").prop("checked",true);
+				} 
+				$("#user_balance").val("${user.user_balance}");
+				$("#user_create").val("${user.user_create}");
+				$("#user_modified").val("${user.user_modified}");
+			};
+			$("#user_email").val("492011200@qq.com");
+			$("#user_tel").val("15259620412");
+			$("#user_realname").val("林惠成");
+			$("#user_cardid").val("350623199008205233");
+			$("#user_address").val("厦门湖里");
+			
 			$('.skin-minimal input').iCheck({
 				checkboxClass : 'icheckbox-blue',
 				radioClass : 'iradio-blue',
 				increaseArea : '20%'
 			});
-
 			$("#form-member-add").validate({
 				rules : {
 					user_acc : {
@@ -206,10 +234,43 @@
 				focusCleanup : true,
 				success : "valid",
 				submitHandler : function(form) {
-					$(form).ajaxSubmit();
-					var index = parent.layer.getFrameIndex(window.name);
-					//parent.$('.btn-refresh').click();
-					parent.layer.close(index);
+					$.ajax({
+						type : '${type}',
+						url : '${actionSrc}',
+						dataType : 'json',
+						contentType:"application/json",
+						data:JSON.stringify({"user_id":$("#user_id").val(),
+							"user_acc":$("#user_acc").val(),
+							"user_pwd":$("#user_pwd").val(),
+							"user_email":$("#user_email").val(),
+							"user_tel":$("#user_tel").val(), 
+							"user_realname":$("#user_realname").val(), 
+							"user_cardid":$("#user_cardid").val(), 
+							"user_address":$("#user_address").val(), 
+							"user_balance":$("#user_balance").val(), 
+							"user_state":$(":checked").val(), 
+							"user_create":$("#user_create").val(), 
+							"user_modified":$("#user_modified").val()}), 
+						success : function(data) {
+							if (data == true) {
+								layer.msg('信息已提交!', {
+									icon : 6,
+									time : 1000
+								});
+							} else {
+								layer.msg("操作失败,该用户已被注册!", {
+									icon : 5,
+									time : 2000
+								});
+							}
+						},
+						error : function(data) {
+							console.log(data.msg);
+						},
+					});
+// 					$(form).ajaxSubmit();
+// 					var index = parent.layer.getFrameIndex(window.name);
+// 					parent.layer.close(index);
 				}
 			});
 		});

@@ -95,7 +95,7 @@
 									class="ml-5" style="text-decoration: none"><i
 										class="Hui-iconfont">&#xe6df;</i></a> <a
 									style="text-decoration: none" class="ml-5"
-									onClick="change_password('修改密码','${pageContext.request.contextPath}/users/askEdit','${user.user_id}','600','270')"
+									onClick="change_password('修改密码','${pageContext.request.contextPath}/users/askChangePwd','${user.user_id}','600','270')"
 									href="javascript:;" title="修改密码"><i class="Hui-iconfont">&#xe63f;</i></a>
 								</td>
 							</tr>
@@ -239,7 +239,7 @@
 		}
 		/*用户-编辑*/
 		function member_edit(title, url, id, w, h) {
-			layer_show(title, url, w, h);
+			layer_show(title, url+ "?user_id=" + id, w, h);
 		}
 		/*密码-修改*/
 		function change_password(title, url, id, w, h) {
