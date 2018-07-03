@@ -24,6 +24,8 @@ public class BackInterceptor implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handle) throws Exception {
+		
+		System.out.println(request.getServletPath());
 		HttpSession session = request.getSession();
 		String manageName = (String) session.getAttribute("manageName");
 		String managePwd = (String) session.getAttribute("managePwd");
@@ -34,7 +36,8 @@ public class BackInterceptor implements HandlerInterceptor {
 		}
 		session.setAttribute("manageName", null);
 		session.setAttribute("managePwd", null);
-		response.sendRedirect("show.html");
+		//这边不能确定用户一定是从manage界面过来的,绝对路径比较靠谱
+		response.sendRedirect(request.getContextPath() + "/manage/show.html");
 		return false;
 	}
 

@@ -50,7 +50,7 @@
 			<span class="l"><a href="javascript:;" onclick="datadel()"
 				class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
 					批量删除</a> <a href="javascript:;"
-				onclick="member_add('添加用户','${pageContext.request.contextPath}/users/askAdd','','560')"
+				onclick="member_add('添加用户','${pageContext.request.contextPath}/users/askAdd','435','540')"
 				class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i>
 					添加用户</a></span> <span class="r">共有数据：<strong>${ size }</strong> 条
 			</span>
@@ -91,13 +91,13 @@
 									onClick="member_stop(this,'${user.user_id}')"
 									href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>
 									<a title="编辑" href="javascript:;"
-									onclick="member_edit('编辑','member-add.html','4','','510')"
+									onclick="member_edit('编辑','${pageContext.request.contextPath}/users/askAdd','${user.user_id}','435','540')"
 									class="ml-5" style="text-decoration: none"><i
 										class="Hui-iconfont">&#xe6df;</i></a> <a
 									style="text-decoration: none" class="ml-5"
-									onClick="change_password('修改密码','change-password.html','10001','600','270')"
+									onClick="change_password('修改密码','${pageContext.request.contextPath}/users/askEdit','${user.user_id}','600','270')"
 									href="javascript:;" title="修改密码"><i class="Hui-iconfont">&#xe63f;</i></a>
-									</td>
+								</td>
 							</tr>
 						</c:forEach>
 					</c:if>
@@ -148,8 +148,12 @@
 		}
 		/*用户-停用*/
 		function member_stop(obj, id) {
-			layer.confirm('确认要停用吗？',function(index) {
-								$.ajax({
+			layer
+					.confirm(
+							'确认要停用吗？',
+							function(index) {
+								$
+										.ajax({
 											type : 'PUT',
 											url : '${pageContext.request.contextPath}/users/stopUser/'
 													+ id,
@@ -239,7 +243,7 @@
 		}
 		/*密码-修改*/
 		function change_password(title, url, id, w, h) {
-			layer_show(title, url, w, h);
+			layer_show(title, url + "?user_id=" + id, w, h);
 		}
 	</script>
 </body>

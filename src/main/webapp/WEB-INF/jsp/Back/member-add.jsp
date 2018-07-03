@@ -35,12 +35,12 @@
 </head>
 <body>
 	<article class="page-container">
-		<form action="${pageContext.request.contextPath}/users/registerUser" class="form form-horizontal" id="form-member-add"
-			method="post">
+		<form action="${pageContext.request.contextPath}/users/registerUser"
+			class="form form-horizontal" id="form-member-add" method="post">
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3"><span
 					class="c-red">*</span>用户名：</label>
-			
+
 				<div class="formControls col-xs-8 col-sm-9">
 					<input type="text" class="input-text" value="" placeholder="请输入用户名"
 						id="user_acc" name="user_acc">
@@ -54,7 +54,15 @@
 						placeholder="请输入密码" id="user_pwd" name="user_pwd">
 				</div>
 			</div>
-			
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3"><span
+					class="c-red">*</span>确认密码：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="password" class="input-text" value=""
+						placeholder="请确认密码" id="usersecpwd" name="usersecpwd">
+				</div>
+			</div>
+
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3"><span
 					class="c-red">*</span>真实姓名：</label>
@@ -73,9 +81,17 @@
 			</div>
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3"><span
+					class="c-red">*</span>所在地址：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" placeholder="请输入您的地址"
+						name="user_address" id="user_address">
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3"><span
 					class="c-red">*</span>手机：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" value="13605000000"
+					<input type="text" class="input-text" value=""
 						placeholder="是输入11位手机号码" id="user_tel" name="user_tel">
 				</div>
 			</div>
@@ -84,7 +100,7 @@
 					class="c-red">*</span>邮箱：</label>
 				<div class="formControls col-xs-8 col-sm-9">
 					<input type="text" class="input-text" placeholder="请输入邮箱地址"
-						name="user_email" id="user_email" value="4920@qq.com">
+						name="user_email" id="user_email" value="">
 				</div>
 			</div>
 			<div class="row cl">
@@ -92,16 +108,18 @@
 					class="c-red">*</span>权限：</label>
 				<div class="formControls col-xs-8 col-sm-9 skin-minimal">
 					<div class="radio-box">
-						<input name="user_state" type="radio" id="state-1" value="0" checked>
-						<label for="state-1">启用</label>
+						<input name="user_state" type="radio" id="state-1" value="0"
+							checked> <label for="state-1">启用</label>
 					</div>
 					<div class="radio-box">
-						<input type="radio" id="state-2" name="user_state" value="1"> <label
-							for="state-2">禁用</label>
+						<input type="radio" id="state-2" name="user_state" value="1">
+						<label for="state-2">禁用</label>
 					</div>
 				</div>
 			</div>
-			
+			<div>
+				<input type="hidden" id="" name="" value="">
+			</div>
 
 			<div class="row cl">
 				<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
@@ -133,7 +151,7 @@
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/static/lib/jquery.validation/1.14.0/messages_zh.js"></script>
 	<script type="text/javascript">
-		 $(function() {
+		$(function() {
 			$('.skin-minimal input').iCheck({
 				checkboxClass : 'icheckbox-blue',
 				radioClass : 'iradio-blue',
@@ -155,14 +173,21 @@
 					usersecpwd : {
 						required : true,
 						minlength : 2,
-						maxlength : 16
+						maxlength : 16,
+						equalTo : "#user_pwd"
+
 					},
 					user_realname : {
 						required : true,
+						isChinese : true
 					},
 					user_cardid : {
 						required : true,
-						
+						isIdCardNo:true
+
+					},
+					user_address:{
+						required : true
 					},
 					user_tel : {
 						required : true,
@@ -187,7 +212,7 @@
 					parent.layer.close(index);
 				}
 			});
-		}); 
+		});
 	</script>
 	<!--/请在上方写此页面业务相关的脚本-->
 </body>

@@ -31,6 +31,7 @@
 			<mvc:mapping path="/users/**" />
 			<!-- 此时访问api/的url则不会被拦截 -->
 			<mvc:exclude-mapping path="/manage/show.html" />
+			<mvc:exclude-mapping path="/manage/valicode" />
 			<bean class="com.etc.interceptor.BackInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>

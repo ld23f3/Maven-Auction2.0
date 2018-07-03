@@ -21,7 +21,7 @@
 <link
 	href="${pageContext.request.contextPath}/static/Hui-iconfont/1.0.8/iconfont.css"
 	rel="stylesheet" type="text/css" />
-<title>后台登录 - H-ui.admin v3.1</title>
+<title>后台登录 - 喬治拍卖 v2.0</title>
 </head>
 
 <body>
@@ -29,29 +29,32 @@
 	<div class="header"></div>
 	<div class="loginWraper">
 		<div id="loginform" class="loginBox">
-			<form class="form form-horizontal" action="${pageContext.request.contextPath}/manage/show.html" method="post">
+			<form class="form form-horizontal"
+				action="${pageContext.request.contextPath}/manage/show.html"
+				method="post">
 				<div class="row cl">
 					<label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
 					<div class="formControls col-xs-8">
-						<input id="manageName" name="manageName" type="text" placeholder="账户"
-							class="input-text size-L">
+						<input id="manageName" name="manageName" type="text"
+							placeholder="账户" class="input-text size-L">
 					</div>
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
 					<div class="formControls col-xs-8">
-						<input id="managePwd" name="managePwd" type="password" placeholder="密码"
-							class="input-text size-L">
+						<input id="managePwd" name="managePwd" type="password"
+							placeholder="密码" class="input-text size-L">
 					</div>
 				</div>
 				<div class="row cl">
 					<div class="formControls col-xs-8 col-xs-offset-3">
 						<input class="input-text size-L" type="text" placeholder="验证码"
-						id="imageCode" name="imageCode"
+							id="imageCode" name="imageCode"
 							onblur="if(this.value==''){this.value='验证码:'}"
 							onclick="if(this.value=='验证码:'){this.value='';}" value="验证码:"
-							style="width: 150px;"> <img src=""> <a id="kanbuq"
-							href="javascript:;">看不清，换一张</a>
+							style="width: 150px;"> <img id="img"
+							src="${pageContext.request.contextPath}/manage/valicode"> <a
+							id="kanbuq">看不清，换一张</a>
 					</div>
 				</div>
 				<div class="row cl">
@@ -77,6 +80,17 @@
 		src="${pageContext.request.contextPath}/static/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/static/h-ui/js/H-ui.min.js"></script>
-
+	<script type="text/javascript">
+		$(function() {
+			$("#kanbuq").click(
+					function() {
+						var imgSrc = $("#img");
+						imgSrc.attr("src",
+								"${pageContext.request.contextPath}/manage/valicode"
+										+ "?timestamp="
+										+ (new Date()).valueOf());
+					})
+		});
+	</script>
 </body>
 </html>

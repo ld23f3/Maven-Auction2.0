@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -74,27 +73,52 @@ public class BackUsersController {
 		model.addAttribute("user", user);
 		return "/Back/member-show";
 	}
+
 	/**
-	 * 请求显示添加用户界面
+	 * 请求显示用户登录界面
+	 * 
+	 * @param user_id
+	 *            用户ID(非必要)
+	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="askAdd",method=RequestMethod.GET)
-	public String showAddUser() {
+	@RequestMapping(value = "askAdd", method = RequestMethod.GET)
+	public String showAddUser(@RequestParam(value = "user_id", required = false, defaultValue = "0") int user_id,
+			Model model) {
+		// 如果这边没有传递传输过来,说明是注册界面,不需要提供参数
+		// 否则如果界面传过来一个用户ID,要把该用户的数据都提交给页面,看页面怎么做处理
+		if (user_id != 0) {
+			Users user = new Users(user_id, "user_acc" + user_id, "user_pwd" + user_id, "user_email" + user_id, "user_tel" + user_id,
+					"user_realname" + user_id, "user_cardid" + user_id, "user_address" + user_id, 100.0, 0, new Date().toLocaleString(),
+					"user_modified" + user_id);
+			model.addAttribute("user", user);
+		}
 		return "/Back/member-add";
 	}
-	
+	@RequestMapping(value = "askEdit", method = RequestMethod.GET)
+	public String showEditUser(@RequestParam(value = "user_id", required = true) int user_id,Model model) {
+		Users user = new Users(user_id, "user_acc" + user_id, "user_pwd" + user_id, "user_email" + user_id, "user_tel" + user_id,
+				"user_realname" + user_id, "user_cardid" + user_id, "user_address" + user_id, 100.0, 0, new Date().toLocaleString(),
+				"user_modified" + user_id);
+		model.addAttribute("user", user);
+		return "/Back/change-password";
+	}
 	/**
 	 * 注册用户
+	 * 
 	 * @param user
 	 * @return
 	 */
-	@RequestMapping(value="registerUser",method=RequestMethod.POST)
+	@RequestMapping(value = "registerUser", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean registerUser(Users user) {
 		System.out.println(user);
-		//user = new Users(user_acc, user_pwd, user_email, user_tel, user_realname, user_cardid, user_address, user_balance, user_state, user_create, user_modified)
+		// user = new Users(user_acc, user_pwd, user_email, user_tel, user_realname,
+		// user_cardid, user_address, user_balance, user_state, user_create,
+		// user_modified)
 		return true;
 	}
+
 	/**
 	 * 用户停权操作
 	 * 
@@ -123,6 +147,7 @@ public class BackUsersController {
 			return false;
 		return true;
 	}
+
 	/**
 	 * 用户彻底删除
 	 * 
@@ -136,6 +161,5 @@ public class BackUsersController {
 			return false;
 		return true;
 	}
-	
-	
+
 }
