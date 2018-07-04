@@ -201,7 +201,7 @@
 		function getCheck() {
 			var list = new Array();
 			$(".check").each(function() { //遍历table里的全部checkbox
-				// 								allcheckbox += $(this).val() + ","; //获取所有checkbox的值
+				// allcheckbox += $(this).val() + ","; //获取所有checkbox的值
 				if ($(this).prop("checked")) //如果被选中
 				{
 					list.push($(this).val());
@@ -212,31 +212,38 @@
 		}
 		function delAll(argument) {
 			var list = getCheck();
-			alert(list);
 			if (list.length > 0) {
-				$.ajax({
-					type : 'DELETE',
-					url : '${pageContext.request.contextPath}/users/deleteCheckUser',
-					dataType : 'json',
-					contentType : "application/json",
-					data : JSON.stringify(list),
-					success : function(data) {
-						if (data == true) {
-							layer.msg('信息已提交!', {
-								icon : 6,
-								time : 1000
-							});
-						} else {
-							layer.msg("操作失败,该用户已被注册!", {
-								icon : 5,
-								time : 2000
-							});
-						}
-					},
-					error : function(data) {
-						console.log(data.msg);
-					},
-				});
+				$
+						.ajax({
+							type : 'DELETE',
+							url : '${pageContext.request.contextPath}/users/deleteCheckUser',
+							dataType : 'json',
+							contentType : "application/json",
+							data : JSON.stringify(list),
+							success : function(data) {
+								if (data == true) {
+									$(".check").each(function() { //遍历table里的全部checkbox
+										// allcheckbox += $(this).val() + ","; //获取所有checkbox的值
+										if ($(this).prop("checked")) //如果被选中
+										{
+											$(this).parents("tr").remove();
+										}
+									});
+									layer.msg('信息已提交!', {
+										icon : 6,
+										time : 1000
+									});
+								} else {
+									layer.msg("操作失败,该用户已被注册!", {
+										icon : 5,
+										time : 2000
+									});
+								}
+							},
+							error : function(data) {
+								console.log(data.msg);
+							},
+						});
 			}
 		}
 	</script>

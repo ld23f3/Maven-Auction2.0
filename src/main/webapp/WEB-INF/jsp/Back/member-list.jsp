@@ -47,9 +47,9 @@
 			</button>
 		</div>
 		<div class="cl pd-5 bg-1 bk-gray mt-20">
-			<span class="l"><a href="javascript:;" onclick="datadel()"
+			<span class="l"><a href="javascript:;" onclick="StopAll()"
 				class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
-					批量删除</a> <a href="javascript:;"
+					批量停权</a> <a href="javascript:;"
 				onclick="member_add('添加用户','${pageContext.request.contextPath}/users/askAdd','435','540')"
 				class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i>
 					添加用户</a></span> <span class="r">共有数据：<strong>${ size }</strong> 条
@@ -76,7 +76,8 @@
 					<c:if test="${ list ne null }">
 						<c:forEach items="${ list }" var="user">
 							<tr class="text-c">
-								<td><input type="checkbox" value="1" name=""></td>
+								<td><input type="checkbox" value="${user.user_id }"
+									class="check"></td>
 								<td>${user.user_id }</td>
 								<td><u style="cursor: pointer" class="text-primary"
 									onclick="member_show('${user.user_realname }','${pageContext.request.contextPath}/users/userInfo?user_id=${user.user_id}','${user.user_id}','360','400')">${user.user_realname }</u></td>
@@ -239,11 +240,59 @@
 		}
 		/*用户-编辑*/
 		function member_edit(title, url, id, w, h) {
-			layer_show(title, url+ "?user_id=" + id, w, h);
+			layer_show(title, url + "?user_id=" + id, w, h);
 		}
 		/*密码-修改*/
 		function change_password(title, url, id, w, h) {
 			layer_show(title, url + "?user_id=" + id, w, h);
+		}
+		function getCheck() {
+			var list = new Array();
+			$(".check").each(function() { //遍历table里的全部checkbox
+				// 								allcheckbox += $(this).val() + ","; //获取所有checkbox的值
+				if ($(this).prop("checked")) //如果被选中
+				{
+					list.push($(this).val());
+				}
+
+			});
+			return list;
+		}
+		function StopAll(argument) {
+			var list = getCheck();
+			if (list.length > 0) {
+				$
+						.ajax({
+							type : 'PUT',
+							url : '${pageContext.request.contextPath}/users/stopCheckUser',
+							dataType : 'json',
+							contentType : "application/json",
+							data : JSON.stringify(list),
+							success : function(data) {
+								if (data == true) {
+									$(".check").each(function() { //遍历table里的全部checkbox
+										// allcheckbox += $(this).val() + ","; //获取所有checkbox的值
+										if ($(this).prop("checked")) //如果被选中
+										{
+											$(this).parents("tr").remove();
+										}
+									});
+									layer.msg('信息已提交!', {
+										icon : 6,
+										time : 1000
+									});
+								} else {
+									layer.msg("操作失败,该用户已被注册!", {
+										icon : 5,
+										time : 2000
+									});
+								}
+							},
+							error : function(data) {
+								console.log(data.msg);
+							},
+						});
+			}
 		}
 	</script>
 </body>

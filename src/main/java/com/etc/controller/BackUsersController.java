@@ -91,33 +91,36 @@ public class BackUsersController {
 		// 如果这边没有传递传输过来,说明是注册界面,不需要提供参数
 		// 否则如果界面传过来一个用户ID,要把该用户的数据都提交给页面,看页面怎么做处理
 		if (user_id != 0) {
-			Users user = new Users(user_id, "user_acc" + user_id, "user_pwd" + user_id, "user_email" + user_id, "user_tel" + user_id,
-					"user_realname" + user_id, "user_cardid" + user_id, "user_address" + user_id, 100.0, 0, new Date().toLocaleString(),
-					"user_modified" + user_id);
+			Users user = new Users(user_id, "user_acc" + user_id, "user_pwd" + user_id, "user_email" + user_id,
+					"user_tel" + user_id, "user_realname" + user_id, "user_cardid" + user_id, "user_address" + user_id,
+					100.0, 0, new Date().toLocaleString(), "user_modified" + user_id);
 			model.addAttribute("user", user);
-			model.addAttribute("actionSrc",request.getContextPath() +  "/users/updateUser");
-			model.addAttribute("type","PUT");
+			model.addAttribute("actionSrc", request.getContextPath() + "/users/updateUser");
+			model.addAttribute("type", "PUT");
 			System.out.println(user);
-		}else {
-			model.addAttribute("type","POST");
-			model.addAttribute("actionSrc",request.getContextPath() +  "/users/registerUser");
+		} else {
+			model.addAttribute("type", "POST");
+			model.addAttribute("actionSrc", request.getContextPath() + "/users/registerUser");
 		}
 		return "/Back/member-add";
 	}
+
 	/**
 	 * 请求显示修改密码
+	 * 
 	 * @param user_id
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping(value = "askChangePwd", method = RequestMethod.GET)
-	public String showEditUser(@RequestParam(value = "user_id", required = true) int user_id,Model model) {
-		Users user = new Users(user_id, "user_acc" + user_id, "user_pwd" + user_id, "user_email" + user_id, "user_tel" + user_id,
-				"user_realname" + user_id, "user_cardid" + user_id, "user_address" + user_id, 100.0, 0, new Date().toLocaleString(),
-				"user_modified" + user_id);
+	public String showEditUser(@RequestParam(value = "user_id", required = true) int user_id, Model model) {
+		Users user = new Users(user_id, "user_acc" + user_id, "user_pwd" + user_id, "user_email" + user_id,
+				"user_tel" + user_id, "user_realname" + user_id, "user_cardid" + user_id, "user_address" + user_id,
+				100.0, 0, new Date().toLocaleString(), "user_modified" + user_id);
 		model.addAttribute("user", user);
 		return "/Back/change-password";
 	}
+
 	/**
 	 * 注册用户
 	 * 
@@ -130,8 +133,10 @@ public class BackUsersController {
 		System.out.println("registerUser:\n" + user);
 		return false;
 	}
+
 	/**
 	 * 更新用户信息
+	 * 
 	 * @param user
 	 * @return
 	 */
@@ -141,8 +146,10 @@ public class BackUsersController {
 		System.out.println("updateUser:\n" + user);
 		return true;
 	}
+
 	/**
 	 * 请求修改密码
+	 * 
 	 * @param user
 	 * @return
 	 */
@@ -152,6 +159,7 @@ public class BackUsersController {
 		System.out.println("updatePwd:\n" + user);
 		return true;
 	}
+
 	/**
 	 * 用户停权操作
 	 * 
@@ -196,15 +204,23 @@ public class BackUsersController {
 		System.out.println("deleteUser:\n" + user_id);
 		return true;
 	}
+
 	/**
-	 * 批量删除
+	 * 批量删除选中的用户
+	 * 
 	 * @param list
 	 * @return
 	 */
 	@RequestMapping(value = "deleteCheckUser", method = RequestMethod.DELETE)
 	@ResponseBody
 	public boolean deleteCheckUser(@RequestBody List<Integer> list) {
-		System.out.println(list);
+		System.out.println("deleteCheckUser:" + list);
+		return true;
+	}
+	@RequestMapping(value = "stopCheckUser",method= RequestMethod.PUT)
+	@ResponseBody
+	public boolean stopCheckUser(@RequestBody List<Integer> list) {
+		System.out.println("stopCheckUser:" + list);
 		return true;
 	}
 
