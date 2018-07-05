@@ -1,5 +1,7 @@
 package com.etc.entity;
 
+import java.util.List;
+
 /**
  * 实体类 商品表
  * @author HongPeiQi
@@ -197,8 +199,20 @@ public class Goods {
 				+ ", goods_typeid=" + goods_typeid + ", goods_desc=" + goods_desc + ", good_state=" + good_state
 				+ ", user_id=" + user_id + ", goods_minpremium=" + goods_minpremium + ", goods_auctiontime="
 				+ goods_auctiontime + ", goods_margin=" + goods_margin + ", goods_create=" + goods_create
-				+ ", goods_modified=" + goods_modified + "]";
+				+ ", goods_modified=" + goods_modified + ", goodsImg=" + goodsImg + "]";
 	}
 	
+	
+	//添加一个商品图片表
+		private List<GoodsImg> goodsImg;
+
+
+		public List<GoodsImg> getGoodsImg() {
+			return goodsImg;
+		}
+
+		public void setGoodsImg(List<GoodsImg> goodsImg) {
+			this.goodsImg = goodsImg;
+		}
 	
 }

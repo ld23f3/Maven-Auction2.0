@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 映射文件 -->
+<mapper namespace="com.etc.dao.MybiddingDao">
+
+
+	<!-- 多表查询goods与mybidding -->
+	<!-- 查询所有用resultMap写法mybidding下面resultmap的id名称 -->
+	<select id="queryMybidding" resultMap="mybidding">
+		select mb.goods_id,mb.user_id,mb.bid_id,gs.goods_name,mb.bid_price,mb.bid_state,mb.bid_date FROM 
+		mybidding as mb INNER JOIN goods as gs ON  mb.goods_id=gs.goods_id WHERE mb.user_id=#{mb.user_id} ORDER BY mb.bid_id DESC
+
+
+	</select>
+	<!--这里的type=Blog是设置其类型。其实Blog是别名。没有设置的话是com.etc.entity.Blog -->
+	<resultMap type="com.etc.entity.Mybidding" id="mybidding">
+		<!--id表示的是主属性（主键） property实体类的属性，column数据库表的列名 -->
+		<id property="bid_id" column="bid_id" />
+		<!-- 其他的属性 -->
+		<result property="user_id" column="user_id" />
+		<result property="goods_id" column="goods_id"/>
+		
+		<result property="bid_price" column="bid_price" />
+		<result property="bid_state" column="bid_state"/>
+		<result property="bid_date" column="bid_date"/>
+		
+		<association property="goods" column="goods_id"
+			javaType="com.etc.entity.Goods">
+			<id property="goods_id" column="goods_id" />
+			<result property="goods_name" column="goods_name" />
+			<result property="goods_minprice" column="goods_minprice"/>
+		</association>
+	</resultMap>
+
+	<!--  通过goodsid显示信息-->
+	<!-- <select id="queryByGoodsId" resultType="com.etc.entity.Goods">
+	
+	SELECT * FROM goods WHERE goods_id=#{goods_id}
+	
+	</select> -->
+	
+	
+	<!--通过goodsid显示信息进行多表查询 goods与g -->
+	<select id="queryByGoodsId" resultMap="selectById">
+	SELECT *FROM goods As gd INNER JOIN goodsimg AS gs ON gd.goods_id=gs.goods_id WHERE gd.goods_id=#{gd.goods_id}
+	</select>
+	
+	<resultMap type="com.etc.entity.Goods" id="selectById">
+	<id property="goods_id" column="goods_id"/>
+	<result property="user_id" column="user_id"/>
+	<result property="goods_name" column="goods_name"/>
+	<result property="goods_minprice" column="goods_minprice"/>
+	<result property="goods_currentprice" column="goods_currentprice"/>
+	<result property="goods_desc" column="goods_desc"/>
+	<result property="goods_minpremium" column="goods_minpremium"/>
+	<result property="goods_modified" column="goods_modified"/>
+	<!-- 1对多的这里是多的哪一个 -->
+	<collection property="goodsImg" ofType="com.etc.entity.GoodsImg">
+	<id property="goodsimg_id" column="goodsimg_id"/>
+	<result property="goods_id" column="goods_id"/>
+	<result property="goodsimg_src" column="goodsimg_src"/>
+	
+	</collection>
+	</resultMap>
+	
+	
+	
+	
+	<!-- 修改当前价格 -->
+	<update id="updateGoods" parameterType="com.etc.entity.Goods">
+	UPDATE goods SET goods_currentprice=#{goods_currentprice},goods_modified=NOW() WHERE goods_id=#{goods_id}
+	
+	</update>
+	
+	<!-- 添加竞拍记录 -->
+	<insert id="addMybidding" parameterType="com.etc.entity.Mybidding">
+	INSERT INTO mybidding VALUES(NULL,#{user_id},#{goods_id},#{bid_state},NOW(),#{bid_price})
+	
+	</insert>
+
+	<insert id="updateGoodsState" parameterType="com.etc.entity.Goods">
+	UPDATE goods set  good_state=#{good_state}  WHERE goods_id=#{goods_id}
+	
+	</insert>
+
+
+
+</mapper>
