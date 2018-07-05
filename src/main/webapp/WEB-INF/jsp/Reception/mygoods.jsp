@@ -276,7 +276,7 @@
 											test="${goods.good_state=='1'}">正在竞拍</c:if> <c:if
 											test="${goods.good_state=='2'}">已售出</c:if> <c:if
 											test="${goods.good_state=='3'}">流拍</c:if></td>
-									<td><input type="button" name="" id="btulook" value="查看详情" /></td>
+									<td><input type="button" name="" id="btulook" value="查看详情" onclick="showGoodsInfo(${goods.goods_id})"/></td>
 
 
 								</tr>
@@ -387,10 +387,11 @@
     </script>
 
 	<script type="text/javascript">
-	$('btulook').click(function(){
-		var goodsId = ${goods.goods_id}.val();
-		location.href = "goodsInfo"+ goodsId;
-	});
+	function showGoodsInfo(id) {
+		
+		window.location.href ='${pageContext.request.contextPath}/api/goodsInfo/' +id;
+	}
+	
 	
     </script>
 	<!-- //cart-js -->

@@ -241,7 +241,7 @@
 						<div class="ecommerce_dres-type">
 							<ul>
 								<li><a href="publish_goods.html">发布商品</a></li>
-								<li><a href="mygoods.html">我的卖品</a></li>
+								<li><a href="mygoods.html">我的订单</a></li>
 
 							</ul>
 						</div>
@@ -250,46 +250,40 @@
 			</div>
 
 			<div class="col-md-9 col-sm-9 contact-right ">
-				<c:forEach items="${goodsInfo}" var="goodsInfo">
+				<c:forEach items="${ordersInfo}" var="ordersInfo">
 				<div class="other">
 
-					<label>商品编号</label>
-					<input type="text"  name="goodsId"
-						placeholder="${goodsInfo.goods_id}" required=" ">
+					<label>订单编号</label>
+					<input type="text"  name="ordersId"
+						placeholder="${ordersInfo.order_id}" required=" ">
 					<label>商品名称</label>
 					<input type="text" name="goodsname"
-						placeholder="${goodsInfo.goods_name}" required=" ">
+						placeholder="${ordersInfo.goods_name}" required=" ">
 					<label>商品类型</label>
-					<input type="text" name="goodstype"
-						placeholder="${goodsInfo.goodstype_desc}" required=" ">
-					<label>起拍价格</label>
-					<input type="text" name="goodsminprice"
-						placeholder="${goodsInfo.goods_minprice}" required=" ">
-					<label>当前价格</label>
-					<input type="text" name="goodscurrentprice"
-						placeholder="${goodsInfo.goods_currentprice}" required=" ">
+					<input type="text" name="orderstype"
+						placeholder="${ordersInfo.goodstype_desc}" required=" ">
 					<label>得标价格</label>
 					<input type="text" name="goodscurrentprice"
-						placeholder="${goodsInfo.goods_currentprice}" required=" ">
-					<label>保证金</label>
-					<input type="text" name="goodsmargin"
-						placeholder="${goodsInfo.goods_getprice}" required=" ">
+						placeholder="${ordersInfo.goods_getprice}" required=" ">
+					<label>收货地址</label>
+					<input type="text" name="consigneeaddress"
+						placeholder="${ordersInfo.consignee_address}" required=" ">
 					<label>竞拍情况</label>
-					<c:if test="${goodsInfo.good_state=='0'}">
+					<c:if test="${ordersInfo.order_state=='0'}">
 					<input type="text" name="goodstate"
-						placeholder="未竞拍" required=" ">
+						placeholder="未付款" required=" ">
 					</c:if>
-					<c:if test="${goodsInfo.good_state=='1'}">
+					<c:if test="${ordersInfo.order_state=='1'}">
 					<input type="text" name="goodstate"
-						placeholder="正在竞拍" required=" ">
+						placeholder="未收货" required=" ">
 					</c:if>
-					<c:if test="${goodsInfo.good_state=='2'}">
+					<c:if test="${ordersInfo.order_state=='2'}">
 					<input type="text" name="goodstate"
-						placeholder="已售出" required=" ">
+						placeholder="交易成功" required=" ">
 					</c:if>
-					<c:if test="${goodsInfo.good_state=='3'}">
+					<c:if test="${ordersInfo.order_state=='3'}">
 					<input type="text" name="goodstate"
-						placeholder="流拍" required=" ">
+						placeholder="交易关闭" required=" ">
 					</c:if>
 					<%-- <input type="text" name="goodstate"
 						placeholder="<c:if test="${goodsInfo.good_state=='0'}">未竞拍</c:if>
@@ -297,14 +291,17 @@
 									<c:if test="${goodsInfo.good_state=='2'}">已售出</c:if>
 									<c:if test="${goodsInfo.good_state=='3'}">流拍</c:if>"
 						required=" "> --%>
-					<label>拍卖时间</label>
+					<label>订购日期</label>
 					<input type="text" name="goodsauctiontime"
-						placeholder="${goodsInfo.goods_auctiontime}" required=" ">
+						placeholder="${ordersInfo.order_date}" required=" ">
+					<label>发货时间</label>
+					<input type="text" name="goodsauctiontime"
+						placeholder="${ordersInfo.senddate}" required=" ">
 						</br>
 					<label>商品描述</label>
 					<textarea name="goodsdesc"
-						placeholder="${goodsInfo.goodstype_desc}" required=" "></textarea>
-					<input type="submit" value="Send message">
+						placeholder="${ordersInfo.goodstype_desc}" required=" "></textarea>
+					<!-- <input type="submit" value="Send message"> -->
 				</div>
 				</c:forEach>
 			</div>

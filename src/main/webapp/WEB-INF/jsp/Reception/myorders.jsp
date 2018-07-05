@@ -235,9 +235,8 @@
 						<div class="ecommerce_dres-type">
 							<ul>
 								<li><a href="publish_goods.html">竞拍记录</a></li>
-								<li><a href="unpaid_order.html">未付款订单</a></li>
-								<li><a href="unfinished_order.html">未完成订单</a></li>
-								<li><a href="completed_order.html">已完成订单</a></li>
+								<li><a href="myorder.html">我的订单</a></li>
+								
 
 
 							</ul>
@@ -279,14 +278,12 @@
 									<td>${orders.consignee_address}</td>
 									<td>${orders.order_date}</td>
 									<td>${orders.senddate}</td>
-									<td><c:if test="${orders.order_state=='0'}"><a href="javascript:void(0)"
-										onclick="updArticle(${orders.order_id})">付款</a></c:if>
-										<c:if test="${orders.order_state=='1'}"><a href="javascript:void(0)"
-										onclick="updArticle(${orders.order_id})">查看详情</a></c:if>
-										<c:if test="${orders.order_state=='2'}"><a href="javascript:void(0)"
-										onclick="updArticle(${orders.order_id})">查看详情</a></c:if>
-										<c:if test="${orders.order_state=='3'}"><a href="javascript:void(0)"
-										onclick="updArticle(${orders.order_id})">查看详情</a></c:if>
+									<td><c:if test="${orders.order_state=='0'}">
+									<input type="button" name="" id="payfor" value="  付    款  " onclick="showOrderInfo(${orders.order_id})"/>
+									</c:if>
+										<c:if test="${orders.order_state=='1'}"><input type="button" name="" id="btulook" value="查看详情" onclick="showOrderInfo(${orders.order_id})"/></c:if>
+										<c:if test="${orders.order_state=='2'}"><input type="button" name="" id="btulook" value="查看详情" onclick="showOrderInfo(${orders.order_id})"/></c:if>
+										<c:if test="${orders.order_state=='3'}"><input type="button" name="" id="btulook" value="查看详情" onclick="showOrderInfo(${orders.order_id})"/></c:if>
 									</td>
 
 
@@ -405,6 +402,15 @@
         		}
         	}
         });
+    </script>
+    
+    	<script type="text/javascript">
+	function showOrderInfo(id) {
+		
+		window.location.href ='${pageContext.request.contextPath}/api/ordersInfo/' +id;
+	}
+	
+	
     </script>
 	<!-- //cart-js -->
 </body>

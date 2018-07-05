@@ -7,5 +7,7 @@ import com.etc.bean.entity.OrderBean;
 public interface MyOrdersService {
 	
 	public List<OrderBean> queryOrderByUserId(int user_id);
+	
+	public List<OrderBean> queryOrderByOrderId(int order_id);
 
 }

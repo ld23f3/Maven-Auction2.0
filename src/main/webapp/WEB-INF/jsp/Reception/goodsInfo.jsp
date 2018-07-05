@@ -241,7 +241,7 @@
 						<div class="ecommerce_dres-type">
 							<ul>
 								<li><a href="publish_goods.html">发布商品</a></li>
-								<li><a href="mygoods.html">我的卖品</a></li>
+								<li><a href="${pageContext.request.contextPath}/api/goods">我的卖品</a></li>
 
 							</ul>
 						</div>

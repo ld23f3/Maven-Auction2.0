@@ -21,5 +21,12 @@ public class MyOrdersServiceImpl implements MyOrdersService {
 		// TODO Auto-generated method stub
 		return myOrdersDao.queryOrderByUserId(user_id);
 	}
+	
+	@Override
+	public List<OrderBean> queryOrderByOrderId(int order_id) {
+		// TODO Auto-generated method stub
+		return myOrdersDao.queryOrderByOrderId(order_id);
+	}
+
 
 }
