@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etc.dao.AddressDao">
+
+	<!--新增地址  -->
+	<insert id="addAddress">
+		insert into shoppingaddress values(null,#{user_id},#{consignee_name},#{consignee_tel},#{consignee_address},now(),null)
+	</insert> 
+	
+	<select id="getAddress" resultType="com.etc.entity.ShoppingAddress">
+		select address_id,consignee_name,consignee_address,consignee_tel,address_create from shoppingaddress where user_id = #{user_id} 
+	</select>
+</mapper>

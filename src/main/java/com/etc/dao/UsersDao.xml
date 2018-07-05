@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etc.dao.UsersDao">
+
+	<!--用户注册  -->
+	<insert id="register">
+		insert into users(user_id,user_acc,user_email,user_tel,user_pwd,user_state,user_balance,user_create) values(null,#{user_acc},#{user_email},#{user_tel},#{user_pwd},#{user_state},#{user_balance},now())
+	</insert> 
+	
+	<!--账号验证  -->
+	<select id="validation" resultType="com.etc.entity.Users">
+		select * from users where user_acc = #{user_acc}
+	</select>
+	
+	<!--登陆  -->
+	<select id="login" resultType="com.etc.entity.Users">
+		select * from users where user_acc = #{user_acc} and user_pwd = #{user_pwd}
+	</select>
+	
+	<!--完善信息  -->
+	<!-- <insert id="contact">
+		insert into users(user_realname,user_cardid,user_address,user_modified) values(#{user_realname},#{user_cardid},#{user_address},now()) where user_acc = #{user_acc}
+	</insert> -->
+	
+	<update id="contact">
+		update users u set u.user_realname = #{user_realname},u.user_cardid = #{user_cardid},u.user_address = #{user_address},u.user_modified = #{user_modified} where user_acc = #{user_acc}
+	</update>
+</mapper>

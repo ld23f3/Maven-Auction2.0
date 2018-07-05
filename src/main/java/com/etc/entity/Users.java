@@ -45,9 +45,9 @@ public class Users {
 	 * @param user_create
 	 * @param user_modified
 	 */
-	public Users(int user_id, String user_acc, String user_pwd, String user_email, String user_tel, String user_realname,
-			String user_cardid, String user_address, double user_balance, int user_state, String user_create,
-			String user_modified) {
+	public Users(int user_id, String user_acc, String user_pwd, String user_email, String user_tel,
+			String user_realname, String user_cardid, String user_address, double user_balance, int user_state,
+			String user_create, String user_modified) {
 		super();
 		this.user_id = user_id;
 		this.user_acc = user_acc;
@@ -60,6 +60,57 @@ public class Users {
 		this.user_balance = user_balance;
 		this.user_state = user_state;
 		this.user_create = user_create;
+		this.user_modified = user_modified;
+	}
+
+	/**
+	 * 注册
+	 * 
+	 * @param user_acc
+	 * @param user_email
+	 * @param user_tel
+	 * @param user_pwd
+	 * @param user_state
+	 * @param user_create
+	 */
+	public Users(String user_acc, String user_email, String user_tel, String user_pwd, int user_state,
+			String user_create, Double user_balance) {
+
+		this.user_acc = user_acc;
+		this.user_pwd = user_pwd;
+		this.user_email = user_email;
+		this.user_state = user_state;
+		this.user_create = user_create;
+		this.user_tel = user_tel;
+		this.user_balance = user_balance;
+	}
+
+	/**
+	 * 登陆
+	 * 
+	 * @param user_acc
+	 * @param user_pwd
+	 */
+	public Users(String user_acc, String user_pwd) {
+
+		this.user_acc = user_acc;
+		this.user_pwd = user_pwd;
+	}
+
+	/**
+	 * 完善个人信息
+	 * 
+	 * @param user_realname
+	 * @param user_cardid
+	 * @param user_address
+	 * @param user_modified
+	 */
+	public Users(String user_acc, String user_realname, String user_cardid, String user_address, String user_modified) {
+
+		this.user_acc = user_acc;
+		this.user_realname = user_realname;
+		this.user_cardid = user_cardid;
+		this.user_address = user_address;
 		this.user_modified = user_modified;
 	}
 
@@ -210,6 +261,5 @@ public class Users {
 				+ user_cardid + ", user_address=" + user_address + ", user_balance=" + user_balance + ", user_state="
 				+ user_state + ", user_create=" + user_create + ", user_modified=" + user_modified + "]";
 	}
-	
-	
+
 }
