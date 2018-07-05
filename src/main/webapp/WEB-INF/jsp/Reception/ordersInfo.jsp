@@ -4,14 +4,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>我的卖品</title>
+<title>订单详情</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
 <script type="application/x-javascript">
 	
 	
+	
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+
+
 
 
 </script>
@@ -33,10 +37,8 @@
 	href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
 	rel='stylesheet' type='text/css'>
 <!-- //font -->
-<script
-	src="${pageContext.request.contextPath}/static/Assets/js/jquery-1.11.1.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/static/Assets/js/bootstrap.js"></script>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/bootstrap.js"></script>
 </head>
 <body>
 	<div class="header-top-w3layouts">
@@ -186,19 +188,21 @@
 				</nav>
 			</div>
 			<script>
-				$(document).ready(function(){
-					$(".dropdown").hover(            
+				$(document).ready(
 						function() {
-							$('.dropdown-menu', this).stop( true, true ).slideDown("fast");
-							$(this).toggleClass('open');        
-						},
-						function() {
-							$('.dropdown-menu', this).stop( true, true ).slideUp("fast");
-							$(this).toggleClass('open');       
-						}
-					);
-				});
-				</script>
+							$(".dropdown").hover(
+									function() {
+										$('.dropdown-menu', this).stop(true,
+												true).slideDown("fast");
+										$(this).toggleClass('open');
+									},
+									function() {
+										$('.dropdown-menu', this).stop(true,
+												true).slideUp("fast");
+										$(this).toggleClass('open');
+									});
+						});
+			</script>
 			<div class="col-md-4 search-agileinfo">
 				<form action="#" method="post">
 					<input type="search" name="Search"
@@ -226,13 +230,13 @@
 	<div class="sub-banner"></div>
 	<div class="contact">
 		<div class="container">
-			<h3>我的卖品</h3>
+			<h3>订单详情</h3>
 
 			<div class="col-md-3 col-sm-3 contact-left">
 
 
 				<div class="w3ls_dresses_grid_left_grid">
-					<h3>商品管理</h3>
+					<h3>订单管理</h3>
 					<div class="w3ls_dresses_grid_left_grid_sub">
 						<div class="ecommerce_dres-type">
 							<ul>
@@ -244,55 +248,69 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-9 col-sm-9 contact-right">
-				<div class="table-responsive">
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>商品编号</th>
-								<th>商品名称</th>
-								<th>商品类型</th>
-								<th>起拍价格</th>
-								<th>当前价格</th>
-								<th>得标价格</th>
-								<th>竞拍情况</th>
-								<th>操作</th>
 
+			<div class="col-md-9 col-sm-9 contact-right ">
+				<c:forEach items="${goodsInfo}" var="goodsInfo">
+				<div class="other">
 
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${mygoods}" var="goods">
-								<tr>
-
-
-									<td>${goods.goods_id}</td>
-									<td>${goods.goods_name}</td>
-									<td>${goods.goodstype_desc}</td>
-									<td>${goods.goods_minprice}</td>
-									<td>${goods.goods_currentprice}</td>
-									<td>${goods.goods_getprice}</td>
-									<td><c:if test="${goods.good_state=='0'}">未竞拍</c:if> <c:if
-											test="${goods.good_state=='1'}">正在竞拍</c:if> <c:if
-											test="${goods.good_state=='2'}">已售出</c:if> <c:if
-											test="${goods.good_state=='3'}">流拍</c:if></td>
-									<td><input type="button" name="" id="btulook" value="查看详情" /></td>
-
-
-								</tr>
-							</c:forEach>
-
-						</tbody>
-
-					</table>
-
-
-
+					<label>商品编号</label>
+					<input type="text"  name="goodsId"
+						placeholder="${goodsInfo.goods_id}" required=" ">
+					<label>商品名称</label>
+					<input type="text" name="goodsname"
+						placeholder="${goodsInfo.goods_name}" required=" ">
+					<label>商品类型</label>
+					<input type="text" name="goodstype"
+						placeholder="${goodsInfo.goodstype_desc}" required=" ">
+					<label>起拍价格</label>
+					<input type="text" name="goodsminprice"
+						placeholder="${goodsInfo.goods_minprice}" required=" ">
+					<label>当前价格</label>
+					<input type="text" name="goodscurrentprice"
+						placeholder="${goodsInfo.goods_currentprice}" required=" ">
+					<label>得标价格</label>
+					<input type="text" name="goodscurrentprice"
+						placeholder="${goodsInfo.goods_currentprice}" required=" ">
+					<label>保证金</label>
+					<input type="text" name="goodsmargin"
+						placeholder="${goodsInfo.goods_getprice}" required=" ">
+					<label>竞拍情况</label>
+					<c:if test="${goodsInfo.good_state=='0'}">
+					<input type="text" name="goodstate"
+						placeholder="未竞拍" required=" ">
+					</c:if>
+					<c:if test="${goodsInfo.good_state=='1'}">
+					<input type="text" name="goodstate"
+						placeholder="正在竞拍" required=" ">
+					</c:if>
+					<c:if test="${goodsInfo.good_state=='2'}">
+					<input type="text" name="goodstate"
+						placeholder="已售出" required=" ">
+					</c:if>
+					<c:if test="${goodsInfo.good_state=='3'}">
+					<input type="text" name="goodstate"
+						placeholder="流拍" required=" ">
+					</c:if>
+					<%-- <input type="text" name="goodstate"
+						placeholder="<c:if test="${goodsInfo.good_state=='0'}">未竞拍</c:if>
+									<c:if test="${goodsInfo.good_state=='1'}">正在竞拍</c:if>
+									<c:if test="${goodsInfo.good_state=='2'}">已售出</c:if>
+									<c:if test="${goodsInfo.good_state=='3'}">流拍</c:if>"
+						required=" "> --%>
+					<label>拍卖时间</label>
+					<input type="text" name="goodsauctiontime"
+						placeholder="${goodsInfo.goods_auctiontime}" required=" ">
+						</br>
+					<label>商品描述</label>
+					<textarea name="goodsdesc"
+						placeholder="${goodsInfo.goodstype_desc}" required=" "></textarea>
+					<input type="submit" value="Send message">
 				</div>
+				</c:forEach>
 			</div>
+
 		</div>
 	</div>
-
 
 	<!-- newsletter -->
 	<div class="newsletter">
@@ -370,29 +388,21 @@
 	<script
 		src="${pageContext.request.contextPath}/static/Assets/js/minicart.js"></script>
 	<script>
-        w3ls1.render();
+		w3ls1.render();
 
-        w3ls1.cart.on('w3sb1_checkout', function (evt) {
-        	var items, len, i;
+		w3ls1.cart.on('w3sb1_checkout', function(evt) {
+			var items, len, i;
 
-        	if (this.subtotal() > 0) {
-        		items = this.items();
+			if (this.subtotal() > 0) {
+				items = this.items();
 
-        		for (i = 0, len = items.length; i < len; i++) {
-        			items[i].set('shipping', 0);
-        			items[i].set('shipping2', 0);
-        		}
-        	}
-        });
-    </script>
-
-	<script type="text/javascript">
-	$('btulook').click(function(){
-		var goodsId = ${goods.goods_id}.val();
-		location.href = "goodsInfo"+ goodsId;
-	});
-	
-    </script>
+				for (i = 0, len = items.length; i < len; i++) {
+					items[i].set('shipping', 0);
+					items[i].set('shipping2', 0);
+				}
+			}
+		});
+	</script>
 	<!-- //cart-js -->
 </body>
 </html>

@@ -1094,6 +1094,18 @@ p.sbmincart-empty-text {
     color: #000;
 	outline:none;
 }
+.contact .other input[type="text"] {
+    width: 38%;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid #000;
+    margin: 10px 14px 13px 0px;
+    color: #000;
+    outline: none;
+}
+.contact label{
+        width: 68px;
+}
 .contact select{
     width: 47%;
     padding: 10px;
