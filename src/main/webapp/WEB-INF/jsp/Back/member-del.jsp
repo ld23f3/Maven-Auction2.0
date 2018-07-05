@@ -177,6 +177,14 @@
 														icon : 1,
 														time : 1000
 													});
+												} else {
+													layer
+															.msg(
+																	'删除出错啦!请刷新页面,或检查是否可删除',
+																	{
+																		icon : 6,
+																		time : 1000
+																	});
 												}
 											},
 											error : function(data) {
@@ -200,37 +208,54 @@
 		function delAll(argument) {
 			var list = getCheck();
 			if (list.length > 0) {
-				$
-						.ajax({
-							type : 'DELETE',
-							url : '${pageContext.request.contextPath}/users/deleteCheckUser',
-							dataType : 'json',
-							contentType : "application/json",
-							data : JSON.stringify(list),
-							success : function(data) {
-								if (data == true) {
-									$(".check").each(function() { //遍历table里的全部checkbox
-										// allcheckbox += $(this).val() + ","; //获取所有checkbox的值
-										if ($(this).prop("checked")) //如果被选中
-										{
-											$(this).parents("tr").remove();
-										}
-									});
-									layer.msg('信息已提交!', {
-										icon : 6,
-										time : 1000
-									});
-								} else {
-									layer.msg("操作失败,该用户已被注册!", {
-										icon : 5,
-										time : 2000
-									});
-								}
-							},
-							error : function(data) {
-								console.log(data.msg);
-							},
-						});
+				layer
+						.confirm(
+								'该操作会删除多个数据，确认要删除吗？',
+								function(index) {
+									$
+											.ajax({
+												type : 'DELETE',
+												url : '${pageContext.request.contextPath}/users/deleteCheckUser',
+												dataType : 'json',
+												contentType : "application/json",
+												data : JSON.stringify(list),
+												success : function(data) {
+													if (data == true) {
+														$(".check")
+																.each(
+																		function() { //遍历table里的全部checkbox
+																			// allcheckbox += $(this).val() + ","; //获取所有checkbox的值
+																			if ($(
+																					this)
+																					.prop(
+																							"checked")) //如果被选中
+																			{
+																				$(
+																						this)
+																						.parents(
+																								"tr")
+																						.remove();
+																			}
+																		});
+														layer.msg('信息已提交!', {
+															icon : 6,
+															time : 1000
+														});
+													} else {
+														layer
+																.msg(
+																		"操作失败,该用户已被注册!",
+																		{
+																			icon : 5,
+																			time : 2000
+																		});
+													}
+												},
+												error : function(data) {
+													console.log(data.msg);
+												},
+											});
+								})
 			}
 		}
 	</script>

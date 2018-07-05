@@ -22,12 +22,12 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/static/h-ui.admin/css/style.css" />
 
-<title>竞拍中的商品</title>
+<title>待审核商品</title>
 </head>
 <body>
 	<nav class="breadcrumb">
 		<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
-		商品管理 <span class="c-gray en">&gt;</span> 竞拍中的商品 <a
+		商品管理 <span class="c-gray en">&gt;</span> 待审核商品 <a
 			class="btn btn-success radius r"
 			style="line-height: 1.6em; margin-top: 3px"
 			href="javascript:location.replace(location.href);" title="刷新"><i
@@ -35,7 +35,11 @@
 	</nav>
 	<div class="page-container">
 		<div class="cl pd-5 bg-1 bk-gray mt-20">
-			<span class="l"><a href="javascript:;" onclick="batchControl('PUT','${pageContext.request.contextPath}/goods/downCheckGoods','下架')"
+			<span class="l"><a href="javascript:;"
+				onclick="batchControl('PUT','${pageContext.request.contextPath}/goods/upCheckGoods','发布')"
+				class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i>
+					批量发布</a> <a href="javascript:;"
+				onclick="batchControl('PUT','${pageContext.request.contextPath}/goods/downCheckGoods','下架')"
 				class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
 					批量下架</a> </span> <span class="r">共有数据：<strong>${ size }</strong> 条
 			</span>
@@ -73,11 +77,11 @@
 								<td class="text-l">${good.goods_desc }</td>
 								<td>${good.goods_create }</td>
 								<td class="td-status"><span
-									class="label label-primary radius">竞拍中</span></td>
+									class="label label-warning radius">待审核</span></td>
 								<td class="td-manage"><a style="text-decoration: none"
-									onClick="picture_stop(this,'${ good.goods_id }')"
-									href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>
-									
+									onClick="picture_shenhe(this,'${ good.goods_id }')"
+									href="javascript:;" title="审核"><i class="Hui-iconfont">&#xe724;</i></a>
+
 								</td>
 							</tr>
 						</c:forEach>
@@ -148,38 +152,82 @@
 								shade : false
 							},
 							function() {
-								$(obj)
-										.parents("tr")
-										.find(".td-manage")
-										.prepend(
-												'<a class="c-primary" onClick="picture_start(this,id)" href="javascript:;" title="申请上线">申请上线</a>');
-								$(obj)
-										.parents("tr")
-										.find(".td-status")
-										.html(
-												'<span class="label label-success radius">已发布</span>');
-								$(obj).remove();
-								layer.msg('已发布', {
-									icon : 6,
-									time : 1000
-								});
+								$
+										.ajax({
+											type : 'PUT',
+											url : '${pageContext.request.contextPath}/goods/upGood/'
+													+ id,
+											dataType : 'json',
+											success : function(data) {
+												if (data == true) {
+													$(obj)
+															.parents("tr")
+															.find(".td-manage")
+															.prepend(
+																	'<a style="text-decoration:none" onClick="picture_stop(this,'
+																			+ id
+																			+ ')" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>');
+													$(obj)
+															.parents("tr")
+															.find(".td-status")
+															.html(
+																	'<span class="label label-primary radius">竞拍中</span>');
+													$(obj).remove();
+													layer.msg('已发布!', {
+														icon : 6,
+														time : 1000
+													});
+												} else {
+													layer.msg('操作失败,请检查网络!', {
+														icon : 5,
+														time : 2000
+													});
+												}
+
+											},
+											error : function(data) {
+												console.log(data.msg);
+											},
+										});
 							},
 							function() {
-								$(obj)
-										.parents("tr")
-										.find(".td-manage")
-										.prepend(
-												'<a class="c-primary" onClick="picture_shenqing(this,id)" href="javascript:;" title="申请上线">申请上线</a>');
-								$(obj)
-										.parents("tr")
-										.find(".td-status")
-										.html(
-												'<span class="label label-danger radius">未通过</span>');
-								$(obj).remove();
-								layer.msg('未通过', {
-									icon : 5,
-									time : 1000
-								});
+								$
+										.ajax({
+											type : 'PUT',
+											url : '${pageContext.request.contextPath}/goods/downGood/'
+													+ id,
+											dataType : 'json',
+											success : function(data) {
+												if (data == true) {
+
+													$(obj)
+															.parents("tr")
+															.find(".td-manage")
+															.prepend(
+																	'<a style="text-decoration:none" onClick="picture_start(this,'
+																			+ id
+																			+ ')" href="javascript:;" title="发布"><i class="Hui-iconfont">&#xe603;</i></a>');
+													$(obj)
+															.parents("tr")
+															.find(".td-status")
+															.html(
+																	'<span class="label label-defaunt radius">已下架</span>');
+													$(obj).remove();
+													layer.msg('未通过!', {
+														icon : 5,
+														time : 1000
+													});
+												} else {
+													layer.msg('操作失败,请检查网络!', {
+														icon : 5,
+														time : 2000
+													});
+												}
+											},
+											error : function(data) {
+												console.log(data.msg);
+											},
+										});
 							});
 		}
 
@@ -299,32 +347,37 @@
 
 		/*图片-删除*/
 		function picture_del(obj, id) {
-			layer.confirm('确认要删除吗？', function(index) {
-				$.ajax({
-					type : 'DELETE',
-					url : '${pageContext.request.contextPath}/goods/deleteGood/'
-						+ id,
-					dataType : 'json',
-					success : function(data) {
-						if(data){
-							$(obj).parents("tr").remove();
-							layer.msg('已删除!', {
-								icon : 1,
-								time : 1000
+			layer
+					.confirm(
+							'确认要删除吗？',
+							function(index) {
+								$
+										.ajax({
+											type : 'DELETE',
+											url : '${pageContext.request.contextPath}/goods/deleteGood/'
+													+ id,
+											dataType : 'json',
+											success : function(data) {
+												if (data) {
+													$(obj).parents("tr")
+															.remove();
+													layer.msg('已删除!', {
+														icon : 1,
+														time : 1000
+													});
+												} else {
+													layer.msg('操作失败,请检查网络!', {
+														icon : 5,
+														time : 2000
+													});
+												}
+
+											},
+											error : function(data) {
+												console.log(data.msg);
+											},
+										});
 							});
-						} else {
-							layer.msg('操作失败,请检查网络!', {
-								icon : 5,
-								time : 2000
-							});
-						}
-						
-					},
-					error : function(data) {
-						console.log(data.msg);
-					},
-				});
-			});
 		}
 		function getCheck() {
 			var list = new Array();
@@ -338,57 +391,41 @@
 			});
 			return list;
 		}
-		function batchControl(curType,curUrl,curControl) {
+		function batchControl(curType, curUrl, curControl) {
 			var list = getCheck();
 			if (list.length > 0) {
-				layer
-						.confirm(
-								'确认要'+curControl+'所有选中商品吗？',
-								function(index) {
-									$
-											.ajax({
-												type : curType,
-												url : curUrl,
-												dataType : 'json',
-												contentType : "application/json",
-												data : JSON.stringify(list),
-												success : function(data) {
-													if (data == true) {
-														$(".check")
-																.each(
-																		function() { //遍历table里的全部checkbox
-																			// allcheckbox += $(this).val() + ","; //获取所有checkbox的值
-																			if ($(
-																					this)
-																					.prop(
-																							"checked")) //如果被选中
-																			{
-																				$(
-																						this)
-																						.parents(
-																								"tr")
-																						.remove();
-																			}
-																		});
-														layer.msg('信息已提交!', {
-															icon : 6,
-															time : 1000
-														});
-													} else {
-														layer
-																.msg(
-																		"操作失败,批量"+curControl+"中出了错!",
-																		{
-																			icon : 5,
-																			time : 2000
-																		});
-													}
-												},
-												error : function(data) {
-													console.log(data.msg);
-												},
-											});
-								})
+				layer.confirm('确认要' + curControl + '所有选中商品吗？', function(index) {
+					$.ajax({
+						type : curType,
+						url : curUrl,
+						dataType : 'json',
+						contentType : "application/json",
+						data : JSON.stringify(list),
+						success : function(data) {
+							if (data == true) {
+								$(".check").each(function() { //遍历table里的全部checkbox
+									// allcheckbox += $(this).val() + ","; //获取所有checkbox的值
+									if ($(this).prop("checked")) //如果被选中
+									{
+										$(this).parents("tr").remove();
+									}
+								});
+								layer.msg('信息已提交!', {
+									icon : 6,
+									time : 1000
+								});
+							} else {
+								layer.msg("操作失败,批量" + curControl + "中出了错!", {
+									icon : 5,
+									time : 2000
+								});
+							}
+						},
+						error : function(data) {
+							console.log(data.msg);
+						},
+					});
+				})
 			}
 		}
 	</script>

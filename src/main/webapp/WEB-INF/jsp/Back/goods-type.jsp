@@ -35,10 +35,8 @@
 	</nav>
 	<div class="page-container">
 		<div class="cl pd-5 bg-1 bk-gray">
-			<span class="l"> <a href="javascript:;" onclick="datadel()"
-				class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
-					批量删除</a> <a class="btn btn-primary radius" href="javascript:;"
-				onclick="admin_role_add('添加分类','admin-role-add.html','800')"><i
+			<span class="l"><a class="btn btn-primary radius" href="javascript:;"
+				onclick="admin_role_add('添加分类','${pageContext.request.contextPath}/type/askAdd','400','180')"><i
 					class="Hui-iconfont">&#xe600;</i> 添加分类</a>
 			</span> <span class="r">共有数据：<strong>${size}</strong> 条
 			</span>
@@ -49,11 +47,10 @@
 					<th scope="col" colspan="6">分类管理</th>
 				</tr>
 				<tr class="text-c">
-					<th width="25"><input type="checkbox" value="" name=""></th>
 					<th width="40">ID</th>
-					<th width="200">类型描述</th>
-					<th>创建时间</th>
-					<th width="300">更新时间</th>
+					<th>类型描述</th>
+					<th width="150">创建时间</th>
+					<th width="150">更新时间</th>
 					<th width="70">操作</th>
 				</tr>
 			</thead>
@@ -62,13 +59,12 @@
 				<c:if test="${ list ne null }">
 					<c:forEach items="${ list }" var="goodType">
 						<tr class="text-c">
-							<td><input type="checkbox" value="" name=""></td>
 							<td>${goodType.goodstype_id }</td>
 							<td><a href="#">${goodType.goodstype_desc }</a></td>
 							<td>${goodType.goodstype_create }</td>
 							<td>${goodType.goodstype_modified }</td>
 							<td class="f-14"><a title="编辑" href="javascript:;"
-								onclick="admin_role_edit('角色编辑','admin-role-add.html','1')"
+								onclick="admin_role_edit('分类编辑','${pageContext.request.contextPath}/type/askAdd','${goodType.goodstype_id }','400','180')"
 								style="text-decoration: none"><i class="Hui-iconfont">&#xe6df;</i></a>
 								<a title="删除" href="javascript:;"
 								onclick="admin_role_del(this,'1')" class="ml-5"
@@ -100,27 +96,43 @@
 		}
 		/*管理员-角色-编辑*/
 		function admin_role_edit(title, url, id, w, h) {
-			layer_show(title, url, w, h);
+			layer_show(title, url + "?goodstype_id=" + id, w, h);
 		}
 		/*管理员-角色-删除*/
 		function admin_role_del(obj, id) {
-			layer.confirm('角色删除须谨慎，确认要删除吗？', function(index) {
-				$.ajax({
-					type : 'POST',
-					url : '',
-					dataType : 'json',
-					success : function(data) {
-						$(obj).parents("tr").remove();
-						layer.msg('已删除!', {
-							icon : 1,
-							time : 1000
-						});
-					},
-					error : function(data) {
-						console.log(data.msg);
-					},
-				});
-			});
+			layer
+					.confirm(
+							'分类删除须谨慎，确认要删除吗？',
+							function(index) {
+								$
+										.ajax({
+											type : 'DELETE',
+											url : '${pageContext.request.contextPath}/type/deleteGoodstype/'
+													+ id,
+											dataType : 'json',
+											success : function(data) {
+												if (data == true) {
+													$(obj).parents("tr")
+															.remove();
+													layer.msg('已删除!', {
+														icon : 1,
+														time : 1000
+													});
+												} else {
+													layer
+															.msg(
+																	'删除出错啦!请刷新页面,或检查是否可删除',
+																	{
+																		icon : 5,
+																		time : 2000
+																	});
+												}
+											},
+											error : function(data) {
+												console.log(data.msg);
+											},
+										});
+							});
 		}
 	</script>
 </body>

@@ -21,7 +21,7 @@
 	id="skin" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/static/h-ui.admin/css/style.css" />
-	
+
 <title>用户管理</title>
 </head>
 <body>
@@ -34,7 +34,7 @@
 			class="Hui-iconfont">&#xe68f;</i></a>
 	</nav>
 	<div class="page-container">
-		
+
 		<div class="cl pd-5 bg-1 bk-gray mt-20">
 			<span class="l"><a href="javascript:;" onclick="StopAll()"
 				class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
@@ -250,37 +250,54 @@
 		function StopAll(argument) {
 			var list = getCheck();
 			if (list.length > 0) {
-				$
-						.ajax({
-							type : 'PUT',
-							url : '${pageContext.request.contextPath}/users/stopCheckUser',
-							dataType : 'json',
-							contentType : "application/json",
-							data : JSON.stringify(list),
-							success : function(data) {
-								if (data == true) {
-									$(".check").each(function() { //遍历table里的全部checkbox
-										// allcheckbox += $(this).val() + ","; //获取所有checkbox的值
-										if ($(this).prop("checked")) //如果被选中
-										{
-											$(this).parents("tr").remove();
-										}
-									});
-									layer.msg('信息已提交!', {
-										icon : 6,
-										time : 1000
-									});
-								} else {
-									layer.msg("操作失败,该用户已被注册!", {
-										icon : 5,
-										time : 2000
-									});
-								}
-							},
-							error : function(data) {
-								console.log(data.msg);
-							},
-						});
+				layer
+						.confirm(
+								'确认后会停权多个用户,确认要全部停权吗？',
+								function(index) {
+									$
+											.ajax({
+												type : 'PUT',
+												url : '${pageContext.request.contextPath}/users/stopCheckUser',
+												dataType : 'json',
+												contentType : "application/json",
+												data : JSON.stringify(list),
+												success : function(data) {
+													if (data == true) {
+														$(".check")
+																.each(
+																		function() { //遍历table里的全部checkbox
+																			// allcheckbox += $(this).val() + ","; //获取所有checkbox的值
+																			if ($(
+																					this)
+																					.prop(
+																							"checked")) //如果被选中
+																			{
+																				$(
+																						this)
+																						.parents(
+																								"tr")
+																						.remove();
+																			}
+																		});
+														layer.msg('信息已提交!', {
+															icon : 6,
+															time : 1000
+														});
+													} else {
+														layer
+																.msg(
+																		"操作失败,该用户已被注册!",
+																		{
+																			icon : 5,
+																			time : 2000
+																		});
+													}
+												},
+												error : function(data) {
+													console.log(data.msg);
+												},
+											});
+								})
 			}
 		}
 	</script>

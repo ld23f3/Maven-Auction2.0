@@ -118,11 +118,13 @@
 					<ul>
 						<li><a data-href="${pageContext.request.contextPath}/type/getList" data-title="分类管理"
 							href="javascript:void(0)">分类管理</a></li>
-						<li><a data-href="${pageContext.request.contextPath}/goods/getList" data-title="竞拍中的商品"
+						<li><a data-href="${pageContext.request.contextPath}/goods/getList?good_state=0" data-title="待审核的商品"
+							href="javascript:void(0)">待审核的商品</a></li>
+						<li><a data-href="${pageContext.request.contextPath}/goods/getList?good_state=1" data-title="竞拍中的商品"
 							href="javascript:void(0)">竞拍中的商品</a></li>
-						<li><a data-href="${pageContext.request.contextPath}/goods/getList" data-title="已售出的商品"
+						<li><a data-href="${pageContext.request.contextPath}/goods/getList?good_state=2" data-title="已售出的商品"
 							href="javascript:void(0)">已售出的商品</a></li>
-						<li><a data-href="${pageContext.request.contextPath}/goods/getList" data-title="已下架的商品"
+						<li><a data-href="${pageContext.request.contextPath}/goods/getList?good_state=3" data-title="已下架的商品"
 							href="javascript:void(0)">已下架的商品</a></li>
 					</ul>
 				</dd>

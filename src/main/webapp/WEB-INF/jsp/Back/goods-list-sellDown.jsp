@@ -22,12 +22,12 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/static/h-ui.admin/css/style.css" />
 
-<title>竞拍中的商品</title>
+<title>已下架的商品</title>
 </head>
 <body>
 	<nav class="breadcrumb">
 		<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
-		商品管理 <span class="c-gray en">&gt;</span> 竞拍中的商品 <a
+		商品管理 <span class="c-gray en">&gt;</span> 已下架的商品 <a
 			class="btn btn-success radius r"
 			style="line-height: 1.6em; margin-top: 3px"
 			href="javascript:location.replace(location.href);" title="刷新"><i
@@ -35,9 +35,9 @@
 	</nav>
 	<div class="page-container">
 		<div class="cl pd-5 bg-1 bk-gray mt-20">
-			<span class="l"><a href="javascript:;" onclick="batchControl('PUT','${pageContext.request.contextPath}/goods/downCheckGoods','下架')"
-				class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
-					批量下架</a> </span> <span class="r">共有数据：<strong>${ size }</strong> 条
+			<span class="l"> <a href="javascript:;" onclick="batchControl('PUT','${pageContext.request.contextPath}/goods/upCheckGoods','发布')"
+				class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i>
+					批量发布</a></span> <span class="r">共有数据：<strong>${ size }</strong> 条
 			</span>
 		</div>
 		<div class="mt-20">
@@ -72,12 +72,12 @@
 								<td>${good.goods_typeid }</td>
 								<td class="text-l">${good.goods_desc }</td>
 								<td>${good.goods_create }</td>
-								<td class="td-status"><span
-									class="label label-primary radius">竞拍中</span></td>
+								<td class="td-status"><span class="label label-info radius">已下架</span></td>
 								<td class="td-manage"><a style="text-decoration: none"
-									onClick="picture_stop(this,'${ good.goods_id }')"
-									href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>
-									
+									onClick="picture_start(this,'${ good.goods_id }')"
+									href="javascript:;" title="发布"><i class="Hui-iconfont">&#xe603;</i></a>
+
+
 								</td>
 							</tr>
 						</c:forEach>
@@ -299,32 +299,37 @@
 
 		/*图片-删除*/
 		function picture_del(obj, id) {
-			layer.confirm('确认要删除吗？', function(index) {
-				$.ajax({
-					type : 'DELETE',
-					url : '${pageContext.request.contextPath}/goods/deleteGood/'
-						+ id,
-					dataType : 'json',
-					success : function(data) {
-						if(data){
-							$(obj).parents("tr").remove();
-							layer.msg('已删除!', {
-								icon : 1,
-								time : 1000
+			layer
+					.confirm(
+							'确认要删除吗？',
+							function(index) {
+								$
+										.ajax({
+											type : 'DELETE',
+											url : '${pageContext.request.contextPath}/goods/deleteGood/'
+													+ id,
+											dataType : 'json',
+											success : function(data) {
+												if (data) {
+													$(obj).parents("tr")
+															.remove();
+													layer.msg('已删除!', {
+														icon : 1,
+														time : 1000
+													});
+												} else {
+													layer.msg('操作失败,请检查网络!', {
+														icon : 5,
+														time : 2000
+													});
+												}
+
+											},
+											error : function(data) {
+												console.log(data.msg);
+											},
+										});
 							});
-						} else {
-							layer.msg('操作失败,请检查网络!', {
-								icon : 5,
-								time : 2000
-							});
-						}
-						
-					},
-					error : function(data) {
-						console.log(data.msg);
-					},
-				});
-			});
 		}
 		function getCheck() {
 			var list = new Array();

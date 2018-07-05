@@ -29,6 +29,8 @@
 			<!-- 所有都会拦截，/**包含子目录 -->
 			<mvc:mapping path="/manage/**" />
 			<mvc:mapping path="/users/**" />
+			<mvc:mapping path="/goods/**" />
+			<mvc:mapping path="/type/**" />
 			<!-- 此时访问api/的url则不会被拦截 -->
 			<mvc:exclude-mapping path="/manage/show.html" />
 			<mvc:exclude-mapping path="/manage/valicode" />

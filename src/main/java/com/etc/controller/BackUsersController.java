@@ -217,6 +217,11 @@ public class BackUsersController {
 		System.out.println("deleteCheckUser:" + list);
 		return true;
 	}
+	/**
+	 * 批量停权选中的用户
+	 * @param list
+	 * @return
+	 */
 	@RequestMapping(value = "stopCheckUser",method= RequestMethod.PUT)
 	@ResponseBody
 	public boolean stopCheckUser(@RequestBody List<Integer> list) {
