@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -21,12 +22,12 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/static/h-ui.admin/css/style.css" />
 
-<title>图片列表</title>
+<title>竞拍中的商品</title>
 </head>
 <body>
 	<nav class="breadcrumb">
 		<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
-		图片管理 <span class="c-gray en">&gt;</span> 图片列表 <a
+		商品管理 <span class="c-gray en">&gt;</span> 竞拍中的商品 <a
 			class="btn btn-success radius r"
 			style="line-height: 1.6em; margin-top: 3px"
 			href="javascript:location.replace(location.href);" title="刷新"><i
@@ -36,8 +37,7 @@
 		<div class="cl pd-5 bg-1 bk-gray mt-20">
 			<span class="l"><a href="javascript:;" onclick="datadel()"
 				class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
-					批量删除</a> </span> <span class="r">共有数据：<strong>54</strong>
-				条
+					批量删除</a> </span> <span class="r">共有数据：<strong>${ size }</strong> 条
 			</span>
 		</div>
 		<div class="mt-20">
@@ -45,42 +45,45 @@
 				class="table table-border table-bordered table-bg table-hover table-sort">
 				<thead>
 					<tr class="text-c">
-						<th width="40"><input name="" type="checkbox" value=""></th>
-						<th width="80">ID</th>
-						<th width="100">分类</th>
-						<th hidden="true" width="100">封面</th>
-						<th>图片名称</th>
-						<th width="150">Tags</th>
-						<th width="150">更新时间</th>
-						<th width="60">发布状态</th>
+						<th width="25"><input type="checkbox" name="" value=""></th>
+						<th width="40">ID</th>
+						<th width="70">名称</th>
+						<th width="60">卖家</th>
+						<th width="60">起拍价格</th>
+						<th width="60">当前价格</th>
+						<th width="60">商品类型</th>
+						<th width="">商品描述</th>
+						<th width="100">上架时间</th>
+						<th width="80">商品状态</th>
 						<th width="100">操作</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr class="text-c">
-						<td><input name="" type="checkbox" value=""></td>
-						<td>001</td>
-						<td>分类名称</td>
-						<td hidden="true" ><a href="javascript:;"
-							onClick="picture_edit('图库编辑','picture-show.html','10001')"><img
-								width="210" class="picture-thumb" src="temp/200x150.jpg"></a></td>
-						<td class="text-l"><a class="maincolor" href="javascript:;"
-							onClick="picture_edit('图库编辑','picture-show.html','10001')">现代简约
-								白色 餐厅</a></td>
-						<td class="text-c">标签</td>
-						<td>2014-6-11 11:11:42</td>
-						<td class="td-status"><span
-							class="label label-success radius">已发布</span></td>
-						<td class="td-manage"><a style="text-decoration: none"
-							onClick="picture_stop(this,'10001')" href="javascript:;"
-							title="下架"><i class="Hui-iconfont">&#xe6de;</i></a> <a
-							style="text-decoration: none" class="ml-5"
-							onClick="picture_edit('图库编辑','picture-add.html','10001')"
-							href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
-							<a style="text-decoration: none" class="ml-5"
-							onClick="picture_del(this,'10001')" href="javascript:;"
-							title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
-					</tr>
+					<c:if test="${ list ne null }">
+						<c:forEach items="${ list }" var="good">
+							<tr class="text-c">
+								<td><input type="checkbox" value="${ good.goods_id }"
+									class="check"></td>
+								<td>${ good.goods_id }</td>
+								<td>${good.goods_name}</td>
+								<td>${good.user_id }</td>
+								<td>${good.goods_minprice }</td>
+								<td>${good.goods_currentprice }</td>
+								<td>${good.goods_typeid }</td>
+								<td class="text-l">${good.goods_desc }</td>
+								<td>${good.goods_create }</td>
+								<td class="td-status"><span
+									class="label label-success radius">竞拍中</span></td>
+								<td class="td-manage"><a style="text-decoration: none"
+									onClick="picture_stop(this,'10001')" href="javascript:;"
+									title="下架"><i class="Hui-iconfont">&#xe6de;</i></a> <a
+									style="text-decoration: none" class="ml-5"
+									onClick="picture_edit('图库编辑','picture-add.html','10001')"
+									href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
+									</td>
+							</tr>
+						</c:forEach>
+					</c:if>
 				</tbody>
 			</table>
 		</div>

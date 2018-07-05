@@ -22,7 +22,7 @@ public class BackProductController {
 	 * @return
 	 */
 	@RequestMapping(value = "getList", method = RequestMethod.GET)
-	public ModelAndView getUsersList(
+	public ModelAndView getGoodsList(
 			@RequestParam(value = "good_state", required = false, defaultValue = "0") int good_state,
 			ModelAndView mav) {
 		List<Goods> list = new ArrayList<>();
@@ -32,6 +32,7 @@ public class BackProductController {
 			list.add(good);
 		}
 		mav.addObject("list", list);
+		mav.addObject("size", list.size());
 		mav.setViewName("/Back/goods-list");
 		return mav;
 	}

@@ -50,15 +50,6 @@
 								class="Hui-iconfont">&#xe6d5;</i></a>
 							<ul class="dropDown-menu menu radius box-shadow">
 								<li><a href="javascript:;"
-									onclick="article_add('添加资讯','article-add.html')"><i
-										class="Hui-iconfont">&#xe616;</i> 资讯</a></li>
-								<li><a href="javascript:;"
-									onclick="picture_add('添加资讯','picture-add.html')"><i
-										class="Hui-iconfont">&#xe613;</i> 图片</a></li>
-								<li><a href="javascript:;"
-									onclick="product_add('添加资讯','product-add.html')"><i
-										class="Hui-iconfont">&#xe620;</i> 产品</a></li>
-								<li><a href="javascript:;"
 									onclick="member_add('添加用户','${pageContext.request.contextPath}/users/askAdd','435','540')"><i
 										class="Hui-iconfont">&#xe60d;</i> 用户</a></li>
 							</ul></li>
@@ -120,17 +111,19 @@
 			</dl>
 			<dl id="menu-product">
 				<dt>
-					<i class="Hui-iconfont">&#xe620;</i> 产品管理<i
+					<i class="Hui-iconfont">&#xe620;</i> 商品管理<i
 						class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 				</dt>
 				<dd>
 					<ul>
-						<li><a data-href="product-brand.html" data-title="品牌管理"
-							href="javascript:void(0)">品牌管理</a></li>
-						<li><a data-href="product-category.html" data-title="分类管理"
+						<li><a data-href="${pageContext.request.contextPath}/type/getList" data-title="分类管理"
 							href="javascript:void(0)">分类管理</a></li>
-						<li><a data-href="${pageContext.request.contextPath}/goods/getList" data-title="产品管理"
-							href="javascript:void(0)">产品管理</a></li>
+						<li><a data-href="${pageContext.request.contextPath}/goods/getList" data-title="竞拍中的商品"
+							href="javascript:void(0)">竞拍中的商品</a></li>
+						<li><a data-href="${pageContext.request.contextPath}/goods/getList" data-title="已售出的商品"
+							href="javascript:void(0)">已售出的商品</a></li>
+						<li><a data-href="${pageContext.request.contextPath}/goods/getList" data-title="已下架的商品"
+							href="javascript:void(0)">已下架的商品</a></li>
 					</ul>
 				</dd>
 			</dl>
