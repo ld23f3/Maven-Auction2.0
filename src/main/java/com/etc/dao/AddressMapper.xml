@@ -9,7 +9,24 @@
 		insert into shoppingaddress values(null,#{user_id},#{consignee_name},#{consignee_tel},#{consignee_address},now(),null)
 	</insert> 
 	
+	<!--获取地址  -->
 	<select id="getAddress" resultType="com.etc.entity.ShoppingAddress">
 		select address_id,consignee_name,consignee_address,consignee_tel,address_create from shoppingaddress where user_id = #{user_id} 
 	</select>
+	
+	<!-- 刪除一個地址 -->
+ 	<delete id="deleteAddress">
+ 		DELETE FROM shoppingaddress WHERE address_id=#{address_id};
+ 	</delete>
+ 	
+ 	<!-- 更新地址 -->
+ 	<update id="updateAddress" parameterType="ShoppingAddress">
+ 		UPDATE shoppingaddress
+ 		<set>
+ 			<if test="consignee_name!=null">consignee_name=#{consignee_name},</if>
+ 			<if test="consignee_tel!=null">consignee_tel=#{consignee_tel},</if>
+ 			<if test="consignee_address!=null">consignee_address=#{consignee_address}</if>	
+ 		</set>
+ 		WHERE address_id=#{address_id}
+ 	</update>
 </mapper>

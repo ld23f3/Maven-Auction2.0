@@ -1,6 +1,6 @@
 package com.etc.controller;
 
-import java.io.PrintWriter;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.etc.entity.Users;
-import com.etc.service.UsersService;
-import com.sun.tools.internal.jxc.gen.config.Config;
+import com.etc.service.UserService;
+
 
 @Controller
 @RequestMapping("/api")
-public class UsersController {
+public class UserController {
 
-	@Resource(name = "usersService")
-	private UsersService usersService;
+	@Resource(name = "userService")
+	private UserService userService;
 
 	/**
 	 * 跳转至注册页面
@@ -84,7 +84,7 @@ public class UsersController {
 		Users users2 = new Users(user_acc, user_email, user_tel, user_pwd, user_state, user_create, user_balance);
 
 		// 把数据存在数据库
-		boolean flag = usersService.register(users2);
+		boolean flag = userService.addUser(users2);
 
 		if (flag) {
 
@@ -104,7 +104,7 @@ public class UsersController {
 	@RequestMapping(value = "/validation", method = RequestMethod.GET)
 	@ResponseBody
 	public String validation(String user_Acc) {
-		boolean flag = usersService.validation(user_Acc);
+		boolean flag = userService.validation(user_Acc);
 		if (flag) {
 			return "true";
 		} else
@@ -131,7 +131,7 @@ public class UsersController {
 		user.setUser_acc(user_acc);
 		user.setUser_pwd(user_pwd);
 
-		user = usersService.login(user);
+		user = userService.login(user);
 
 		if (user!=null) {
 			session.setAttribute("user", user);
@@ -169,7 +169,7 @@ public class UsersController {
 		Users users2 = new Users(user_acc, user_realname, user_cardid, user_address, user_modified);
 
 		// 把数据存在数据库
-		boolean flag = usersService.contact(users2);
+		boolean flag = userService.contact(users2);
 
 		if (flag) {
 

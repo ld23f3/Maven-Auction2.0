@@ -20,9 +20,9 @@ public class AddressServiceImpl implements AddressService {
 	 * ĞÂÔö×¡Ö·
 	 */
 	@Override
-	public boolean addAddress(ShoppingAddress shoppingAddress) {
+	public boolean addAddress(ShoppingAddress address) {
 		// TODO Auto-generated method stub
-		return addressDao.addAddress(shoppingAddress);
+		return addressDao.addAddress(address);
 	}
 	
 	@Override
@@ -30,5 +30,16 @@ public class AddressServiceImpl implements AddressService {
 		// TODO Auto-generated method stub
 		return addressDao.getAddress(user_id);
 	}
+	
+	@Override
+	public boolean updateAddress(ShoppingAddress address) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
+	@Override
+	public boolean deleteAddress(int address_id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
