@@ -1,48 +1,32 @@
 package com.etc.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.JOptionPane;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.etc.bean.entity.GoodsBean;
 import com.etc.dao.GoodsDao;
 import com.etc.dao.GoodsImgDao;
-
 import com.etc.entity.Goods;
 import com.etc.entity.GoodsImg;
 import com.etc.entity.GoodsView;
 import com.etc.entity.Users;
-import com.etc.service.GoodsService1;
+import com.etc.service.GoodsService;
 
 /**
  * 自定义前台控制器
@@ -61,7 +45,7 @@ public class GoodsController {
 	@Resource(name = "goodsImgDao")
 	private GoodsImgDao gid;
 	@Resource(name = "goodsService")
-	private GoodsService1 goodsService;
+	private GoodsService goodsService;
 
 	/**
 	 * 测试时打开添加的网页

@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.etc.bean.entity.GoodsBean;
-import com.etc.dao.GoodsDao1;
+import com.etc.dao.GoodsDao;
 import com.etc.entity.Goods;
 import com.etc.entity.GoodsView;
 import com.etc.service.GoodsService;
@@ -19,7 +19,7 @@ public class GoodsServiceImpl implements GoodsService {
 	private GoodsService gs;
 	
 	@Resource(name="goodsDao")
-	private GoodsDao1 goodsDao;
+	private GoodsDao goodsDao;
 	
 	@Override
 	public int InsertGoods(Goods g) {
