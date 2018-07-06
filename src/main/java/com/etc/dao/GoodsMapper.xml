@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etc.dao.GoodsDao">
+
+	<insert id="InsertGoods">
+		<!-- insert into goods values(null,#{goods_name},#{goods_minprice},null,null,#{goods_typeid},#{goods_desc},#{good_state},#{user_id},#{goods_minpremium},#{goods_auctiontime},#{goods_margin},now(),null) -->
+		insert into
+		goods(goods_name,goods_minprice,goods_typeid,goods_desc,good_state,user_id,goods_minpremium,goods_auctiontime,goods_margin,goods_create)
+		values(#{goods_name},#{goods_minprice},#{goods_typeid},#{goods_desc},#{good_state},#{user_id},#{goods_minpremium},#{goods_auctiontime},#{goods_margin},now())
+	</insert>
+	<select id="queryGoods" resultType="com.etc.entity.Goods">
+		select goods_id from goods where goods_name = #{goods_name}
+	</select>
+	<select id="queryAllGoods" resultType="com.etc.entity.GoodsView">
+		select goods_name,goods_minprice,goodsimg_src from goodsimg LEFT JOIN
+		goods on goodsimg.goods_id=goods.goods_id ;
+	</select>
+
+	<select id="queryGoodsByUserId" resultType="com.etc.bean.entity.GoodsBean">
+		select * from goods ,
+		goodstype where goods.goodstype_id = goodstype.goodstype_id and
+		user_id = #{goods.user_id}
+	</select>
+
+	<select id="queryGoodsByGoodsId" resultType="com.etc.bean.entity.GoodsBean">
+		select * from goods
+		, goodstype where goods.goodstype_id = goodstype.goodstype_id and
+		goods_id = #{goods.goods_id}
+	</select>
+</mapper>
