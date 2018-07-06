@@ -32,36 +32,77 @@
 
 	<!--依據用戶編號->查詢用戶詳細資訊 -->
 	<select id="queryUsersById" resultType="com.etc.entity.Users">
-		select * from users where user_id = #{user_id}
+		select * from users where
+		user_id = #{user_id}
 	</select>
-	
-	<!--查詢所有用戶  -->
+
+	<!--查詢所有用戶 -->
 	<select id="queryUsers" resultType="com.etc.entity.Users">
 		select * from users;
 	</select>
-	
-	
+
+	<!-- 根据用户 -->
 	<select id="queryUsersByState" resultType="com.etc.entity.Users">
-		select * from users where user_state = #{user_id};
+		select * from users
+		where user_state = #{user_state};
 	</select>
-	
-	<!--依據用戶名子->查詢用戶(模糊查詢)  -->
+
+	<!--依據用戶名子->查詢用戶(模糊查詢) -->
 	<select id="queryUsersByName" resultType="com.etc.entity.Users">
-		select * from users where user_realname like
+		select * from users
+		where user_realname like
 		concat('%',#{user_realname},'%')
 	</select>
-	
-	<!--删除用户  -->
-	<delete id="delUser">
-		delete from users where user_id=#{user_id};
-	</delete>
-	
-	<!--更新用户  -->
+
+	<!-- 根据用户ID设置用户状态 -->
+	<update id="updateUserState">
+		update users set
+		user_state =
+		#{user_state},user_modified = now() where
+		user_id = #{user_id}
+	</update>
+
+	<!--更新用户 -->
 	<update id="updateUser" parameterType="com.etc.entity.Users">
 		update users set
+		user_pwd =
+		#{user_pwd},
+		user_email = #{user_email},
+		user_tel = #{user_tel},
 		user_realname = #{user_realname},
+		user_cardid = #{user_cardid},
+		user_address = #{user_address},
 		user_balance = #{user_balance},
-		user_email = #{user_email}
-		where user_id = #{user_id}
+		user_state = #{user_state},
+		user_modified = now()
+		where user_id =
+		#{user_id}
 	</update>
+	<!-- 批量设置用户状态 -->
+	<update id="batchSetUsersState">
+		update users set
+		user_state = #{user_state},user_modified = now()
+		WHERE
+		user_id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+
+	</update>
+	<!-- 批量删除用户状态 -->
+	<update id="batchDeleteUsers">
+		delete from users
+		WHERE user_id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+
+	</update>
+
+	<!--删除用户 -->
+	<delete id="deleteUserById">
+		delete from users where user_id=#{user_id};
+	</delete>
 </mapper>

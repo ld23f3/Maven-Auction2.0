@@ -1,7 +1,6 @@
 package com.etc.service.impl;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.annotation.Resource;
 
@@ -72,5 +71,21 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<Users> queryUsersByState(int user_state) {
 		return userDao.queryUsersByState(user_state);
+	}
+	@Override
+	public boolean updateUserState(int user_id, int user_state) {
+		return userDao.updateUserState(user_id, user_state);
+	}
+	@Override
+	public boolean deleteUserById(int user_id) {
+		return userDao.deleteUserById(user_id);
+	}
+	@Override
+	public boolean batchSetUsersState(List<Integer> list, int user_state) {
+		return userDao.batchSetUsersState(list, user_state);
+	}
+	@Override
+	public boolean batchDeleteUsers(List<Integer> list) {
+		return userDao.batchDeleteUsers(list);
 	}
 }

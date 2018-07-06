@@ -2,6 +2,8 @@ package com.etc.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.etc.entity.Users;
 import com.etc.util.PageData;
 
@@ -71,11 +73,46 @@ public interface UserService {
 	 * @return
 	 */
 	public List<Users> queryUsersByState(int user_state);
-	
+	/**
+	 * 2018年7月6日17:57:27
+	 * 修改人(LHC)
+	 * 根据用户ID设置用户状态
+	 * @param user_id 用户ID
+	 * @param user_state 用户状态
+	 * @return
+	 */
+	public boolean updateUserState(int user_id,int user_state);
 	/**
 	 * 依據用戶狀態->查詢用戶
 	 * @param user_state
 	 * @return
 	 */
 	public PageData<Users> queryUserByState(Integer pageNo, Integer pageSize,int user_state);
+	/**
+	 * 2018年7月6日17:57:27
+	 * 修改人(LHC)
+	 * 彻底删除用户
+	 * (后台界面操作需要,此功能应该慎用)
+	 * @param user_id
+	 * @return
+	 */
+	public boolean deleteUserById(int user_id);
+	/**
+	 * 2018年7月6日17:57:27
+	 * 修改人(LHC)
+	 * 批量设置用户状态
+	 * (后台界面操作需要)
+	 * @param list
+	 * @return
+	 */
+	public boolean batchSetUsersState(List<Integer> list ,int user_state);
+	/**
+	 * 2018年7月6日18:50:48
+	 * 修改人(LHC)
+	 * 批量删除用户
+	 * (后台界面操作需要)
+	 * @param list 用户列表
+	 * @return
+	 */
+	public boolean batchDeleteUsers(List<Integer> list);
 }

@@ -1,6 +1,5 @@
 package com.etc.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -28,8 +27,9 @@ import com.etc.service.UserService;
 @Controller
 @RequestMapping(value = "users")
 public class BackUsersController {
-	@Resource(name="userService")
+	@Resource(name = "userService")
 	UserService us;
+
 	/**
 	 * 获取指定状态用户的列表
 	 * 
@@ -39,15 +39,12 @@ public class BackUsersController {
 	 *            本操作该返回的视图以及数据
 	 * @return
 	 */
-	
 	@RequestMapping(value = "getList", method = RequestMethod.GET)
 	public ModelAndView getUsersList(
 			@RequestParam(value = "user_state", required = false, defaultValue = "0") int user_state,
 			ModelAndView mav) {
-		System.out.println("user_state:" +user_state);
 		List<Users> list = us.queryUsersByState(user_state);
 		mav.addObject("list", list);
-
 		if (user_state == 0) {
 			/// 这边显示的是正常的会员
 			mav.setViewName("/Back/member-list");
@@ -69,15 +66,13 @@ public class BackUsersController {
 	@RequestMapping(value = "userInfo", method = RequestMethod.GET)
 	public String getUserInfo(@RequestParam(value = "user_id", required = true, defaultValue = "1") int user_id,
 			Model model) {
-		Users user = new Users(user_id, "user_acc" + user_id, "user_pwd" + user_id, "user_email" + user_id,
-				"user_tel" + user_id, "user_realname" + user_id, "user_cardid" + user_id, "user_address" + user_id,
-				100.0, 0, "user_create" + user_id, "user_modified" + user_id);
+		Users user = us.queryUsersById(user_id);
 		model.addAttribute("user", user);
 		return "/Back/member-show";
 	}
 
 	/**
-	 * 请求显示用户登录界面
+	 * 请求添加用户登录界面
 	 * 
 	 * @param user_id
 	 *            用户ID(非必要)
@@ -90,13 +85,10 @@ public class BackUsersController {
 		// 如果这边没有传递传输过来,说明是注册界面,不需要提供参数
 		// 否则如果界面传过来一个用户ID,要把该用户的数据都提交给页面,看页面怎么做处理
 		if (user_id != 0) {
-			Users user = new Users(user_id, "user_acc" + user_id, "user_pwd" + user_id, "user_email" + user_id,
-					"user_tel" + user_id, "user_realname" + user_id, "user_cardid" + user_id, "user_address" + user_id,
-					100.0, 0, "", "user_modified" + user_id);
+			Users user = us.queryUsersById(user_id);
 			model.addAttribute("user", user);
 			model.addAttribute("actionSrc", request.getContextPath() + "/users/updateUser");
 			model.addAttribute("type", "PUT");
-			System.out.println(user);
 		} else {
 			model.addAttribute("type", "POST");
 			model.addAttribute("actionSrc", request.getContextPath() + "/users/registerUser");
@@ -113,9 +105,7 @@ public class BackUsersController {
 	 */
 	@RequestMapping(value = "askChangePwd", method = RequestMethod.GET)
 	public String showEditUser(@RequestParam(value = "user_id", required = true) int user_id, Model model) {
-		Users user = new Users(user_id, "user_acc" + user_id, "user_pwd" + user_id, "user_email" + user_id,
-				"user_tel" + user_id, "user_realname" + user_id, "user_cardid" + user_id, "user_address" + user_id,
-				100.0, 0, "", "user_modified" + user_id);
+		Users user = us.queryUsersById(user_id);
 		model.addAttribute("user", user);
 		return "/Back/change-password";
 	}
@@ -129,8 +119,11 @@ public class BackUsersController {
 	@RequestMapping(value = "registerUser", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean registerUser(@RequestBody Users user) {
-		System.out.println("registerUser:\n" + user);
-		return false;
+		//用户存在,就注册失败
+		if (us.validation(user.getUser_acc())) {
+			return false;
+		}
+		return us.addUser(user);
 	}
 
 	/**
@@ -142,8 +135,7 @@ public class BackUsersController {
 	@RequestMapping(value = "updateUser", method = RequestMethod.PUT)
 	@ResponseBody
 	public boolean updateUser(@RequestBody Users user) {
-		System.out.println("updateUser:\n" + user);
-		return true;
+		return us.updateUser(user);
 	}
 
 	/**
@@ -155,29 +147,30 @@ public class BackUsersController {
 	@RequestMapping(value = "updatePwd", method = RequestMethod.PUT)
 	@ResponseBody
 	public boolean updatePwd(@RequestBody Users user) {
-		System.out.println("updatePwd:\n" + user);
-		return true;
+		// 实现类未提供直接修改密码的方法,先这样应该吧
+		Users newUser = us.queryUsersById(user.getUser_id());
+		newUser.setUser_pwd(user.getUser_pwd());
+		return us.updateUser(newUser);
 	}
 
 	/**
 	 * 用户停权操作
-	 * 
+	 * 用户状态(0启用1停权)
 	 * @param user_id
 	 * @return
 	 */
 	@RequestMapping(value = "stopUser/{user_id}", method = RequestMethod.PUT)
 	@ResponseBody
 	public boolean stopUser(@PathVariable(value = "user_id") int user_id) {
-		System.out.println(user_id);
 		if (user_id == 0) {
 			return false;
 		}
-		return true;
+		return us.updateUserState(user_id, 1);
 	}
 
 	/**
 	 * 用户权限激活
-	 * 
+	 * 用户状态(0启用1停权)
 	 * @param user_id
 	 * @return
 	 */
@@ -186,7 +179,7 @@ public class BackUsersController {
 	public boolean activeUser(@PathVariable(value = "user_id") int user_id) {
 		if (user_id == 0)
 			return false;
-		return true;
+		return us.updateUserState(user_id, 0);
 	}
 
 	/**
@@ -200,8 +193,7 @@ public class BackUsersController {
 	public boolean deleteUser(@PathVariable(value = "user_id") int user_id) {
 		if (user_id == 0)
 			return false;
-		System.out.println("deleteUser:\n" + user_id);
-		return true;
+		return us.deleteUserById(user_id);
 	}
 
 	/**
@@ -213,19 +205,19 @@ public class BackUsersController {
 	@RequestMapping(value = "deleteCheckUser", method = RequestMethod.DELETE)
 	@ResponseBody
 	public boolean deleteCheckUser(@RequestBody List<Integer> list) {
-		System.out.println("deleteCheckUser:" + list);
-		return true;
+		return us.batchDeleteUsers(list);
 	}
+
 	/**
 	 * 批量停权选中的用户
+	 * 
 	 * @param list
 	 * @return
 	 */
-	@RequestMapping(value = "stopCheckUser",method= RequestMethod.PUT)
+	@RequestMapping(value = "stopCheckUser", method = RequestMethod.PUT)
 	@ResponseBody
 	public boolean stopCheckUser(@RequestBody List<Integer> list) {
-		System.out.println("stopCheckUser:" + list);
-		return true;
+		return us.batchSetUsersState(list, 1);
 	}
-	
+
 }

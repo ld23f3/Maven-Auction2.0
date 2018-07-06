@@ -159,6 +159,11 @@
 				$("#user_id").val("${user.user_id}");
 				$("#user_acc").val("${user.user_acc}");
 				$("#user_acc").attr("readonly","readonly");
+	 			$("#user_email").val("${user.user_tel}");
+	 			$("#user_tel").val("${user.user_tel}");
+	 			$("#user_realname").val("${user.user_realname}");
+	 			$("#user_cardid").val("${user.user_cardid}");
+	 			$("#user_address").val("${user.user_address}");
 				
 
 				$("#user_pwd").val("${user.user_pwd}");
@@ -175,11 +180,6 @@
 				$("#user_create").val("${user.user_create}");
 				$("#user_modified").val("${user.user_modified}");
 			};
-			$("#user_email").val("492011200@qq.com");
-			$("#user_tel").val("15259620412");
-			$("#user_realname").val("林惠成");
-			$("#user_cardid").val("350623199008205233");
-			$("#user_address").val("厦门湖里");
 			
 			$('.skin-minimal input').iCheck({
 				checkboxClass : 'icheckbox-blue',

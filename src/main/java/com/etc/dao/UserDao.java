@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.etc.entity.Users;
 import com.etc.util.PageData;
 
@@ -75,13 +77,49 @@ public interface UserDao {
 	public List<Users> queryUsersByName(String user_realName);
 	/**
 	 * 2018年7月6日14:51:10
-	 * (LHC)
+	 * 修改人(LHC)
 	 * 根据用户状态查询用户
 	 * (后台查询时需要根据用户状态管理)
 	 * @param user_state
 	 * @return
 	 */
 	public List<Users> queryUsersByState(int user_state);
+	/**
+	 * 2018年7月6日17:57:27
+	 * 修改人(LHC)
+	 * 根据用户ID设置用户状态
+	 * @param user_id 用户ID
+	 * @param user_state 用户状态
+	 * @return
+	 */
+	public boolean updateUserState(@Param("user_id") int user_id,@Param("user_state") int user_state);
+	/**
+	 * 2018年7月6日17:57:27
+	 * 修改人(LHC)
+	 * 彻底删除用户
+	 * (后台界面操作需要,此功能应该慎用)
+	 * @param user_id
+	 * @return
+	 */
+	public boolean deleteUserById(int user_id);
+	/**
+	 * 2018年7月6日17:57:27
+	 * 修改人(LHC)
+	 * 批量设置用户状态
+	 * (后台界面操作需要)
+	 * @param list
+	 * @return
+	 */
+	public boolean batchSetUsersState(@Param("list")List<Integer> list ,@Param("user_state")int user_state);
+	/**
+	 * 2018年7月6日18:50:48
+	 * 修改人(LHC)
+	 * 批量删除用户
+	 * (后台界面操作需要)
+	 * @param list 用户列表
+	 * @return
+	 */
+	public boolean batchDeleteUsers(List<Integer> list);
 	/**
 	 * 依據用戶狀態->查詢用戶
 	 * 
