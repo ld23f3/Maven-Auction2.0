@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etc.dao.OrderDao">
+
+	<select id="queryOrderByUserId" resultType="com.etc.bean.entity.OrderBean">
+		SELECT
+		orders.order_id ,orders.goods_id ,orders.user_id ,goods.goods_name ,goodstype.goodstype_desc ,goods.goods_getprice
+		,orders.address_id , shoppingaddress.consignee_address
+		,orders.senddate ,orders.payment ,orders.sendprice ,orders.order_state
+		,orders.order_date FROM goods ,orders , shoppingaddress , goodstype
+		WHERE orders.goods_id = goods.goods_id AND orders.address_id =
+		shoppingaddress.address_id AND goods.goodstype_id =
+		goodstype.goodstype_id and orders.user_id = #{orders.user_id}
+	</select>
+
+	<select id="queryOrderByOrderId" resultType="com.etc.bean.entity.OrderBean">
+		SELECT
+		orders.order_id ,orders.goods_id ,orders.user_id ,goods.goods_name ,goodstype.goodstype_desc ,goods.goods_getprice
+		,orders.address_id , shoppingaddress.consignee_address
+		,orders.senddate ,orders.payment ,orders.sendprice ,orders.order_state
+		,orders.order_date FROM goods ,orders , shoppingaddress , goodstype
+		WHERE orders.goods_id = goods.goods_id AND orders.address_id =
+		shoppingaddress.address_id AND goods.goodstype_id =
+		goodstype.goodstype_id and orders.order_id = #{orders.order_id}
+	</select>
+</mapper>
