@@ -5,9 +5,9 @@
 <mapper namespace="com.etc.dao.UserDao">
 	<!--用户注册 -->
 	<insert id="addUser">
-		insert into
-		users(user_id,user_acc,user_email,user_tel,user_pwd,user_state,user_balance,user_create)
-		values(null,#{user_acc},#{user_email},#{user_tel},#{user_pwd},#{user_state},#{user_balance},now())
+		insert into users values
+		(null,#{user_acc},#{user_pwd},#{user_email},#{user_tel},#{user_realname}
+		,#{user_cardid},#{user_address},#{user_balance},#{user_state},now(),null)
 	</insert>
 
 	<!--账号验证 -->
