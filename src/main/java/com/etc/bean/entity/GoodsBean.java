@@ -11,6 +11,7 @@ public class GoodsBean {
 	private String goods_desc; //商品描述
 	private int good_state; //商品竞拍情况（0未竞拍1正在竞拍2已出售 3流标）
 	private int user_id; //用户编号
+	private String user_acc; // 账号
 	private double goods_minpremium; //最低加价
 	private int goods_auctiontime; //商品拍卖时间（单位：天）
 	private double goods_margin; //商品竞拍保证金
@@ -26,10 +27,10 @@ public class GoodsBean {
 		return "GoodsBean [goods_id=" + goods_id + ", goods_name=" + goods_name + ", goods_minprice=" + goods_minprice
 				+ ", goods_currentprice=" + goods_currentprice + ", goods_getprice=" + goods_getprice
 				+ ", goods_typeid=" + goods_typeid + ", goods_desc=" + goods_desc + ", good_state=" + good_state
-				+ ", user_id=" + user_id + ", goods_minpremium=" + goods_minpremium + ", goods_auctiontime="
-				+ goods_auctiontime + ", goods_margin=" + goods_margin + ", goods_create=" + goods_create
-				+ ", goods_modified=" + goods_modified + ", goodstype_desc=" + goodstype_desc + ", goodstype_create="
-				+ goodstype_create + ", goodstype_modified=" + goodstype_modified + "]";
+				+ ", user_id=" + user_id + ", user_acc=" + user_acc + ", goods_minpremium=" + goods_minpremium
+				+ ", goods_auctiontime=" + goods_auctiontime + ", goods_margin=" + goods_margin + ", goods_create="
+				+ goods_create + ", goods_modified=" + goods_modified + ", goodstype_desc=" + goodstype_desc
+				+ ", goodstype_create=" + goodstype_create + ", goodstype_modified=" + goodstype_modified + "]";
 	}
 	public int getGoods_id() {
 		return goods_id;
@@ -85,6 +86,12 @@ public class GoodsBean {
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
 	}
+	public String getUser_acc() {
+		return user_acc;
+	}
+	public void setUser_acc(String user_acc) {
+		this.user_acc = user_acc;
+	}
 	public double getGoods_minpremium() {
 		return goods_minpremium;
 	}
@@ -135,5 +142,4 @@ public class GoodsBean {
 	}
 	
 	
-
 }
