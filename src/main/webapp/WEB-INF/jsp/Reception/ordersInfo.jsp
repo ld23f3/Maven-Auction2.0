@@ -301,7 +301,9 @@
 					<label>商品描述</label>
 					<textarea name="goodsdesc"
 						placeholder="${ordersInfo.goodstype_desc}" required=" "></textarea>
-					<!-- <input type="submit" value="Send message"> -->
+					<c:if test="${ordersInfo.order_state=='1'}">
+				 	<input type="submit" id="take" value="确认收货" onclick="takeOrderInfo(${ordersInfo.order_id})"/> 
+				 	</c:if> 
 				</div>
 				</c:forEach>
 			</div>

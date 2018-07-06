@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>未付款订单</title>
+<title>我的订单</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
@@ -279,7 +279,7 @@
 									<td>${orders.order_date}</td>
 									<td>${orders.senddate}</td>
 									<td><c:if test="${orders.order_state=='0'}">
-									<input type="button" name="" id="payfor" value="  付    款  " onclick="showOrderInfo(${orders.order_id})"/>
+									<input type="button" name="" id="payfor" value="  付    款  " onclick=""/>
 									</c:if>
 										<c:if test="${orders.order_state=='1'}"><input type="button" name="" id="btulook" value="查看详情" onclick="showOrderInfo(${orders.order_id})"/></c:if>
 										<c:if test="${orders.order_state=='2'}"><input type="button" name="" id="btulook" value="查看详情" onclick="showOrderInfo(${orders.order_id})"/></c:if>
@@ -294,17 +294,7 @@
 
 					</table>
 
-					<div class="col-md-12 column text-center">
-						<ul class="pagination">
-							<li><a href="#">首页</a></li>
-							<li><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">下一页</a></li>
-						</ul>
-					</div>
+
 
 				</div>
 			</div>
@@ -412,6 +402,7 @@
 	
 	
     </script>
+
 	<!-- //cart-js -->
 </body>
 </html>
