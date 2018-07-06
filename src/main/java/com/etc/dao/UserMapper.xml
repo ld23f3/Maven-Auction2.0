@@ -2,8 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.etc.dao.UsersDao">
-
+<mapper namespace="com.etc.dao.UserDao">
 	<!--用户注册 -->
 	<insert id="addUser">
 		insert into
@@ -32,17 +31,22 @@
 	</update>
 
 	<!--依據用戶編號->查詢用戶詳細資訊 -->
-	<select id="queryUsersById" resultType="Users">
-		select * from users where user_id = #{id}
+	<select id="queryUsersById" resultType="com.etc.entity.Users">
+		select * from users where user_id = #{user_id}
 	</select>
 	
 	<!--查詢所有用戶  -->
-	<select id="queryUsers" resultType="Users">
+	<select id="queryUsers" resultType="com.etc.entity.Users">
 		select * from users;
 	</select>
 	
+	
+	<select id="queryUsersByState" resultType="com.etc.entity.Users">
+		select * from users where user_state = #{user_id};
+	</select>
+	
 	<!--依據用戶名子->查詢用戶(模糊查詢)  -->
-	<select id="queryUsersByName" resultType="Users">
+	<select id="queryUsersByName" resultType="com.etc.entity.Users">
 		select * from users where user_realname like
 		concat('%',#{user_realname},'%')
 	</select>
@@ -53,7 +57,7 @@
 	</delete>
 	
 	<!--更新用户  -->
-	<update id="updateUser" parameterType="Users">
+	<update id="updateUser" parameterType="com.etc.entity.Users">
 		update users set
 		user_realname = #{user_realname},
 		user_balance = #{user_balance},

@@ -12,25 +12,20 @@ import com.etc.entity.Users;
 import com.etc.service.UserService;
 import com.etc.util.PageData;
 
-@Service(value="usersService")
+@Service(value="userService")
 public class UserServiceImpl implements UserService {
 	
 	//Logger logger = Logger.getLogger(UserServiceImpl.class);
 	
-	@Resource(name="usersDao")
+	@Resource(name="userDao")
 	private UserDao userDao;
-	
-	/**
-	 * 用户注册
-	 */
+
 	@Override
 	public boolean addUser(Users users) {
 
 		return userDao.addUser(users);
 	}
-	/**
-	 * 账号验证
-	 */
+	@Override
 	public boolean validation(String userAcc) {
 	
 		Users user = userDao.validation(userAcc);
@@ -39,48 +34,43 @@ public class UserServiceImpl implements UserService {
 		}
 		return false;
 	}
-	/**
-	 * 登陆
-	 */
+	@Override
 	public Users login(Users users) {
 		
 		return userDao.login(users);
 		
 	}
-	/**
-	 * 完善个人信息
-	 */
+	@Override
 	public boolean contact(Users users) {
 		return userDao.contact(users);
 	}
 	
 	@Override
 	public boolean updateUser(Users user) {
-		// TODO Auto-generated method stub
-		return false;
+		return userDao.updateUser(user);
 	}
 
 	@Override
 	public PageData<Users> queryUsers(Integer page, Integer pageSize, Object... param) {
-		// TODO Auto-generated method stub
-		return userDao.queryUsers(page, pageSize, null);
+		return userDao.queryUsers(page, pageSize, param);
 	}
 	
 	@Override
 	public Users queryUsersById(int user_id) {
-		// TODO Auto-generated method stub
 		return userDao.queryUsersById(user_id);
 	}
 
 	@Override
 	public List<Users> queryUsersByName(String user_realName) {
-		// TODO Auto-generated method stub
 		return userDao.queryUsersByName(user_realName);
 	}
 
 	@Override
 	public PageData<Users> queryUserByState(Integer page, Integer pageSize,int user_state) {
-		// TODO Auto-generated method stub
 		return userDao.queryUserByState(page, pageSize, user_state);
+	}
+	@Override
+	public List<Users> queryUsersByState(int user_state) {
+		return userDao.queryUsersByState(user_state);
 	}
 }

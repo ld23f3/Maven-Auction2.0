@@ -5,7 +5,7 @@
 	id="WebApp_ID" version="3.0">
 	<display-name>Archetype Created Web Application</display-name>
 	<listener>
-		<description>Spring监听器</description>
+		<description>SpringLi</description>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	<!-- ContextLoaderListener初始化Spring上下文时需要使用到的contextConfigLocation参数 -->

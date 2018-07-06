@@ -1,9 +1,9 @@
 package com.etc.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.etc.entity.Users;
+import com.etc.service.UserService;
 
 /**
  * 用户相关的控制器
@@ -27,6 +28,8 @@ import com.etc.entity.Users;
 @Controller
 @RequestMapping(value = "users")
 public class BackUsersController {
+	@Resource(name="userService")
+	UserService us;
 	/**
 	 * 获取指定状态用户的列表
 	 * 
@@ -36,17 +39,13 @@ public class BackUsersController {
 	 *            本操作该返回的视图以及数据
 	 * @return
 	 */
+	
 	@RequestMapping(value = "getList", method = RequestMethod.GET)
 	public ModelAndView getUsersList(
 			@RequestParam(value = "user_state", required = false, defaultValue = "0") int user_state,
 			ModelAndView mav) {
-		List<Users> list = new ArrayList<>();
-		for (int i = 1; i <= 20; i++) {
-			Users user = new Users(i, "user_acc" + i, "user_pwd" + i, "user_email" + i, "user_tel" + i,
-					"user_realname" + i, "user_cardid" + i, "user_address" + i, 100.0, 0, new Date().toLocaleString(),
-					"user_modified" + i);
-			list.add(user);
-		}
+		System.out.println("user_state:" +user_state);
+		List<Users> list = us.queryUsersByState(user_state);
 		mav.addObject("list", list);
 
 		if (user_state == 0) {
@@ -93,7 +92,7 @@ public class BackUsersController {
 		if (user_id != 0) {
 			Users user = new Users(user_id, "user_acc" + user_id, "user_pwd" + user_id, "user_email" + user_id,
 					"user_tel" + user_id, "user_realname" + user_id, "user_cardid" + user_id, "user_address" + user_id,
-					100.0, 0, new Date().toLocaleString(), "user_modified" + user_id);
+					100.0, 0, "", "user_modified" + user_id);
 			model.addAttribute("user", user);
 			model.addAttribute("actionSrc", request.getContextPath() + "/users/updateUser");
 			model.addAttribute("type", "PUT");
@@ -116,7 +115,7 @@ public class BackUsersController {
 	public String showEditUser(@RequestParam(value = "user_id", required = true) int user_id, Model model) {
 		Users user = new Users(user_id, "user_acc" + user_id, "user_pwd" + user_id, "user_email" + user_id,
 				"user_tel" + user_id, "user_realname" + user_id, "user_cardid" + user_id, "user_address" + user_id,
-				100.0, 0, new Date().toLocaleString(), "user_modified" + user_id);
+				100.0, 0, "", "user_modified" + user_id);
 		model.addAttribute("user", user);
 		return "/Back/change-password";
 	}

@@ -20,7 +20,7 @@
  	</delete>
  	
  	<!-- 更新地址 -->
- 	<update id="updateAddress" parameterType="ShoppingAddress">
+ 	<update id="updateAddress" parameterType="com.etc.entity.ShoppingAddress">
  		UPDATE shoppingaddress
  		<set>
  			<if test="consignee_name!=null">consignee_name=#{consignee_name},</if>

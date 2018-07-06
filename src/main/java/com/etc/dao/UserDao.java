@@ -73,7 +73,15 @@ public interface UserDao {
 	 * @return
 	 */
 	public List<Users> queryUsersByName(String user_realName);
-
+	/**
+	 * 2018年7月6日14:51:10
+	 * (LHC)
+	 * 根据用户状态查询用户
+	 * (后台查询时需要根据用户状态管理)
+	 * @param user_state
+	 * @return
+	 */
+	public List<Users> queryUsersByState(int user_state);
 	/**
 	 * 依據用戶狀態->查詢用戶
 	 * 

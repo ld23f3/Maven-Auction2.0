@@ -15,15 +15,19 @@ import com.etc.util.ImageUtil;
 
 /**
  * 后台系统的登录权限控制
- * 
+ * 本页主要页面跳转，不需要与数据库交互
  * @author LHC
  *
  */
 @Controller
 @RequestMapping("manage")
 public class BackController {
-
-	// 生成验证码图片
+	/**
+	 * 生成验证码图片
+	 * @param response
+	 * @param session
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "valicode", method = RequestMethod.GET) // 对应/user/valicode.do请求
 	public void valicode(HttpServletResponse response, HttpSession session) throws Exception {
 		// 利用图片工具生成图片
@@ -38,12 +42,22 @@ public class BackController {
 		OutputStream os = response.getOutputStream();
 		ImageIO.write(image, "png", os);
 	}
-
+	/**
+	 * 显示登录界面
+	 * @return
+	 */
 	@RequestMapping(value = "show.html", method = RequestMethod.GET)
 	public String showLogin() {
 		return "/Back/login";
 	}
-
+	/**
+	 * 请求登录(这边硬写,只给一个管理员admin,admin)
+	 * @param manageName
+	 * @param managePwd
+	 * @param imageCode
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value = "show.html", method = RequestMethod.POST)
 	public String askLogin(String manageName, String managePwd, String imageCode, HttpSession session) {
 
@@ -63,7 +77,11 @@ public class BackController {
 		// 重定向,地址栏会改变.
 		return "redirect:index.html";
 	}
-
+	/**
+	 * 退出登录
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value = "exit", method = RequestMethod.GET)
 	public String exitLogin(HttpSession session) {
 		// 清除会话人的数据
@@ -72,7 +90,10 @@ public class BackController {
 		// 转发,地址栏显示不会变化,但是经过拦截器,最终还是会变成登录界面的地址
 		return "forward:index.html";
 	}
-
+	/**
+	 * 显示后台主页
+	 * @return
+	 */
 	@RequestMapping(value = "index.html")
 	public String ShowIndex() {
 		return "/Back/index";
