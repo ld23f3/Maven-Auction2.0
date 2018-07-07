@@ -32,7 +32,7 @@
 	<div class="header-top-w3layouts">
 		<div class="container">
 			<div class="col-md-6 logo-w3">
-				<a href="index"><img src="${pageContext.request.contextPath}/static/Assets/images/logo2.png" alt=" " />
+				<a href="${pageContext.request.contextPath}/api/query"><img src="${pageContext.request.contextPath}/static/Assets/images/logo2.png" alt=" " />
 				<h1>喬治拍卖</h1></a>
 			</div>
 			<div class="col-md-6 phone-w3l">
@@ -60,7 +60,7 @@
 					</div>
 					<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 						<ul class="nav navbar-nav ">
-							<li class=" active"><a href="index" class="hyper "><span>首页</span></a></li>
+							<li class=" active"><a href="${pageContext.request.contextPath}/api/query" class="hyper "><span>首页</span></a></li>
 							<li class="dropdown "><a href="#"
 								class="dropdown-toggle  hyper" data-toggle="dropdown"><span>商品分类<b
 										class="caret"></b></span></a>
@@ -84,7 +84,7 @@
 										</div>
 
 										<div class="col-sm-4 w3l">
-											<a href=""><img src="images/menu1.jpg"
+											<a href=""><img src="${pageContext.request.contextPath}/static/Assets/images/menu1.jpg"
 												class="img-responsive" alt=""></a>
 										</div>
 										<div class="clearfix"></div>
@@ -109,7 +109,7 @@
 										</div>
 
 										<div class="col-sm-4 w3l">
-											<a href=""><img src="images/menu2.jpg"
+											<a href=""><img src="${pageContext.request.contextPath}/static/Assets/images/menu2.jpg"
 												class="img-responsive" alt=""></a>
 										</div>
 										<div class="clearfix"></div>
@@ -132,7 +132,7 @@
 										</div>
 
 										<div class="col-sm-4 w3l">
-											<a href=""><img src="images/menu3.jpg"
+											<a href=""><img src="${pageContext.request.contextPath}/static/Assets/images/menu3.jpg"
 												class="img-responsive" alt=""></a>
 										</div>
 										<div class="clearfix"></div>
@@ -159,7 +159,7 @@
 										</div>
 
 										<div class="col-sm-4 w3l">
-											<a href=""><img src="images/menu4.jpg"
+											<a href=""><img src="${pageContext.request.contextPath}/static/Assets/images/menu4.jpg"
 												class="img-responsive" alt=""></a>
 										</div>
 										<div class="clearfix"></div>
@@ -253,7 +253,7 @@
 	<div class="footer">
 		<div class="container">
 			<div class="col-md-3 footer-grids fgd1">
-				<a href="index"><img src="${pageContext.request.contextPath}/static/Assets/images/logo2.png" alt=" " />
+				<a href="${pageContext.request.contextPath}/api/query"><img src="${pageContext.request.contextPath}/static/Assets/images/logo2.png" alt=" " />
 				<h3>
 						喬治拍卖</span>
 					</h3></a>
@@ -296,13 +296,13 @@
 			<div class="clearfix"></div>
 			<p class="copy-right">
 				Copyright &copy; 2018.Company name All rights reserved.More
-				Templates <a href="http://www.index.com/" target="_blank"
+				Templates <a href="${pageContext.request.contextPath}/api/query" target="_blank"
 					title="喬治拍卖">喬治拍卖</a></a>
 			</p>
 		</div>
 	</div>
 	<!-- cart-js -->
-	<script src="js/minicart.js"></script>
+	<script src="${pageContext.request.contextPath}/static/Assets/js/minicart.js"></script>
 	<script>
 		w3ls1.render();
 

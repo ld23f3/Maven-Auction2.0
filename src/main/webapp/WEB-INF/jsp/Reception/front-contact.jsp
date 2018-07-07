@@ -38,7 +38,7 @@
 	<div class="header-top-w3layouts">
 		<div class="container">
 			<div class="col-md-6 logo-w3">
-				<a href="index.html"><img
+				<a href="${pageContext.request.contextPath}/api/query"><img
 					src="${pageContext.request.contextPath}/static/Assets/images/logo2.png"
 					alt=" " />
 				<h1>喬治拍卖</h1></a>
@@ -68,7 +68,7 @@
 					</div>
 					<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 						<ul class="nav navbar-nav ">
-							<li class=" active"><a href="index.html" class="hyper "><span>首页</span></a></li>
+							<li class=" active"><a href="${pageContext.request.contextPath}/api/query" class="hyper "><span>首页</span></a></li>
 							<li class="dropdown "><a href="#"
 								class="dropdown-toggle  hyper" data-toggle="dropdown"><span>商品分类<b
 										class="caret"></b></span></a>
@@ -286,7 +286,7 @@
 	<div class="footer">
 		<div class="container">
 			<div class="col-md-3 footer-grids fgd1">
-				<a href="index.html"><img
+				<a href="${pageContext.request.contextPath}/api/query"><img
 					src="${pageContext.request.contextPath}/static/Assets/images/logo2.png"
 					alt=" " />
 				<h3>
@@ -331,7 +331,7 @@
 			<div class="clearfix"></div>
 			<p class="copy-right">
 				Copyright &copy; 2018.Company name All rights reserved.More
-				Templates <a href="http://www.index.com/" target="_blank"
+				Templates <a href="${pageContext.request.contextPath}/api/query" target="_blank"
 					title="喬治拍卖">喬治拍卖</a></a>
 			</p>
 		</div>

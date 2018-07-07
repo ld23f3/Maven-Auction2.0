@@ -25,7 +25,7 @@
 <div class="header-top-w3layouts">
 	<div class="container">
 		<div class="col-md-6 logo-w3">
-			<a href="index"><img src="${pageContext.request.contextPath}/static/Assets/images/logo2.png" alt=" " /><h1>喬治拍卖</h1></a>
+			<a href="${pageContext.request.contextPath}/api/query"><img src="${pageContext.request.contextPath}/static/Assets/images/logo2.png" alt=" " /><h1>喬治拍卖</h1></a>
 		</div>
 		<div class="col-md-6 phone-w3l">
 			<ul>
@@ -50,7 +50,7 @@
 				</div> 
 				<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 					<ul class="nav navbar-nav ">
-						<li class=" active"><a href="index" class="hyper "><span>首页</span></a></li>	
+						<li class=" active"><a href="${pageContext.request.contextPath}/api/query" class="hyper "><span>首页</span></a></li>	
 						<li class="dropdown ">
 							<a href="#" class="dropdown-toggle  hyper" data-toggle="dropdown" ><span>商品分类<b class="caret"></b></span></a>
 								<ul class="dropdown-menu multi">
@@ -236,7 +236,7 @@
 <div class="footer">
 	<div class="container">
 		<div class="col-md-3 footer-grids fgd1">
-		<a href="index"><img src="${pageContext.request.contextPath}/static/Assets/images/logo2.png" alt=" " /><h3>喬治拍卖</span></h3></a>
+		<a href="${pageContext.request.contextPath}/api/query"><img src="${pageContext.request.contextPath}/static/Assets/images/logo2.png" alt=" " /><h3>喬治拍卖</span></h3></a>
 		<ul>
 			<li>地址：厦门市观日路2号</li>
 			<li>邮编：350000</li>
@@ -274,7 +274,7 @@
 			</ul>
 		</div>
 		<div class="clearfix"></div>
-		<p class="copy-right">Copyright &copy; 2018.Company name All rights reserved.More Templates <a href="http://www.index.com/" target="_blank" title="喬治拍卖">喬治拍卖</a>  >网页模板</a></p>
+		<p class="copy-right">Copyright &copy; 2018.Company name All rights reserved.More Templates <a href="${pageContext.request.contextPath}/api/query" target="_blank" title="喬治拍卖">喬治拍卖</a>  >网页模板</a></p>
 	</div>
 </div>
 	<!-- cart-js -->
