@@ -146,7 +146,7 @@
 		function picture_shenhe(obj, id) {
 			layer
 					.confirm(
-							'审核文章？',
+							'审核商品？',
 							{
 								btn : [ '通过', '不通过' ],
 								shade : false

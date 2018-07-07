@@ -92,8 +92,11 @@ public class BackController {
 	 * @return
 	 */
 	@RequestMapping(value = "index.html")
-	public String ShowIndex() {
+	public String showIndex() {
 		return "/Back/index";
 	}
-
+	@RequestMapping(value = "welcome")
+	public String showWelcome() {
+		return "/Back/welcome";
+	}
 }
