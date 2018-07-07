@@ -64,7 +64,6 @@ public class BackProductController {
 	@RequestMapping(value = "downGood/{goods_id}", method = RequestMethod.PUT)
 	@ResponseBody
 	public boolean stopGood(@PathVariable(value = "goods_id") int goods_id) {
-		System.out.println("下架商品" + goods_id);
 		if (goods_id == 0) {
 			return false;
 		}
@@ -81,7 +80,6 @@ public class BackProductController {
 	@RequestMapping(value = "upGood/{goods_id}", method = RequestMethod.PUT)
 	@ResponseBody
 	public boolean activeGood(@PathVariable(value = "goods_id") int goods_id) {
-		System.out.println("上架商品");
 		if (goods_id == 0)
 			return false;
 		return gs.updateGoodsState(goods_id, 1);
@@ -98,7 +96,6 @@ public class BackProductController {
 	public boolean deleteGood(@PathVariable(value = "goods_id") int goods_id) {
 		if (goods_id == 0)
 			return false;
-		System.out.println("删除商品:" + goods_id);
 		// 有表关联,不直接写删除了.随便修改个状态码,查不到就当做是删除了
 		return gs.updateGoodsState(goods_id, 5);
 	}
@@ -112,7 +109,6 @@ public class BackProductController {
 	@RequestMapping(value = "deleteCheckGoods", method = RequestMethod.DELETE)
 	@ResponseBody
 	public boolean deleteCheckGoods(@RequestBody List<Integer> list) {
-		System.out.println("批量删除商品:" + list);
 		// 有表关联,不直接写删除了.随便修改个状态码,查不到就当做是删除了
 		return gs.batchSetGoodsState(list, 5);
 	}
@@ -126,7 +122,6 @@ public class BackProductController {
 	@RequestMapping(value = "downCheckGoods", method = RequestMethod.PUT)
 	@ResponseBody
 	public boolean downCheckGoods(@RequestBody List<Integer> list) {
-		System.out.println("批量下架商品:" + list);
 		return gs.batchSetGoodsState(list, 3);
 	}
 
@@ -139,7 +134,6 @@ public class BackProductController {
 	@RequestMapping(value = "upCheckGoods", method = RequestMethod.PUT)
 	@ResponseBody
 	public boolean upCheckGoods(@RequestBody List<Integer> list) {
-		System.out.println("批量上架商品:" + list);
 		return gs.batchSetGoodsState(list, 1);
 	}
 }

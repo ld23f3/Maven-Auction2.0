@@ -35,7 +35,6 @@ public class BackController {
 		Object[] objs = ImageUtil.createImage();
 		// 将验证码存入Session
 		session.setAttribute("imageCode", objs[0]);
-		System.out.println(objs[0]);
 		// 将图片输出给浏览器
 		BufferedImage image = (BufferedImage) objs[1];
 		response.setContentType("image/png");
@@ -65,8 +64,6 @@ public class BackController {
 		
 		// 保存会话登录人数据。后台管理员，只需要一个即可,不做登录账号权限的验证了
 		if (sessionImageCode.toLowerCase().equals(imageCode.toLowerCase())) {
-			System.out.println("验证完成");
-			System.out.println("imageCode:" + imageCode + " sessionImageCode:" + sessionImageCode);
 			if (manageName != null && managePwd != null) {
 				if ("admin".equals(manageName) && "admin".equals(managePwd)) {
 					session.setAttribute("manageName", manageName);

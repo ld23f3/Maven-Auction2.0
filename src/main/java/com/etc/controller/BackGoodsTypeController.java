@@ -70,7 +70,6 @@ public class BackGoodsTypeController {
 	@RequestMapping(value = "addGoodsType", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean registerUser(@RequestBody GoodsType goodsType) {
-		System.out.println("addGoodsType:\n" + goodsType);
 		return gts.addGoodsType(goodsType);
 	}
 	/**
@@ -81,7 +80,6 @@ public class BackGoodsTypeController {
 	@RequestMapping(value = "updateGoodsType", method = RequestMethod.PUT)
 	@ResponseBody
 	public boolean updatePwd(@RequestBody GoodsType goodsType) {
-		System.out.println("updateGoodsType:\n" + goodsType);
 		return gts.updateTypeById(goodsType);
 	}
 	/**
@@ -94,7 +92,6 @@ public class BackGoodsTypeController {
 	public boolean deleteUser(@PathVariable(value = "goodstype_id") int goodstype_id) {
 		if (goodstype_id == 0)
 			return false;
-		System.out.println("deleteGoodstype:\n" + goodstype_id);
 		return gts.delGoodsTypeById(goodstype_id);
 	}
 }
