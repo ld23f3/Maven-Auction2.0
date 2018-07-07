@@ -255,7 +255,7 @@
 									<div
 										class="col-md-3 top-product-grids tp1 animated wow slideInUp"
 										data-wow-delay=".5s">
-										<a href="single.html"><div class="product-img">
+										<a href="single?goodsId=${good.goods_id}"><div class="product-img">
 												<img
 													src="${pageContext.request.contextPath}/static/Assets/images/GoodsImg/${good.goodsimg_src}"
 													alt="" />

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.etc.entity.Goods;
 import com.etc.entity.Mybidding;
+import com.etc.entity.Users;
 
 public interface MybiddingService {
 	// 显示我的竞标记录
@@ -13,7 +14,7 @@ public interface MybiddingService {
 	public Goods queryByGoodsId(int goodsId);
 
 	// 修改当前价格
-	public boolean updateGoods(Goods goods);
+	public boolean updateGoods(Goods goods,Users user);
 	//增加竞拍记录
 	public boolean addMybidding(Mybidding mybidding);
 	//修改商品的状态

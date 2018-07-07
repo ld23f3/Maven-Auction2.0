@@ -19,7 +19,7 @@
 	</select>
 	<!-- 根据商品类型查询显示的商品 -->
 	<select id="queryAllGoodsByType" resultType="com.etc.entity.GoodsView">
-		select goods.goods_name,goods.goods_minprice,goodsimg_src from goods LEFT JOIN
+		select goods.goods_id,goods.goods_name,goods.goods_minprice,goodsimg_src from goods LEFT JOIN
 		goodsimg on goodsimg.goods_id=goods.goods_id where  goods.goodstype_id = #{goodstype_id} GROUP BY goods.goods_id;
 	</select>
 	<select id="queryGoodsByUserId" resultType="com.etc.bean.entity.GoodsBean">

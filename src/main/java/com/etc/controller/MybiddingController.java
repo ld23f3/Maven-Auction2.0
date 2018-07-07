@@ -39,17 +39,19 @@ public class MybiddingController {
 	public String showSingle(@RequestParam(value = "goodsId", required = false, defaultValue = "1") Integer goodsId,
 			Model model) {
 		Goods goods = mybiddingService.queryByGoodsId(goodsId);
+		goods.getGoodsImg().forEach(System.out::println);
 		model.addAttribute("goods", goods);
 		return "/Reception/single";
 	}
 
 	// 修改goods当前价格
 	@RequestMapping(value = "/updateGoods")
-	public String updateGoods(Goods goods) {
-		mybiddingService.updateGoods(goods);
+	public String updateGoods(Goods goods,HttpSession session) {
+		Users user = (Users)session.getAttribute("user");
+		mybiddingService.updateGoods(goods,user);
 		System.out.println(
 				"商品编号" + goods.getGoods_id() + "当前价格" + goods.getGoods_currentprice() + "状态" + goods.getGood_state());
-		return "redirect:single";
+		return "redirect:single?goodsId="+goods.getGoods_id();
 
 	}
 

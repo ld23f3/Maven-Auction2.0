@@ -205,8 +205,8 @@
 							<ul class="slides">
 							 <c:if test="${goods!=null }">
             	            <c:forEach items="${goods.goodsImg}" var="gg">
-										<li data-thumb="${pageContext.request.contextPath}/static/Assets/images/${gg.goodsimg_src}.jpg">
-									<div class="thumb-image detail_images"> <img src="${pageContext.request.contextPath}/static/Assets/images/${gg.goodsimg_src}.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>
+										<li data-thumb="${pageContext.request.contextPath}/static/Assets/images/GoodsImg/${gg.goodsimg_src}">
+									<div class="thumb-image detail_images"> <img src="${pageContext.request.contextPath}/static/Assets/images/GoodsImg/${gg.goodsimg_src}" data-imagezoom="true" class="img-responsive" alt=""> </div>
 								</li>
 									</c:forEach>
                               </c:if>
@@ -261,37 +261,37 @@
             </div>
             
             <!--出价信息 -->
-            
-            <form action="updateGoods" method="post" >
-        	<div class="myOfferInfoRowCls defaultHide" id="myBidBandDiv">
-            	<div class="floatLeft priceLabelDivCls">竞买价：</div>
-            	<%-- <div class="floatLeft priceLabelDivCls">${goods.goodsImg.goodsimg_src }</div> --%>
-           
-            	<div class="floatLeft">
-                	<div class="priceDivCls">
-                    	<!--<div class="floatLeft priceContentCls" id="selfPrice" >&nbsp;</div>-->
-                    	<input type="text"  class="offerCurrentPriceValInfoColumnCls" name="goods_id" id="goods_id"  value="${goods.goods_id }" style="display: none"/>
-                    	<input type="text"  class="offerCurrentPriceValInfoColumnCls" name="user_id" id="user_id"  value="${goods.user_id }" style="display: none"/>
-                    	<input type="text"  class="offerCurrentPriceValInfoColumnCls" name="good_state" id="good_state"  value="${goods.good_state }" style="display: none"/>
-                    	<input type="text"  class="offerCurrentPriceValInfoColumnCls" name="goods_modified" id="goods_modified"  value="${goods.goods_modified }" style="display: none"/>
-                    	<input type="text"  readonly="readonly" class="floatLeft priceContentCls" id="selfPrice" name="goods_currentprice" value="${goods.goods_currentprice +goods.goods_minpremium } "/>
-                    </div>
-                </div>
-               </div>
-						 <!-- <div class="single-price">
-							<ul>
-								
-							</ul>	 
-						</div>  -->
-							<!-- <input type="hidden" name="cmd" value="_cart" />
-							<input type="hidden" name="add" value="1" /> 
-							<input type="hidden" name="w3ls1_item" value="Handbag" /> 
-							<input type="hidden" name="amount" value="540.00" /> 
-							<button type="submit" class="w3ls-cart" ><i class="fa fa-cart-plus" aria-hidden="true"></i>确认出价</button> -->
+
+						<form action="updateGoods" method="post">
+							<div class="myOfferInfoRowCls defaultHide" id="myBidBandDiv">
+								<div class="floatLeft priceLabelDivCls">竞买价：</div>
+								<%-- <div class="floatLeft priceLabelDivCls">${goods.goodsImg.goodsimg_src }</div> --%>
+
+								<div class="floatLeft">
+									<div class="priceDivCls">
+										<!--<div class="floatLeft priceContentCls" id="selfPrice" >&nbsp;</div>-->
+										<input type="text" class="offerCurrentPriceValInfoColumnCls"
+											name="goods_id" id="goods_id" value="${goods.goods_id }"
+											style="display: none" /> <input type="text"
+											class="offerCurrentPriceValInfoColumnCls" name="user_id"
+											id="user_id" value="${goods.user_id }" style="display: none" />
+										<input type="text" class="offerCurrentPriceValInfoColumnCls"
+											name="good_state" id="good_state"
+											value="${goods.good_state }" style="display: none" /> <input
+											type="text" class="offerCurrentPriceValInfoColumnCls"
+											name="goods_modified" id="goods_modified"
+											value="${goods.goods_modified }" style="display: none" /> <input
+											type="text" readonly="readonly"
+											class="floatLeft priceContentCls" id="selfPrice"
+											name="goods_currentprice"
+											value="${goods.goods_currentprice +goods.goods_minpremium } " />
+									</div>
+								</div>
+							</div>
 							<input type="submit" class="w3ls-cart" id="sub" value="确认出价" />
 						</form>
 
-					<!-- 当倒计时结束的时候修改状态 -->
+						<!-- 当倒计时结束的时候修改状态 -->
 					<form action="uddateGoodsState" method="post" id="myForm">
 						<input type="text"  class="offerCurrentPriceValInfoColumnCls" name="good_state" id="good_state"  value="${goods.good_state }" style="display: none"/>
 						<input type="submit" class="w3ls-cart" id="sub1" value="确认出价"  style="display: none"/>
@@ -424,7 +424,7 @@
     return i;
    }
    function freshTime(){
-    var endtime=new Date('2018/07/6');
+    var endtime=new Date('2018/07/8');
     var nowtime=new Date();
     var lefttime=parseInt(endtime.getTime()-nowtime.getTime());//这是毫秒，如果再/1000就是秒
     // 获取剩下的日、小时、分钟、秒钟
@@ -469,8 +469,7 @@
  /* 点击购物车的时候吧userid转到控制器 */
  function  selectFunction(user_id){
 		/* alert("user_id:"+user_id) */
-		location.href="${pageContext.request.contextPath}/mybidding?user_id="
-			+ user_id;
+		location.href="${pageContext.request.contextPath}/api/record.html";
 		
 	}
  

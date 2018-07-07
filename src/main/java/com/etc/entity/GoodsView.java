@@ -10,9 +10,7 @@ public class GoodsView implements Serializable {
 	private String goods_name;
 	private int goods_minprice;
 	private String goodsimg_src;
-	public GoodsView() {
-		// TODO Auto-generated constructor stub
-	}
+	private int goods_id;
 	public String getGoods_name() {
 		return goods_name;
 	}
@@ -31,17 +29,28 @@ public class GoodsView implements Serializable {
 	public void setGoodsimg_src(String goodsimg_src) {
 		this.goodsimg_src = goodsimg_src;
 	}
-	@Override
-	public String toString() {
-		return "GoodsView [goods_name=" + goods_name + ", goods_minprice=" + goods_minprice + ", goodsimg_src="
-				+ goodsimg_src + "]";
+	public int getGoods_id() {
+		return goods_id;
 	}
-	public GoodsView(String goods_name, int goods_minprice, String goodsimg_src) {
+	public void setGoods_id(int goods_id) {
+		this.goods_id = goods_id;
+	}
+	public GoodsView(String goods_name, int goods_minprice, String goodsimg_src, int goods_id) {
 		super();
 		this.goods_name = goods_name;
 		this.goods_minprice = goods_minprice;
 		this.goodsimg_src = goodsimg_src;
+		this.goods_id = goods_id;
 	}
+	public GoodsView() {
+		super();
+	}
+	@Override
+	public String toString() {
+		return "GoodsView [goods_name=" + goods_name + ", goods_minprice=" + goods_minprice + ", goodsimg_src="
+				+ goodsimg_src + ", goods_id=" + goods_id + "]";
+	}
+	
 	
 
 }
