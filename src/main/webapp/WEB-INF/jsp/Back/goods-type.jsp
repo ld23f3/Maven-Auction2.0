@@ -60,14 +60,14 @@
 					<c:forEach items="${ list }" var="goodType">
 						<tr class="text-c">
 							<td>${goodType.goodstype_id }</td>
-							<td><a href="#">${goodType.goodstype_desc }</a></td>
+							<td>${goodType.goodstype_desc }</a></td>
 							<td>${goodType.goodstype_create }</td>
 							<td>${goodType.goodstype_modified }</td>
 							<td class="f-14"><a title="编辑" href="javascript:;"
 								onclick="admin_role_edit('分类编辑','${pageContext.request.contextPath}/type/askAdd','${goodType.goodstype_id }','400','180')"
 								style="text-decoration: none"><i class="Hui-iconfont">&#xe6df;</i></a>
 								<a title="删除" href="javascript:;"
-								onclick="admin_role_del(this,'1')" class="ml-5"
+								onclick="admin_role_del(this,'${goodType.goodstype_id }')" class="ml-5"
 								style="text-decoration: none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
 						</tr>
 					</c:forEach>

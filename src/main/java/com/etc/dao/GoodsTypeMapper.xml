@@ -7,8 +7,9 @@
 	<!--添加分类 -->
 	<insert id="addGoodsType">
 		insert into goodstype values
-		(null,#{goodstype_dese},#{goodstype_create},#{goodstype_modified})
+		(null,#{goodstype_desc},now(),#{goodstype_modified})
 	</insert>
+	
 	
 	<!--查询分类 -->
 	<select id="queryAllGoodsType" resultType="com.etc.entity.GoodsType">
@@ -26,5 +27,8 @@
 	<delete id="delGoodsTypeById">
 		delete from goodstype where goodstype_id=#{goodstype_id};
 	</delete>
-	
+	<update id="updateTypeById">
+		update goodstype set goodstype_desc = #{goodstype_desc},goodstype_modified = now()
+		where goodstype_id = #{goodstype_id}
+	</update>
 </mapper>

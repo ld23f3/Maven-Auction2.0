@@ -18,26 +18,27 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
 	
 	@Override
 	public boolean addGoodsType(GoodsType goodsType) {
-		// TODO Auto-generated method stub
-		return false;
+		return goodsTypeDao.addGoodsType(goodsType);
 	}
 
 	@Override
 	public List<GoodsType> queryAllGoodsType() {
-		// TODO Auto-generated method stub
 		return goodsTypeDao.queryAllGoodsType();
 	}
 
 	@Override
-	public List<GoodsType> queryGoodsTypeById(int goodstype_id) {
-		// TODO Auto-generated method stub
+	public GoodsType queryGoodsTypeById(int goodstype_id) {
 		return goodsTypeDao.queryGoodsTypeById(goodstype_id);
 	}
 
 	@Override
 	public boolean delGoodsTypeById(int goodstype_id) {
-		// TODO Auto-generated method stub
-		return false;
+		return goodsTypeDao.delGoodsTypeById(goodstype_id);
+	}
+
+	@Override
+	public boolean updateTypeById(GoodsType goodsType) {
+		return goodsTypeDao.updateTypeById(goodsType);
 	}
 
 }

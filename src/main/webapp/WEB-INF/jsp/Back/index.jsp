@@ -97,7 +97,7 @@
 					</ul>
 				</dd>
 			</dl>
-			<dl id="menu-picture">
+			<dl id="menu-picture" hidden="true">
 				<dt>
 					<i class="Hui-iconfont">&#xe613;</i> 图片管理<i
 						class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
@@ -168,7 +168,7 @@
 					</ul>
 				</dd>
 			</dl>
-			<dl id="menu-admin">
+			<dl id="menu-admin" hidden="true">
 				<dt>
 					<i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i
 						class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
@@ -184,7 +184,7 @@
 					</ul>
 				</dd>
 			</dl>
-			<dl id="menu-tongji">
+			<dl id="menu-tongji" hidden="true">
 				<dt>
 					<i class="Hui-iconfont">&#xe61a;</i> 系统统计<i
 						class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
@@ -208,7 +208,7 @@
 					</ul>
 				</dd>
 			</dl>
-			<dl id="menu-system">
+			<dl id="menu-system" hidden="true">
 				<dt>
 					<i class="Hui-iconfont">&#xe62e;</i> 系统管理<i
 						class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>

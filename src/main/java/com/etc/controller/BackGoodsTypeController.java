@@ -3,6 +3,7 @@ package com.etc.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -15,10 +16,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.etc.entity.GoodsType;
+import com.etc.service.GoodsTypeService;
 
 @Controller
 @RequestMapping("type")
 public class BackGoodsTypeController {
+	@Resource(name="goodsTypeService")
+	private GoodsTypeService gts;
 	/**
 	 * 获取商品分类信息
 	 * 
@@ -27,12 +31,7 @@ public class BackGoodsTypeController {
 	 */
 	@RequestMapping(value = "getList", method = RequestMethod.GET)
 	public String getUsersList(Model model) {
-		List<GoodsType> list = new ArrayList<>();
-		for (int i = 1; i <= 5; i++) {
-			GoodsType goodType = new GoodsType(i, "goodstype_desc" + i, "goodstype_create" + i,
-					"goodstype_modified" + i);
-			list.add(goodType);
-		}
+		List<GoodsType> list = gts.queryAllGoodsType();
 		model.addAttribute("list", list);
 		model.addAttribute("size", list.size());
 		return "/Back/goods-type";
@@ -53,8 +52,7 @@ public class BackGoodsTypeController {
 		// 如果这边没有传递传输过来,说明是注册界面,不需要提供参数
 		// 否则如果界面传过来一个用户ID,要把该用户的数据都提交给页面,看页面怎么做处理
 		if (goodstype_id != 0) {
-			GoodsType goodType = new GoodsType(goodstype_id, "goodstype_desc" + goodstype_id,
-					"goodstype_create" + goodstype_id, "goodstype_modified" + goodstype_id);
+			GoodsType goodType = gts.queryGoodsTypeById(goodstype_id);
 			model.addAttribute("goodType", goodType);
 			model.addAttribute("actionSrc", request.getContextPath() + "/type/updateGoodsType");
 			model.addAttribute("type", "PUT");
@@ -73,7 +71,7 @@ public class BackGoodsTypeController {
 	@ResponseBody
 	public boolean registerUser(@RequestBody GoodsType goodsType) {
 		System.out.println("addGoodsType:\n" + goodsType);
-		return false;
+		return gts.addGoodsType(goodsType);
 	}
 	/**
 	 * 更新商品类型
@@ -84,7 +82,7 @@ public class BackGoodsTypeController {
 	@ResponseBody
 	public boolean updatePwd(@RequestBody GoodsType goodsType) {
 		System.out.println("updateGoodsType:\n" + goodsType);
-		return true;
+		return gts.updateTypeById(goodsType);
 	}
 	/**
 	 * 删除商品类型
@@ -97,6 +95,6 @@ public class BackGoodsTypeController {
 		if (goodstype_id == 0)
 			return false;
 		System.out.println("deleteGoodstype:\n" + goodstype_id);
-		return false;
+		return gts.delGoodsTypeById(goodstype_id);
 	}
 }

@@ -27,7 +27,7 @@ public interface GoodsTypeDao {
 	 * @param goodstype_id
 	 * @return
 	 */
-	public List<GoodsType> queryGoodsTypeById(int goodstype_id);
+	public GoodsType queryGoodsTypeById(int goodstype_id);
 	
 	/**
 	 * 根据id删除分类
@@ -35,5 +35,13 @@ public interface GoodsTypeDao {
 	 * @return
 	 */
 	public boolean delGoodsTypeById(int goodstype_id);
-
+	/**
+	 * 更新物品分类
+	 * 2018年7月7日10:52:56
+	 * 修改人(LHC)
+	 * 业务需要
+	 * @param goodsType
+	 * @return
+	 */
+	public boolean updateTypeById(GoodsType goodsType);
 }
