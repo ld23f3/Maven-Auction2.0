@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etc.dao.GoodsTypeDao">
+
+	<!--添加分类 -->
+	<insert id="addGoodsType">
+		insert into goodstype values
+		(null,#{goodstype_dese},#{goodstype_create},#{goodstype_modified})
+	</insert>
+	
+	<!--查询分类 -->
+	<select id="queryAllGoodsType" resultType="com.etc.entity.GoodsType">
+		select * from
+		goodstype
+	</select>
+
+	<!--根据id查询分类 -->
+	<select id="queryGoodsTypeById" resultType="com.etc.entity.GoodsType">
+		select * from
+		goodstype where goodstype.goodstype_id = #{goodstype.goodstype_id}
+	</select>
+	
+	<!--删除分类 -->
+	<delete id="delGoodsTypeById">
+		delete from goodstype where goodstype_id=#{goodstype_id};
+	</delete>
+	
+</mapper>
