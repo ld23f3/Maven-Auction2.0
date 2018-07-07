@@ -3,6 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.etc.dao.UserDao">
+	<!--修改时间 2018年7月6日19:10:11 -->
+	<!-- 非自动生成字段最好都能插入一个值,如果可空,不用填写的默认参数传递进来也是空值 -->
 	<!--用户注册 -->
 	<insert id="addUser">
 		insert into users values
