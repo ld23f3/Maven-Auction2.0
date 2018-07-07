@@ -69,7 +69,7 @@
 										</div>
 									
 										<div class="col-sm-4 w3l">
-											<a href=""><img src="images/menu1.jpg" class="img-responsive" alt=""></a>
+											<a href=""><img src="${pageContext.request.contextPath}/static/Assets/images/menu1.jpg" class="img-responsive" alt=""></a>
 										</div>
 										<div class="clearfix"></div>
 									</div>	
@@ -90,7 +90,7 @@
 										</div>
 										
 										<div class="col-sm-4 w3l">
-											<a href=""><img src="images/menu2.jpg" class="img-responsive" alt=""></a>
+											<a href=""><img src="${pageContext.request.contextPath}/static/Assets/images/menu2.jpg" class="img-responsive" alt=""></a>
 										</div>
 										<div class="clearfix"></div>
 									</div>	
@@ -110,7 +110,7 @@
 										</div>
 										
 										<div class="col-sm-4 w3l">
-											<a href=""><img src="images/menu3.jpg" class="img-responsive" alt=""></a>
+											<a href=""><img src="${pageContext.request.contextPath}/static/Assets/images/menu3.jpg" class="img-responsive" alt=""></a>
 										</div>
 										<div class="clearfix"></div>
 									</div>	
@@ -132,7 +132,7 @@
 										</div>
 										
 										<div class="col-sm-4 w3l">
-											<a href=""><img src="images/menu4.jpg" class="img-responsive" alt=""></a>
+											<a href=""><img src="${pageContext.request.contextPath}/static/Assets/images/menu4.jpg" class="img-responsive" alt=""></a>
 										</div>
 										<div class="clearfix"></div>
 									</div>	
