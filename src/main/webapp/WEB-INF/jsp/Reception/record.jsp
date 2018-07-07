@@ -282,7 +282,7 @@
 <div class="footer">
 	<div class="container">
 		<div class="col-md-3 footer-grids fgd1">
-		<a href="${pageContext.request.contextPath}/api/query"><img src="images/logo2.png" alt=" " /><h3>喬治拍卖</span></h3></a>
+		<a href="${pageContext.request.contextPath}/api/query"><img src="${pageContext.request.contextPath}/static/Assets/images/logo2.png" alt=" " /><h3>喬治拍卖</span></h3></a>
 		<ul>
 			<li>地址：厦门市观日路2号</li>
 			<li>邮编：350000</li>
@@ -324,7 +324,7 @@
 	</div>
 </div>
 	<!-- cart-js -->
-	<script src="js/minicart.js"></script>
+	<script src="${pageContext.request.contextPath}/static/Assets/js/minicart.js"></script>
 	<script>
         w3ls1.render();
 

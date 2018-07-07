@@ -24,7 +24,7 @@ public class OrderController {
 	private OrderService orderService;
 
 	@RequestMapping(value = { "orders", "unpaid_order.html", "unfinished_order.html",
-			"completed_order.html" }, method = RequestMethod.GET)
+			"completed_order.html","myorder.html" }, method = RequestMethod.GET)
 	public String queryOrdersByUserId(Model model, HttpSession httpSession) {
 
 		Users users = (Users) httpSession.getAttribute("user");
