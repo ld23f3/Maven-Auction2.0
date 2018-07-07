@@ -35,7 +35,7 @@ import com.etc.service.GoodsService;
  *
  */
 @Controller
-@RequestMapping(value="/api")
+@RequestMapping(value = "/api")
 public class GoodsController {
 	/**
 	 * 注入参数
@@ -52,7 +52,7 @@ public class GoodsController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = {"/list","publish_goods.html"})
+	@RequestMapping(value = { "/list", "publish_goods.html" })
 	public String SelectGoods() {
 		return "/Reception/AddGoods";
 
@@ -167,50 +167,124 @@ public class GoodsController {
 	 * @return
 	 */
 	@RequestMapping(value = "/query")
-	public String queryAll(Model m, HttpSession session) {
-		List<GoodsView> list = gd.queryAllGoods();
+	public String queryAll(@RequestParam(value = "goods_typeid", required = false, defaultValue = "1") int goods_typeid,
+			Model m, HttpSession session) {
+		List<GoodsView> list = goodsService.queryAllGoodsByType(goods_typeid);
+		if (list.size() >= 8) {
+			list = list.subList(0, 8);
+		}
+		m.addAttribute("size", list.size());
 		m.addAttribute("list", list);
-		session.setAttribute("list", list);
-		System.out.println(list);
+		list.forEach(System.out::println);
 		return "/Reception/ShowGoods";
 	}
-	
+
+	/**
+	 * 查詢书画
+	 * 
+	 * @param m
+	 * @return
+	 */
+	@RequestMapping(value = "paper.html")
+	public String queryPaper(Model m) {
+		List<GoodsView> list = goodsService.queryAllGoodsByType(1);
+		if (list.size() >= 8) {
+			list = list.subList(0, 8);
+		}
+		m.addAttribute("size", list.size());
+		m.addAttribute("list", list);
+		return "/Reception/ShowGoods";
+	}
+
+	/**
+	 * 查詢瓷器
+	 * 
+	 * @param m
+	 * @return
+	 */
+	@RequestMapping(value = "ceramics.html")
+	public String queryCeramics(Model m) {
+		List<GoodsView> list = goodsService.queryAllGoodsByType(2);
+		if (list.size() >= 8) {
+			list = list.subList(0, 8);
+		}
+		m.addAttribute("size", list.size());
+		m.addAttribute("list", list);
+		return "/Reception/ShowGoods";
+	}
+
+	/**
+	 * 查詢玉石
+	 * 
+	 * @param m
+	 * @return
+	 */
+	@RequestMapping(value = "jade.html")
+	public String queryJade(Model m) {
+		List<GoodsView> list = goodsService.queryAllGoodsByType(3);
+		if (list.size() >= 8) {
+			list = list.subList(0, 8);
+		}
+		m.addAttribute("size", list.size());
+		m.addAttribute("list", list);
+		return "/Reception/ShowGoods";
+	}
+
+	/**
+	 * 查詢玉石
+	 * 
+	 * @param m
+	 * @return
+	 */
+	@RequestMapping(value = "sundry.html")
+	public String querySundry(Model m) {
+		List<GoodsView> list = goodsService.queryAllGoodsByType(4);
+		if (list.size() >= 8) {
+			list = list.subList(0, 8);
+		}
+		m.addAttribute("size", list.size());
+		m.addAttribute("list", list);
+		return "/Reception/ShowGoods";
+	}
+
 	/**
 	 * 根据用户id查询商品
+	 * 
 	 * @param model
 	 * @param httpSession
 	 * @return
 	 */
-	@RequestMapping(value= {"goods","mygoods.html"}, method = RequestMethod.GET)
-	public String queryGoodsByUserId(Model model ,HttpSession httpSession) {
-		
-		Users users = (Users)httpSession.getAttribute("user");
-		System.out.println("users"+users);
+	@RequestMapping(value = { "goods", "mygoods.html" }, method = RequestMethod.GET)
+	public String queryGoodsByUserId(Model model, HttpSession httpSession) {
+
+		Users users = (Users) httpSession.getAttribute("user");
+		System.out.println("users" + users);
 		int user_id = users.getUser_id();
-		System.out.println("user_id"+user_id);
+		System.out.println("user_id" + user_id);
 		List<GoodsBean> mygoods = goodsService.queryGoodsByUserId(user_id);
-		
+
 		model.addAttribute("mygoods", mygoods);
-		
+
 		mygoods.forEach(System.out::println);
-		
+
 		return "Reception/mygoods";
-		
+
 	}
+
 	/**
 	 * 根据商品id查询商品详情
+	 * 
 	 * @param goodsId
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="goodsInfo/{goods_id}", method = RequestMethod.GET)
-	public String queryGoodsByGoodsId(@PathVariable(value="goods_id") int goodsId ,Model model) {
-		
-		
+	@RequestMapping(value = "goodsInfo/{goods_id}", method = RequestMethod.GET)
+	public String queryGoodsByGoodsId(@PathVariable(value = "goods_id") int goodsId, Model model) {
+
 		System.out.println("goodsInfo:\n" + goodsId);
-		
+
 		List<GoodsBean> goodsInfo = goodsService.queryGoodsByGoodsId(goodsId);
-		
+
 		model.addAttribute("goodsInfo", goodsInfo);
 
 		goodsInfo.forEach(System.out::println);

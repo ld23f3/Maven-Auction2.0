@@ -15,7 +15,12 @@ public interface GoodsService {
 	public List<Goods> queryGoods(String goods_name);
 
 	public List<GoodsView> queryAllGoods();
-
+	/**
+     * 根据物品类型查询显示物品
+     * @param goods_typeid
+     * @return
+     */
+    public List<GoodsView> queryAllGoodsByType(int goods_typeid);
 	/**
 	 * 添加新商品
 	 * 

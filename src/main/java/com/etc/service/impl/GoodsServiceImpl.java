@@ -65,8 +65,7 @@ public class GoodsServiceImpl implements GoodsService {
 
 	@Override
 	public List<Goods> queryGoodsByType(int goods_typeid) {
-		// TODO Auto-generated method stub
-		return null;
+		return goodsDao.queryGoodsByType(goods_typeid);
 	}
 
 	@Override
@@ -105,6 +104,11 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public boolean batchSetGoodsState(List<Integer> list, int good_state) {
 		return goodsDao.batchSetGoodsState(list, good_state);
+	}
+
+	@Override
+	public List<GoodsView> queryAllGoodsByType(int goods_typeid) {
+		return goodsDao.queryAllGoodsByType(goods_typeid);
 	}
 
 

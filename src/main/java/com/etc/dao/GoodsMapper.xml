@@ -17,7 +17,11 @@
 		select goods_name,goods_minprice,goodsimg_src from goodsimg LEFT JOIN
 		goods on goodsimg.goods_id=goods.goods_id ;
 	</select>
-
+	<!-- 根据商品类型查询显示的商品 -->
+	<select id="queryAllGoodsByType" resultType="com.etc.entity.GoodsView">
+		select goods.goods_name,goods.goods_minprice,goodsimg_src from goods LEFT JOIN
+		goodsimg on goodsimg.goods_id=goods.goods_id where  goods.goodstype_id = #{goodstype_id} GROUP BY goods.goods_id;
+	</select>
 	<select id="queryGoodsByUserId" resultType="com.etc.bean.entity.GoodsBean">
 		select * from goods ,
 		goodstype where goods.goodstype_id = goodstype.goodstype_id and
@@ -30,7 +34,10 @@
 		goods_id = #{goods.goods_id}
 	</select>
 	
-	
+	<select id="queryGoodsByType" resultType="com.etc.entity.Goods">
+		select * from goods
+		where goodstype_id = #{goodstype_id}
+	</select>
 	<select id="queryGoodsBean" resultType="com.etc.bean.entity.GoodsBean">
 		select * from goods
 		, goodstype where goods.goodstype_id = goodstype.goodstype_id
@@ -45,7 +52,7 @@
 		where goods_id = #{goods_id}
 	</update>
 	
-	<!-- 批量设置用户状态 -->
+	<!-- 批量设置商品状态 -->
 	<update id="batchSetGoodsState">
 		update goods set
 		good_state = #{good_state},goods_modified = now()

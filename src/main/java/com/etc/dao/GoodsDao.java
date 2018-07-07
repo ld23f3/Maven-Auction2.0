@@ -12,7 +12,17 @@ import com.etc.entity.GoodsView;
 public interface GoodsDao {
 	public int InsertGoods(Goods g);
 	public List<Goods> queryGoods(String goods_name); 
+	/**
+	 * 查询所有显示商品
+	 * @return
+	 */
     public List<GoodsView> queryAllGoods();
+    /**
+     * 根据物品类型查询显示物品
+     * @param goods_typeid
+     * @return
+     */
+    public List<GoodsView> queryAllGoodsByType(int goods_typeid);
     
     /**
 	 * 添加新商品
@@ -33,7 +43,6 @@ public interface GoodsDao {
 	 * @return Goods
 	 */
 	public List<GoodsBean> queryGoodsByGoodsId(int goods_id);
-
 	/**
 	 * 查詢所有商品
 	 * 2018年7月7日9:58:19
