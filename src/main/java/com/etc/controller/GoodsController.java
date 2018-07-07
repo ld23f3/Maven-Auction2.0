@@ -52,7 +52,7 @@ public class GoodsController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/list")
+	@RequestMapping(value = {"/list","publish_goods.html"})
 	public String SelectGoods() {
 		return "/Reception/AddGoods";
 
@@ -181,7 +181,7 @@ public class GoodsController {
 	 * @param httpSession
 	 * @return
 	 */
-	@RequestMapping(value="goods", method = RequestMethod.GET)
+	@RequestMapping(value= {"goods","mygoods.html"}, method = RequestMethod.GET)
 	public String queryGoodsByUserId(Model model ,HttpSession httpSession) {
 		
 		Users users = (Users)httpSession.getAttribute("user");

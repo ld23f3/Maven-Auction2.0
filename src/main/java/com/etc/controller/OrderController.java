@@ -17,43 +17,40 @@ import com.etc.entity.Users;
 import com.etc.service.OrderService;
 
 @Controller
-@RequestMapping(value="/api")
+@RequestMapping(value = "/api")
 public class OrderController {
-	
-	@Resource(name="orderService")
+
+	@Resource(name = "orderService")
 	private OrderService orderService;
-	
-	@RequestMapping(value="orders", method = RequestMethod.GET)
-	public String queryOrdersByUserId(Model model,HttpSession httpSession) {
-		
-		
-		Users users = (Users)httpSession.getAttribute("user");
-		System.out.println("users"+users);
+
+	@RequestMapping(value = { "orders", "unpaid_order.html", "unfinished_order.html",
+			"completed_order.html" }, method = RequestMethod.GET)
+	public String queryOrdersByUserId(Model model, HttpSession httpSession) {
+
+		Users users = (Users) httpSession.getAttribute("user");
+		System.out.println("users" + users);
 		int user_id = users.getUser_id();
-		System.out.println("user_id"+user_id);
+		System.out.println("user_id" + user_id);
 		List<OrderBean> myorders = orderService.queryOrderByUserId(user_id);
-		
+
 		model.addAttribute("myorders", myorders);
-		
+
 		myorders.forEach(System.out::println);
-		
+
 		return "Reception/myorders";
 	}
-	
-	@RequestMapping(value="ordersInfo/{order_id}", method = RequestMethod.GET)
-	public String queryGoodsByGoodsId(@PathVariable(value="order_id") int orderId ,Model model) {
-		
-		
+
+	@RequestMapping(value = "ordersInfo/{order_id}", method = RequestMethod.GET)
+	public String queryGoodsByGoodsId(@PathVariable(value = "order_id") int orderId, Model model) {
+
 		System.out.println("ordersInfo:\n" + orderId);
-		
+
 		List<OrderBean> ordersInfo = orderService.queryOrderByOrderId(orderId);
-		
+
 		model.addAttribute("ordersInfo", ordersInfo);
 
 		ordersInfo.forEach(System.out::println);
 		return "Reception/ordersInfo";
 	}
-	
-	
 
 }

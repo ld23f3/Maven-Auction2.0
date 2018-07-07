@@ -189,12 +189,7 @@
 					<div class="w3ls_dresses_grid_left_grid_sub">
 						<div class="ecommerce_dres-type">
 							<ul>
-								<li><a href="publish_goods.html">竞拍记录</a></li>
-								<li><a href="unpaid_order.html">未付款订单</a></li>
-								<li><a href="unfinished_order.html">未完成订单</a></li>
-								<li><a href="completed_order.html">已完成订单</a></li>
-								
-								
+								<li><a href="record.html">竞拍记录</a></li>
 							</ul>
 						</div>
 					</div>

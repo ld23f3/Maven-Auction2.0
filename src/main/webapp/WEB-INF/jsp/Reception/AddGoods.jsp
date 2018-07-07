@@ -5,7 +5,7 @@
 <head>
 <title>发布商品</title>
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-<link href="${pageContext.request.contextPath}/static/Assets/css/bootstrap.min.css" rel="stylesheet" />
+<link href="${pageContext.request.contextPath}/static/Assets/css/bootstrap.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
@@ -370,7 +370,7 @@
 	
 
 	
-	<script src="js/minicart.js"></script>
+	<script src="${pageContext.request.contextPath}/static/Assets/js/minicart.js"></script>
 	<script>
 		
 		
