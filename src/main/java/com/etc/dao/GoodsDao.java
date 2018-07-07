@@ -2,6 +2,7 @@ package com.etc.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.etc.bean.entity.GoodsBean;
@@ -25,14 +26,31 @@ public interface GoodsDao {
 	 * @return List
 	 */
 	public List<Goods> queryGoods();
-	
+
 	/**
 	 * 依據商品ID 查詢商品詳細資訊
 	 * @param goods_id  商品編號
 	 * @return Goods
 	 */
 	public List<GoodsBean> queryGoodsByGoodsId(int goods_id);
-	
+
+	/**
+	 * 查詢所有商品
+	 * 2018年7月7日9:58:19
+	 * 修改人LHC
+	 * (后台需要用到)
+	 * @return GoodsBean
+	 */
+	public List<GoodsBean> queryGoodsBean();
+	/**
+	 * 查詢指定状态的商品
+	 * 2018年7月7日10:08:46
+	 * 修改人LHC
+	 * (后台需要用到)
+	 * @param good_state
+	 * @return
+	 */
+	public List<GoodsBean> queryGoodsBeanByGoodtate(int good_state);
 	
 	/**
 	 * 依據商品名稱 做模糊查詢
@@ -71,4 +89,23 @@ public interface GoodsDao {
 	 * @return True 添加成功 False添加失敗
 	 */
 	public boolean updateGoods(Goods goods);
+	/**
+	 * 更新商品状态
+	 * 2018年7月7日10:18:11
+	 * 修改人(LHC)
+	 * 操作商品的业务,上架下架,审核
+	 * @param good_state 
+	 * @return
+	 */
+	public boolean updateGoodsState(@Param("goods_id") int goods_id ,@Param("good_state") int good_state);
+	/**
+	 * 批量设置商品状态
+	 * 2018年7月7日10:36:02
+	 * 修改人(LHC)
+	 * 批量操作商品的业务,上架下架,审核
+	 * @param list
+	 * @param good_state
+	 * @return
+	 */
+	public boolean batchSetGoodsState(@Param("list") List<Integer> list,@Param("good_state") int good_state);
 }

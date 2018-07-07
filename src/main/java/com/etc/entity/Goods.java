@@ -16,7 +16,7 @@ public class Goods {
 	private double goods_getprice; //商品得标价格
 	private int goods_typeid; //商品类型编号
 	private String goods_desc; //商品描述
-	private int good_state; //商品竞拍情况（0未竞拍1正在竞拍2已出售 3流标）
+	private int good_state; //商品竞拍情况（0待审核1正在竞拍2已出售 3流标）
 	private int user_id; //用户编号
 	private double goods_minpremium; //最低加价
 	private int goods_auctiontime; //商品拍卖时间（单位：天）

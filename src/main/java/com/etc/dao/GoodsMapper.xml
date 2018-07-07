@@ -29,4 +29,33 @@
 		, goodstype where goods.goodstype_id = goodstype.goodstype_id and
 		goods_id = #{goods.goods_id}
 	</select>
+	
+	
+	<select id="queryGoodsBean" resultType="com.etc.bean.entity.GoodsBean">
+		select * from goods
+		, goodstype where goods.goodstype_id = goodstype.goodstype_id
+	</select>
+	<select id="queryGoodsBeanByGoodtate" resultType="com.etc.bean.entity.GoodsBean">
+		select * from goods
+		, goodstype where goods.goodstype_id = goodstype.goodstype_id and
+		good_state = #{good_state}
+	</select>
+	<update id="updateGoodsState">
+		update  goods  set good_state = #{good_state},goods_modified = now()
+		where goods_id = #{goods_id}
+	</update>
+	
+	<!-- 批量设置用户状态 -->
+	<update id="batchSetGoodsState">
+		update goods set
+		good_state = #{good_state},goods_modified = now()
+		WHERE
+		goods_id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+
+	</update>
+	
 </mapper>

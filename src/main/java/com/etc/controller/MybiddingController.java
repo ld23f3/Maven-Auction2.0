@@ -3,16 +3,12 @@ package com.etc.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.websocket.server.PathParam;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.alibaba.druid.stat.TableStat.Mode;
-import com.etc.dao.MybiddingDao;
 import com.etc.entity.Goods;
 import com.etc.entity.Mybidding;
 import com.etc.service.MybiddingService;

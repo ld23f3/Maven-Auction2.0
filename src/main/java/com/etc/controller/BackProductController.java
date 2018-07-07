@@ -3,6 +3,8 @@ package com.etc.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,11 +14,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.etc.bean.entity.GoodsBean;
 import com.etc.entity.Goods;
+import com.etc.service.GoodsService;
 
 @Controller
 @RequestMapping("goods")
 public class BackProductController {
+	@Resource(name = "goodsService")
+	private GoodsService gs;
+
 	/**
 	 * 获取指定类型产品的列表 (上架,审核之类的)
 	 * 
@@ -28,33 +35,28 @@ public class BackProductController {
 	public ModelAndView getGoodsList(
 			@RequestParam(value = "good_state", required = false, defaultValue = "0") int good_state,
 			ModelAndView mav) {
-		List<Goods> list = new ArrayList<>();
-		for (int i = 0; i < 20; i++) {
-			Goods good = new Goods(i, "goods_name" + i, 100, 200, 300, 1, "goods_desc", good_state, 1, 50, 3, 1000,
-					"goods_create" + i, "goods_modified" + i);
-			list.add(good);
-		}
+		List<GoodsBean> list = gs.queryGoodsBeanByGoodtate(good_state);
 		mav.addObject("list", list);
 		mav.addObject("size", list.size());
-		System.out.println(good_state);
 		// 商品竞拍情况（0未竞拍1正在竞拍2已出售 3流标）
 		if (good_state == 1) {
-			/// 这边显示的是正常的会员
+			/// 这边显示的是出售中的商品
 			mav.setViewName("/Back/goods-list");
 		} else if (good_state == 2) {
-			/// 这边显示被停权的会员
+			/// 这边显示已售出的商品
 			mav.setViewName("/Back/goods-list-sellOut");
 		} else if (good_state == 3) {
-			/// 这边显示被停权的会员
+			/// 这边显示下架的商品
 			mav.setViewName("/Back/goods-list-sellDown");
 		} else {
+			/// 这边显示待审核的商品
 			mav.setViewName("/Back/goods-list-check");
 		}
 		return mav;
 	}
 
 	/**
-	 * 下架商品
+	 * 下架商品 （0待审核1正在竞拍2已出售 3下架）
 	 * 
 	 * @param goods_id
 	 * @return
@@ -66,11 +68,12 @@ public class BackProductController {
 		if (goods_id == 0) {
 			return false;
 		}
-		return true;
+
+		return gs.updateGoodsState(goods_id, 3);
 	}
 
 	/**
-	 * 上架商品
+	 * 上架商品 （0待审核1正在竞拍2已出售 3下架）
 	 * 
 	 * @param goods_id
 	 * @return
@@ -81,7 +84,7 @@ public class BackProductController {
 		System.out.println("上架商品");
 		if (goods_id == 0)
 			return false;
-		return true;
+		return gs.updateGoodsState(goods_id, 1);
 	}
 
 	/**
@@ -96,7 +99,8 @@ public class BackProductController {
 		if (goods_id == 0)
 			return false;
 		System.out.println("删除商品:" + goods_id);
-		return true;
+		// 有表关联,不直接写删除了.随便修改个状态码,查不到就当做是删除了
+		return gs.updateGoodsState(goods_id, 5);
 	}
 
 	/**
@@ -109,10 +113,13 @@ public class BackProductController {
 	@ResponseBody
 	public boolean deleteCheckGoods(@RequestBody List<Integer> list) {
 		System.out.println("批量删除商品:" + list);
-		return true;
+		// 有表关联,不直接写删除了.随便修改个状态码,查不到就当做是删除了
+		return gs.batchSetGoodsState(list, 5);
 	}
+
 	/**
-	 * 批量下架商品
+	 * 批量下架商品 （0待审核1正在竞拍2已出售 3下架）
+	 * 
 	 * @param list
 	 * @return
 	 */
@@ -120,10 +127,12 @@ public class BackProductController {
 	@ResponseBody
 	public boolean downCheckGoods(@RequestBody List<Integer> list) {
 		System.out.println("批量下架商品:" + list);
-		return true;
+		return gs.batchSetGoodsState(list, 3);
 	}
+
 	/**
-	 * 批量上架商品
+	 * 批量上架商品 （0待审核1正在竞拍2已出售 3下架）
+	 * 
 	 * @param list
 	 * @return
 	 */
@@ -131,6 +140,6 @@ public class BackProductController {
 	@ResponseBody
 	public boolean upCheckGoods(@RequestBody List<Integer> list) {
 		System.out.println("批量上架商品:" + list);
-		return true;
+		return gs.batchSetGoodsState(list, 1);
 	}
 }

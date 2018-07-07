@@ -3,6 +3,10 @@ package com.etc.entity;
 import java.io.Serializable;
 
 public class GoodsView implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3941587899915123677L;
 	private String goods_name;
 	private int goods_minprice;
 	private String goodsimg_src;

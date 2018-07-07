@@ -2,6 +2,8 @@ package com.etc.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.etc.bean.entity.GoodsBean;
 import com.etc.entity.Goods;
 import com.etc.entity.GoodsView;
@@ -85,4 +87,40 @@ public interface GoodsService {
 	 * @return True 添加成功 False添加失敗
 	 */
 	public boolean updateGoods(Goods goods);
+	/**
+	 * 查詢所有商品
+	 * 2018年7月7日9:58:19
+	 * 修改人LHC
+	 * (后台需要用到)
+	 * @return GoodsBean
+	 */
+	public List<GoodsBean> queryGoodsBean();
+	/**
+	 * 查詢指定状态的商品
+	 * 2018年7月7日10:08:46
+	 * 修改人LHC
+	 * (后台需要用到)
+	 * @param good_state
+	 * @return
+	 */
+	public List<GoodsBean> queryGoodsBeanByGoodtate(int good_state);
+	/**
+	 * 更新用户状态
+	 * 2018年7月7日10:18:11
+	 * 修改人(LHC)
+	 * 操作商品的业务,上架下架,审核
+	 * @param good_state 
+	 * @return
+	 */
+	public boolean updateGoodsState(int goods_id ,int good_state);
+	/**
+	 * 批量设置商品状态
+	 * 2018年7月7日10:36:02
+	 * 修改人(LHC)
+	 * 批量操作商品的业务,上架下架,审核
+	 * @param list
+	 * @param good_state
+	 * @return
+	 */
+	public boolean batchSetGoodsState(List<Integer> list,int good_state);
 }

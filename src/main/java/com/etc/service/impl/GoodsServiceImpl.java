@@ -87,5 +87,25 @@ public class GoodsServiceImpl implements GoodsService {
 		return false;
 	}
 
+	@Override
+	public List<GoodsBean> queryGoodsBean() {
+		return goodsDao.queryGoodsBean();
+	}
+
+	@Override
+	public List<GoodsBean> queryGoodsBeanByGoodtate(int good_state) {
+		return goodsDao.queryGoodsBeanByGoodtate(good_state);
+	}
+
+	@Override
+	public boolean updateGoodsState(int goods_id, int good_state) {
+		return goodsDao.updateGoodsState(goods_id, good_state);
+	}
+
+	@Override
+	public boolean batchSetGoodsState(List<Integer> list, int good_state) {
+		return goodsDao.batchSetGoodsState(list, good_state);
+	}
+
 
 }
