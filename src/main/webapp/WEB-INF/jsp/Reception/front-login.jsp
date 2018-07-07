@@ -97,11 +97,11 @@
 									<div class="row">
 										<div class="col-sm-4">
 											<ul class="multi-column-dropdown">
-												<li><a href="login"><i
+												<li><a href="login.html"><i
 														class="fa fa-angle-right" aria-hidden="true"></i>登录</a></li>
-												<li><a href="contact"><i
+												<li><a href="contact.html"><i
 														class="fa fa-angle-right" aria-hidden="true"></i>个人信息</a></li>
-												<li><a href="address"><i
+												<li><a href="address.html"><i
 														class="fa fa-angle-right" aria-hidden="true"></i>收货地址</a></li>
 
 											</ul>
@@ -213,7 +213,7 @@
 		<div class="main-agileits">
 			<div class="form-w3agile">
 				<h3>用户登录</h3>
-				<form action="login" method="post">
+				<form action="login.html" method="post">
 					<div class="key">
 						<i class="fa fa-user" aria-hidden="true"></i> <input type="text"
 							name="user_acc" required="" placeholder="账号">
@@ -287,9 +287,9 @@
 				<h4>个人中心</h4>
 				<ul>
 
-					<li><a href="login">登录</a></li>
-					<li><a href="register">注册</a></li>
-					<li><a href="address">收货地址</a></li>
+					<li><a href="login.html">登录</a></li>
+					<li><a href="register.html">注册</a></li>
+					<li><a href="address.html">收货地址</a></li>
 
 				</ul>
 			</div>

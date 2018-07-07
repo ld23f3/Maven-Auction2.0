@@ -106,11 +106,11 @@
 									<div class="row">
 										<div class="col-sm-4">
 											<ul class="multi-column-dropdown">
-												<li><a href="login"><i class="fa fa-angle-right"
+												<li><a href="login.html"><i class="fa fa-angle-right"
 														aria-hidden="true"></i>登录</a></li>
-												<li><a href="contact"><i class="fa fa-angle-right"
+												<li><a href="contact.html"><i class="fa fa-angle-right"
 														aria-hidden="true"></i>个人信息</a></li>
-												<li><a href="address"><i class="fa fa-angle-right"
+												<li><a href="address.html"><i class="fa fa-angle-right"
 														aria-hidden="true"></i>收货地址</a></li>
 
 											</ul>
@@ -142,7 +142,7 @@
 										</div>
 
 										<div class="col-sm-4 w3l">
-											<a href=""><img src="images/menu3.jpg"
+											<a href=""><img src="${pageContext.request.contextPath}/static/Assets/images/menu3.jpg"
 												class="img-responsive" alt=""></a>
 										</div>
 										<div class="clearfix"></div>
@@ -322,9 +322,9 @@
 				<h4>个人中心</h4>
 				<ul>
 
-					<li><a href="login">登录</a></li>
-					<li><a href="register">注册</a></li>
-					<li><a href="address">收货地址</a></li>
+					<li><a href="login.html">登录</a></li>
+					<li><a href="register.html">注册</a></li>
+					<li><a href="address.html">收货地址</a></li>
 
 				</ul>
 			</div>
@@ -337,7 +337,7 @@
 		</div>
 	</div>
 	<!-- cart-js -->
-	<script src="js/minicart.js"></script>
+	<script src="${pageContext.request.contextPath}/static/Assets/js/minicart.js"></script>
 	<script>
 		w3ls1.render();
 

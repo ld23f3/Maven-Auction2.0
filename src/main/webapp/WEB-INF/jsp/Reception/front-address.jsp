@@ -320,7 +320,7 @@
 	</div>
 </div>
 	<!-- cart-js -->
-	<script src="js/minicart.js"></script>
+	<script src="${pageContext.request.contextPath}/static/Assets/js/minicart.js"></script>
 	<script>
         w3ls1.render();
 

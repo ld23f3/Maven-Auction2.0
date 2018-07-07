@@ -28,7 +28,7 @@ public class UserController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	@RequestMapping(value = {"/register.html","/register"}, method = RequestMethod.GET)
 	public String showRegister() {
 		// System.out.println("showRegister");
 		return "/Reception/front-register";
@@ -39,7 +39,7 @@ public class UserController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = {"/login.html","/login"}, method = RequestMethod.GET)
 	public String showLogin() {
 		// System.out.println("showLogin");
 		return "/Reception/front-login";
@@ -50,7 +50,7 @@ public class UserController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/contact", method = RequestMethod.GET)
+	@RequestMapping(value = {"/contact.html","/contact"}, method = RequestMethod.GET)
 	public String showContact() {
 		// System.out.println("showContact");
 		return "/Reception/front-contact";
@@ -62,7 +62,7 @@ public class UserController {
 	 * @param users
 	 * @return
 	 */
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	@RequestMapping(value = {"/register.html","/register"}, method = RequestMethod.POST)
 
 	public String register(Users users) {
 
@@ -101,7 +101,7 @@ public class UserController {
 	 * @param user_Acc
 	 * @return
 	 */
-	@RequestMapping(value = "/validation", method = RequestMethod.GET)
+	@RequestMapping(value = {"/validation","/validation.html"}, method = RequestMethod.GET)
 	@ResponseBody
 	public String validation(String user_Acc) {
 		boolean flag = userService.validation(user_Acc);
@@ -117,7 +117,7 @@ public class UserController {
 	 * @param users
 	 * @return
 	 */
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = {"/login.html","/login"}, method = RequestMethod.POST)
 	public String login(Users users, HttpSession session) {
 
 		// 得到用户输入的值
@@ -146,7 +146,7 @@ public class UserController {
 	 * @param users
 	 * @return
 	 */
-	@RequestMapping(value = "/contact", method = RequestMethod.POST)
+	@RequestMapping(value = {"/contact.html","/contact"}, method = RequestMethod.POST)
 
 	public String contact(Users users,HttpSession session) {
         Users u=(Users)session.getAttribute("user");
