@@ -136,7 +136,7 @@ public class UserController {
 		if (user!=null) {
 			session.setAttribute("user", user);
 			System.out.println(user);
-			return "/Reception/ShowGoods";
+			return "redirect:/api/query";
 		} else
 			return null;
 

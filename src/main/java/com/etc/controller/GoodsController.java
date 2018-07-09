@@ -120,7 +120,7 @@ public class GoodsController {
 		}
 
 		out.print("<scipt>alert('Ìí¼Ó³É¹¦');</script>");
-		return "redirect:/list";
+		return "redirect:/api/list";
 
 	}
 

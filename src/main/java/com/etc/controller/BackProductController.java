@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.etc.bean.entity.GoodsBean;
-import com.etc.entity.Goods;
 import com.etc.service.GoodsService;
 
 @Controller

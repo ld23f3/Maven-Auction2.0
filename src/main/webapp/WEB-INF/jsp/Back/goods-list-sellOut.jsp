@@ -67,10 +67,10 @@
 									class="check"></td>
 								<td>${ good.goods_id }</td>
 								<td>${good.goods_name}</td>
-								<td>${good.user_id }</td>
+								<td>${good.user_acc }</td>
 								<td>${good.goods_minprice }</td>
 								<td>${good.goods_currentprice }</td>
-								<td>${good.goods_typeid }</td>
+								<td>${good.goodstype_desc }</td>
 								<td class="text-l">${good.goods_desc }</td>
 								<td>${good.goods_create }</td>
 								<td class="td-status"><span

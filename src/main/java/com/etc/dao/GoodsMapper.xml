@@ -7,7 +7,7 @@
 	<insert id="InsertGoods">
 		<!-- insert into goods values(null,#{goods_name},#{goods_minprice},null,null,#{goods_typeid},#{goods_desc},#{good_state},#{user_id},#{goods_minpremium},#{goods_auctiontime},#{goods_margin},now(),null) -->
 		insert into
-		goods(goods_name,goods_minprice,goods_typeid,goods_desc,good_state,user_id,goods_minpremium,goods_auctiontime,goods_margin,goods_create)
+		goods(goods_name,goods_minprice,goodstype_id,goods_desc,good_state,user_id,goods_minpremium,goods_auctiontime,goods_margin,goods_create)
 		values(#{goods_name},#{goods_minprice},#{goods_typeid},#{goods_desc},#{good_state},#{user_id},#{goods_minpremium},#{goods_auctiontime},#{goods_margin},now())
 	</insert>
 	<select id="queryGoods" resultType="com.etc.entity.Goods">
@@ -44,8 +44,8 @@
 	</select>
 	<select id="queryGoodsBeanByGoodtate" resultType="com.etc.bean.entity.GoodsBean">
 		select * from goods
-		, goodstype where goods.goodstype_id = goodstype.goodstype_id and
-		good_state = #{good_state}
+		, goodstype,users where goods.goodstype_id = goodstype.goodstype_id and
+		good_state = #{good_state} and users.user_id = goods.user_id
 	</select>
 	<update id="updateGoodsState">
 		update  goods  set good_state = #{good_state},goods_modified = now()

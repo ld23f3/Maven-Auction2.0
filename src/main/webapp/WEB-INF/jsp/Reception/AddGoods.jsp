@@ -199,7 +199,7 @@
 			</div>
 		</div>
 		<div class="col-md-9 col-sm-9 contact-right">
-			<form action="${pageContext.request.contextPath}/FileUpload"method="post" enctype="multipart/form-data">
+			<form action="${pageContext.request.contextPath}/api/FileUpload"method="post" enctype="multipart/form-data">
 				<input type="text" name="Gname" placeholder="商品名称" required=" ">
 				<select class="" name="Gselect">
 								<option>字画</option>
