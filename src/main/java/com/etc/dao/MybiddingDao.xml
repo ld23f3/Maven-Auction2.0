@@ -9,7 +9,7 @@
 	<!-- 多表查询goods与mybidding -->
 	<!-- 查询所有用resultMap写法mybidding下面resultmap的id名称 -->
 	<select id="queryMybidding" resultMap="mybidding">
-		select mb.goods_id,mb.user_id,mb.bid_id,gs.goods_name,mb.bid_price,mb.bid_state,mb.bid_date FROM 
+		select mb.goods_id,mb.user_id,mb.bid_id,gs.goods_name,mb.bid_price,mb.bid_state,mb.bid_date ,gs.good_state FROM 
 		mybidding as mb INNER JOIN goods as gs ON  mb.goods_id=gs.goods_id WHERE mb.user_id=#{mb.user_id} ORDER BY mb.bid_id DESC
 
 
@@ -31,6 +31,7 @@
 			<id property="goods_id" column="goods_id" />
 			<result property="goods_name" column="goods_name" />
 			<result property="goods_minprice" column="goods_minprice"/>
+			<result property="good_state" column="good_state"/>
 		</association>
 	</resultMap>
 
@@ -56,6 +57,7 @@
 	<result property="goods_desc" column="goods_desc"/>
 	<result property="goods_minpremium" column="goods_minpremium"/>
 	<result property="goods_modified" column="goods_modified"/>
+	<result property="good_state" column="good_state"/>
 	<!-- 1对多的这里是多的哪一个 -->
 	<collection property="goodsImg" ofType="com.etc.entity.GoodsImg">
 	<id property="goodsimg_id" column="goodsimg_id"/>
@@ -79,12 +81,17 @@
 	INSERT INTO mybidding VALUES(NULL,#{user_id},#{goods_id},#{bid_state},NOW(),#{bid_price})
 	
 	</insert>
-
+	<!-- 倒计时结束之后改变商品状态 -->
 	<insert id="updateGoodsState" parameterType="com.etc.entity.Goods">
 	UPDATE goods set  good_state=#{good_state}  WHERE goods_id=#{goods_id}
 	
 	</insert>
-
+	
+	<!--//通过商品的名字进行模糊查询  -->
+	<select id="queryGoodsLike" resultType="com.etc.entity.Goods">
+	
+	SELECT * FROM goods WHERE goods_name LIKE concat('%',#{goods_name},'%')
+	</select>
 
 
 </mapper>

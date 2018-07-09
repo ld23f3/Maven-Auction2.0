@@ -292,9 +292,10 @@
 						</form>
 
 						<!-- 当倒计时结束的时候修改状态 -->
-					<form action="uddateGoodsState" method="post" id="myForm">
-						<input type="text"  class="offerCurrentPriceValInfoColumnCls" name="good_state" id="good_state"  value="${goods.good_state }" style="display: none"/>
-						<input type="submit" class="w3ls-cart" id="sub1" value="确认出价"  style="display: none"/>
+					<form  >
+					<input type="text"  class="offerCurrentPriceValInfoColumnCls goods_id" name="goods_id" id="goods_id"  value="${goods.goods_id }" style="display: none"/>
+					<input type="text"  class="offerCurrentPriceValInfoColumnCls good_state" name="good_state" id="good_state"  value="${goods.good_state +1 }" style="display: none"/>	
+						<input type="button" class="w3ls-cart" id="btn" value="确认出价"  style="display: none"/>
 					</form>
 					</div>
 				   <div class="clearfix"> </div>  
@@ -424,7 +425,7 @@
     return i;
    }
    function freshTime(){
-    var endtime=new Date('2018/07/8');
+    var endtime=new Date('2018/07/10');
     var nowtime=new Date();
     var lefttime=parseInt(endtime.getTime()-nowtime.getTime());//这是毫秒，如果再/1000就是秒
     // 获取剩下的日、小时、分钟、秒钟
@@ -448,6 +449,22 @@
         //下面是满足条件不能提交
        // document.getElementById("sub").disabled="disabled"
 	      
+        	//使用ajax局部刷新
+        	
+    		
+
+			$.ajax({
+				url : "uddateGoodsState",
+				type : "put", //修改操作  put方法
+				contentType:"application/json",			
+				data:JSON.stringify({"goods_id":$(".goods_id").val(),"good_state":$(".good_state").val()}), //拼接json格式的数据?
+				success : function(result) {
+					console.log(result);
+				}
+
+			});
+       
+       
 	     
     }
     

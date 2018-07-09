@@ -7,8 +7,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.etc.entity.Goods;
 import com.etc.entity.Mybidding;
@@ -57,10 +59,10 @@ public class MybiddingController {
 
 	// 当倒计时结束的时候修改商品的状态
 	@RequestMapping(value = "/uddateGoodsState")
-	public String updateGoodsState(Goods goods) {
-		mybiddingService.updateGoodsState(goods);
-		System.out.println("修改后的状态" + goods.getGood_state());
-		return "redirect:single";
+	@ResponseBody
+	public boolean updateGoodsState(@RequestBody Goods goods) {
+		System.out.println("修改后的状态" + goods.getGood_state() + "商品的id" + goods.getGoods_id());
+		return mybiddingService.updateGoodsState(goods);
 
 	}
 
