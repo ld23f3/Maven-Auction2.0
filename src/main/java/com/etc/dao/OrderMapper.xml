@@ -6,7 +6,7 @@
 
 	<select id="queryOrderByUserId" resultType="com.etc.bean.entity.OrderBean">
 		SELECT
-		orders.order_id ,orders.goods_id ,orders.user_id ,goods.goods_name ,goodstype.goodstype_desc ,goods.goods_getprice
+		orders.order_id ,orders.goods_id ,orders.user_id ,goods.goods_name ,goods.goods_desc ,goodstype.goodstype_desc ,goods.goods_getprice
 		,orders.address_id , shoppingaddress.consignee_address
 		,orders.senddate ,orders.payment ,orders.sendprice ,orders.order_state
 		,orders.order_date FROM goods ,orders , shoppingaddress , goodstype
@@ -17,7 +17,7 @@
 
 	<select id="queryOrderByOrderId" resultType="com.etc.bean.entity.OrderBean">
 		SELECT
-		orders.order_id ,orders.goods_id ,orders.user_id ,goods.goods_name ,goodstype.goodstype_desc ,goods.goods_getprice
+		orders.order_id ,orders.goods_id ,orders.user_id ,goods.goods_name ,goods.goods_desc ,goodstype.goodstype_desc ,goods.goods_getprice
 		,orders.address_id , shoppingaddress.consignee_address
 		,orders.senddate ,orders.payment ,orders.sendprice ,orders.order_state
 		,orders.order_date FROM goods ,orders , shoppingaddress , goodstype

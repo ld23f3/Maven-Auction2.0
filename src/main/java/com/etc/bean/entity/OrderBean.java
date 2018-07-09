@@ -7,6 +7,7 @@ public class OrderBean {
 	private String user_acc; // 账号
 	private int goods_id; //商品编号
 	private String goods_name; //商品名称
+	private String goods_desc; //商品描述
 	private String goodstype_desc; //类型描述
 	private double goods_getprice; //商品得标价格
 	private String address_id; //送货地址编号
@@ -21,10 +22,10 @@ public class OrderBean {
 	@Override
 	public String toString() {
 		return "OrderBean [order_id=" + order_id + ", user_id=" + user_id + ", user_acc=" + user_acc + ", goods_id="
-				+ goods_id + ", goods_name=" + goods_name + ", goodstype_desc=" + goodstype_desc + ", goods_getprice="
-				+ goods_getprice + ", address_id=" + address_id + ", consignee_address=" + consignee_address
-				+ ", senddate=" + senddate + ", payment=" + payment + ", sendprice=" + sendprice + ", order_state="
-				+ order_state + ", order_date=" + order_date + "]";
+				+ goods_id + ", goods_name=" + goods_name + ", goods_desc=" + goods_desc + ", goodstype_desc="
+				+ goodstype_desc + ", goods_getprice=" + goods_getprice + ", address_id=" + address_id
+				+ ", consignee_address=" + consignee_address + ", senddate=" + senddate + ", payment=" + payment
+				+ ", sendprice=" + sendprice + ", order_state=" + order_state + ", order_date=" + order_date + "]";
 	}
 	public int getOrder_id() {
 		return order_id;
@@ -55,6 +56,12 @@ public class OrderBean {
 	}
 	public void setGoods_name(String goods_name) {
 		this.goods_name = goods_name;
+	}
+	public String getGoods_desc() {
+		return goods_desc;
+	}
+	public void setGoods_desc(String goods_desc) {
+		this.goods_desc = goods_desc;
 	}
 	public String getGoodstype_desc() {
 		return goodstype_desc;

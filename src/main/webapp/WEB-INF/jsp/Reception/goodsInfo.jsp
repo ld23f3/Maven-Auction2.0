@@ -303,7 +303,7 @@
 						</br>
 					<label>商品描述</label>
 					<textarea name="goodsdesc"
-						placeholder="${goodsInfo.goodstype_desc}" required=" "></textarea>
+						placeholder="${goodsInfo.goods_desc}" required=" "></textarea>
 					<input type="submit" value="Send message">
 				</div>
 				</c:forEach>

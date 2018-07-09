@@ -54,6 +54,7 @@ ul.flex-direction-nav {
 	-o-transition: all 1s ease;
 	transition: all 1s ease;
 	border: 1px solid #D1CFCF;
+	max-height: 124px;
 }
 .flex-control-thumbs img:hover {
 	opacity: 1;
